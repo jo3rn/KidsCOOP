@@ -1,0 +1,69 @@
+
+{% load staticfiles otree_tags %}
+
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <title>Canvas</title>
+
+  <style type="text/css">
+    body {
+      margin: 0;
+    }
+
+    canvas {
+      border: 1px solid black;
+      background: orange;
+    }
+  </style>
+</head>
+
+{% block content %}
+
+<audio autoplay="autoplay">
+ <source src={% static 'public_good_kids/jingle.mp3' %} type="audio/mpeg">
+ Your browser does not support the audio element.
+</audio>
+
+<p>
+    This is a public goods game with
+    {{ Constants.players_per_group }} players per group,
+    an endowment of {{ Constants.endowment }},
+    and an efficiency factor of {{ Constants.efficiency_factor }}.
+</p>
+
+
+{% formfield player.contribution with label="How much will you contribute?" %}
+
+<canvas>
+
+</canvas>
+
+
+
+{% next_button %}
+
+{% endblock %}
+
+
+
+{% block scripts %}
+
+    <!-- JavaScript für canvas -->
+    <script>
+      // grab das canvas HTML-Element
+      var canvas = document.querySelector('canvas');
+      // passe canvas an Bildschirm an
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+
+      // c steht für context
+      var c = canvas.getContext('2d');
+
+      c.fillRect(100,100,100,100);
+    </script>
+
+{% endblock %}
+
+</html>
