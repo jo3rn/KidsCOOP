@@ -6,13 +6,509 @@
 {% block content %}
 
 <p>
-    You started with an endowment of {{ Constants.endowment }},
-    of which you contributed {{ player.contribution }}.
-    Your group contributed {{ group.total_contribution }},
-    resulting in an individual share of {{ group.individual_share }}.
-    Your profit is therefore {{ player.payoff }}.
+    Am Anfang hattest du {{ Constants.endowment }} Münzen,
+    von denen du {{ player.contribution }} hergabst.
+    Deine Gruppe gab insgesamt {{ group.total_contribution }} Münzen,
+    sodass jeder {{ group.individual_share }} Münzen ausbezahlt bekommt.
+    Deine Gesamtauszahlung ist {{ player.payoff }}.
 </p>
+
+<div id ="container">
+	<!-- Geldtöpfe -->
+	<div class="partner" id="partnerLeft"></div>
+	<div class="partner" id ="partnerTop"></div>
+	<div class="partner" id ="partnerRight"></div>
+	<div class="partner" id ="partnerBottom"></div>
+
+	<!-- Gemeinschaftstopf -->
+	<div id="mainpot"></div>
+
+	<!-- Spielerfiguren -->
+	<img src={% static 'public_good_kids/figureyellow.png' %} class="figure figureLeft"/>
+	<img src={% static 'public_good_kids/figuregreen.png' %} class="figure figureTop"/>
+	<img src={% static 'public_good_kids/figurered.png' %} class="figure figureRight"/>
+	<img src="{% static 'public_good_kids/figureblue.png' %}" class="figure figureBottom"/>
+
+	<!-- Münzen unten -->
+	<img src={% static 'public_good_kids/coins.png' %} class="coins {{class1}}" id="cb1" style="top: {{top1}}"/>
+	<img src={% static 'public_good_kids/coins.png' %} class="coins {{class2}}" id="cb2" style="top: {{top2}}"/>
+	<img src={% static 'public_good_kids/coins.png' %} class="coins {{class3}}" id="cb3" style="top: {{top3}}"/>
+	<img src={% static 'public_good_kids/coins.png' %} class="coins {{class4}}" id="cb4" style="top: {{top4}}"/>
+	<img src={% static 'public_good_kids/coins.png' %} class="coins {{class5}}" id="cb5" style="top: {{top5}}"/>
+
+	<!-- Bestätigungs-Button -->
+	<img src={% static 'public_good_kids/confirm.png' %} id="confirmbutton" onclick="confirm()"/>
+</div>
 
 {% next_button %}
 
+
+{% endblock %}
+
+
+{% block styles %}
+<style>
+#container {
+  /* gesamte Spielfläche */
+  width: 800px;
+  height: 800px;
+  position: relative;
+  border: solid black;
+}
+
+.partner {
+  /* Geldtöpfe */
+  border-radius: 15%;
+  width: 20%;
+  height: 20%;
+  position: absolute;
+  z-index: -2;
+}
+
+#partnerLeft {
+  /* Geldtopf links */
+  background-color: rgb(255,255,1);
+  top: 40%;
+  left: 2.5%;
+}
+
+#partnerTop {
+  /* Geldtopf oben */
+  background-color: rgb(98,190,1);
+  top: 2.5%;
+  left: 40%;
+}
+
+#partnerRight {
+  /* Geldtopf rechts */
+  background-color: rgb(192,0,0);
+  top: 40%;
+  right: 2.5%;
+}
+
+#partnerBottom {
+  /* Geldtopf unten */
+  left: 40%;
+  bottom: 2.5%;
+  background-color: rgb(104,132,195);
+}
+
+#mainpot {
+  /* Gemeinschaftseldtopf in der Mitte */
+  border-radius: 15%;
+  width: 30%;
+  height: 30%;
+  left: 35%;
+  top: 35%;
+  position: absolute;
+  background-image: url({% static 'public_good_kids/main.png' %});
+  background-position: center;
+}
+
+.figure {
+  /* Spielerfiguren neben den Töpfen */
+  height: 10%;
+  position: absolute;
+  z-index: 2;
+}
+
+.figureLeft {
+  top: 35%;
+  left: 23%;
+}
+
+.figureTop {
+  top: 22%;
+  left: 58%;
+}
+
+.figureRight {
+  top: 55%;
+  left: 71%;
+}
+
+.figureBottom {
+  top: 68%;
+  left: 35%;
+}
+
+.coins {
+  width: 4%;
+  position: absolute;
+  transition: all 1.5s;
+}
+
+#cb1 {
+  top: 70%;
+  left: 40%;
+}
+
+#cb2 {
+  top: 70%;
+  left: 44%;
+}
+
+#cb3 {
+  top: 70%;
+  left: 48%;
+}
+
+#cb4 {
+  top: 70%;
+  left: 52%;
+}
+
+#cb5 {
+  top: 70%;
+  left: 56%;
+}
+
+#confirmbutton {
+  /* Button, der Auswahl bestätigt */
+  width: 10%;
+  height: 10%;
+  position: absolute;
+  bottom: 5%;
+  right: 5%;
+  /*visibility: hidden;*/
+}
+
+</style>
+{% endblock %}
+
+
+{% block scripts %}
+<script type="text/javascript">
+
+function confirm() {
+	try {
+		// hide confirm button
+		document.getElementById('confirmbutton').style.visibility = 'hidden';
+
+		var container = document.getElementById('container');
+		var contributionOthers = {{ otherchipin|json }};
+		var m;
+
+		var div = document.getElementById('mainpot');
+		div.style.transition = 'all 2s';
+		div.style.transform = 'rotate(360deg)';
+
+		// put contributed coins of other participants in mainpot
+		for (m=0; m < contributionOthers; m++) {
+			// create coin image and properties
+			var newcoin = document.createElement('img');
+			newcoin.src = '/static/public_good_kids/coins.png';
+			newcoin.classList.add('maincoin');
+			newcoin.style.position = 'absolute';
+			newcoin.style.width = '4%';
+			newcoin.style.transition = 'all 1.5s';
+			container.appendChild(newcoin);
+
+			// determine vertical position of new coin
+			if (m < 5) {
+				newcoin.style.top = '54%';
+			} else if (m < 10) {
+				newcoin.style.top = '47%';
+			} else if (m < 15) {
+				newcoin.style.top = '39%';
+			}
+
+			// determine horizontal position of new coin
+			if (m == 0 || m == 5 || m == 10) {
+				newcoin.style.left = '40%';
+			} else if (m == 1 || m == 6 || m == 11) {
+				newcoin.style.left = '44%';
+			} else if (m == 2 || m == 7 || m == 12) {
+				newcoin.style.left = '48%';
+			} else if (m == 3 || m == 8 || m == 13) {
+				newcoin.style.left = '52%';
+			} else if (m == 4 || m == 9 || m == 14) {
+				newcoin.style.left = '56%';
+			}
+		}
+
+
+		var maincoins = document.getElementsByClassName('maincoin');
+		var i;
+		var amount = maincoins.length;
+
+		for (i=0; i < amount; i++) {
+			var top = window.getComputedStyle(maincoins[i],null).getPropertyValue('top');
+			var left = window.getComputedStyle(maincoins[i],null).getPropertyValue('left');
+
+			// rename IDs of coins in mainpot
+			maincoins[i].id = 'maincoin' + i;
+			maincoins[i].style.top = top;
+			maincoins[i].style.left = left;
+
+			// clone coins in mainpot
+			var coinClone = maincoins[i].cloneNode();
+			// rename IDs of clones
+			coinClone.id = 'maincoin' + (amount + i);
+			container.appendChild(coinClone);
+
+			coinClone.style.top = top;
+			coinClone.style.left = left;
+		}
+
+		// reassign variable so that also doubled coins are included
+		var maincoins = document.getElementsByClassName('maincoin');
+		var j;
+
+		// shift the doubled coins slightly above the original coins
+		for (j=amount; j <(2*amount); j++) {
+			if (j < amount + {{ contribution|json }}) {
+				maincoins[j].style.top = '58%';
+			} else if (j < amount + {{ contribution|json }} + 5) {
+				maincoins[j].style.top = '51%';
+			} else if (j < amount + {{ contribution|json }} + 10) {
+				maincoins[j].style.top = '44%';
+			} else {
+				maincoins[j].style.top = '36%';
+			}
+		}
+
+		setTimeout(distributeCoins, 3000);
+		setTimeout(distributeCoins, 4000);
+		setTimeout(distributeCoins, 5000);
+		setTimeout(distributeCoins, 6000);
+		setTimeout(distributeCoins, 7000);
+		setTimeout(distributeCoins, 8000);
+		setTimeout(distributeCoins, 9000);
+		setTimeout(distributeCoins, 10000);
+		setTimeout(distributeCoins, 11000);
+		setTimeout(distributeCoins, 12000);
+		setTimeout(distributeCoins, 13000);
+	}
+	catch(err) {
+	}
+}
+
+
+function distributeCoins() {
+	try {
+		var maincoins = document.getElementsByClassName('maincoin');
+
+		if (maincoins.length > 39) {
+			// coin to left
+			maincoins[0].style.left = '18.5%';
+			maincoins[0].style.top = '50%';
+			// coin to top
+			maincoins[1].style.left = '56%';
+			maincoins[1].style.top = '13%';
+			// coin to right
+			maincoins[2].style.left = '93.5%';
+			maincoins[2].style.top = '50%';
+			// coin to bottom
+			maincoins[3].style.left = '56%';
+			maincoins[3].style.top = '90%';
+
+			maincoins[3].classList.remove('maincoin');
+			maincoins[2].classList.remove('maincoin');
+			maincoins[1].classList.remove('maincoin');
+			maincoins[0].classList.remove('maincoin');
+		} else if (maincoins.length > 35) {
+			// coin to left
+			maincoins[0].style.left = '14.5%';
+			maincoins[0].style.top = '50%';
+			// coin to top
+			maincoins[1].style.left = '52%';
+			maincoins[1].style.top = '13%';
+			// coin to right
+			maincoins[2].style.left = '89.5%';
+			maincoins[2].style.top = '50%';
+			// coin to bottom
+			maincoins[3].style.left = '52%';
+			maincoins[3].style.top = '90%';
+
+			maincoins[3].classList.remove('maincoin');
+			maincoins[2].classList.remove('maincoin');
+			maincoins[1].classList.remove('maincoin');
+			maincoins[0].classList.remove('maincoin');
+		} else if (maincoins.length > 31) {
+			// coin to left
+			maincoins[0].style.left = '10.5%';
+			maincoins[0].style.top = '50%';
+			// coin to top
+			maincoins[1].style.left = '48%';
+			maincoins[1].style.top = '13%';
+			// coin to right
+			maincoins[2].style.left = '85.5%';
+			maincoins[2].style.top = '50%';
+			// coin to bottom
+			maincoins[3].style.left = '48%';
+			maincoins[3].style.top = '90%';
+
+			maincoins[3].classList.remove('maincoin');
+			maincoins[2].classList.remove('maincoin');
+			maincoins[1].classList.remove('maincoin');
+			maincoins[0].classList.remove('maincoin');
+		} else if (maincoins.length > 27) {
+			// coin to left
+			maincoins[0].style.left = '6.5%';
+			maincoins[0].style.top = '50%';
+			// coin to top
+			maincoins[1].style.left = '44%';
+			maincoins[1].style.top = '13%';
+			// coin to right
+			maincoins[2].style.left = '81.5%';
+			maincoins[2].style.top = '50%';
+			// coin to bottom
+			maincoins[3].style.left = '44%';
+			maincoins[3].style.top = '90%';
+
+			maincoins[3].classList.remove('maincoin');
+			maincoins[2].classList.remove('maincoin');
+			maincoins[1].classList.remove('maincoin');
+			maincoins[0].classList.remove('maincoin');
+		} else if (maincoins.length > 23) {
+			// coin to left
+			maincoins[0].style.left = '2.5%';
+			maincoins[0].style.top = '50%';
+			// coin to top
+			maincoins[1].style.left = '40%';
+			maincoins[1].style.top = '13%';
+			// coin to right
+			maincoins[2].style.left = '77.5%';
+			maincoins[2].style.top = '50%';
+			// coin to bottom
+			maincoins[3].style.left = '40%';
+			maincoins[3].style.top = '90%';
+
+			maincoins[3].classList.remove('maincoin');
+			maincoins[2].classList.remove('maincoin');
+			maincoins[1].classList.remove('maincoin');
+			maincoins[0].classList.remove('maincoin');
+		} else if (maincoins.length > 19) {
+			// coin to left
+			maincoins[0].style.left = '18.5%';
+			maincoins[0].style.top = '45%';
+			// coin to top
+			maincoins[1].style.left = '56%';
+			maincoins[1].style.top = '8%';
+			// coin to right
+			maincoins[2].style.left = '93.5%';
+			maincoins[2].style.top = '45%';
+			// coin to bottom
+			maincoins[3].style.left = '56%';
+			maincoins[3].style.top = '85%';
+
+			maincoins[3].classList.remove('maincoin');
+			maincoins[2].classList.remove('maincoin');
+			maincoins[1].classList.remove('maincoin');
+			maincoins[0].classList.remove('maincoin');
+		} else if (maincoins.length > 15) {
+			// coin to left
+			maincoins[0].style.left = '14.5%';
+			maincoins[0].style.top = '45%';
+			// coin to top
+			maincoins[1].style.left = '52%';
+			maincoins[1].style.top = '8%';
+			// coin to right
+			maincoins[2].style.left = '89.5%';
+			maincoins[2].style.top = '45%';
+			// coin to bottom
+			maincoins[3].style.left = '52%';
+			maincoins[3].style.top = '85%';
+
+			maincoins[3].classList.remove('maincoin');
+			maincoins[2].classList.remove('maincoin');
+			maincoins[1].classList.remove('maincoin');
+			maincoins[0].classList.remove('maincoin');
+		} else if (maincoins.length > 11) {
+			// coin to left
+			maincoins[0].style.left = '10.5%';
+			maincoins[0].style.top = '45%';
+			// coin to top
+			maincoins[1].style.left = '48%';
+			maincoins[1].style.top = '8%';
+			// coin to right
+			maincoins[2].style.left = '85.5%';
+			maincoins[2].style.top = '45%';
+			// coin to bottom
+			maincoins[3].style.left = '48%';
+			maincoins[3].style.top = '85%';
+
+			maincoins[3].classList.remove('maincoin');
+			maincoins[2].classList.remove('maincoin');
+			maincoins[1].classList.remove('maincoin');
+			maincoins[0].classList.remove('maincoin');
+		} else if (maincoins.length > 7) {
+			// coin to left
+			maincoins[0].style.left = '6.5%';
+			maincoins[0].style.top = '45%';
+			// coin to top
+			maincoins[1].style.left = '44%';
+			maincoins[1].style.top = '8%';
+			// coin to right
+			maincoins[2].style.left = '81.5%';
+			maincoins[2].style.top = '45%';
+			// coin to bottom
+			maincoins[3].style.left = '44%';
+			maincoins[3].style.top = '85%';
+
+			maincoins[3].classList.remove('maincoin');
+			maincoins[2].classList.remove('maincoin');
+			maincoins[1].classList.remove('maincoin');
+			maincoins[0].classList.remove('maincoin');
+		} else if (maincoins.length > 3) {
+			// coin to left
+			maincoins[0].style.left = '2.5%';
+			maincoins[0].style.top = '45%';
+			// coin to top
+			maincoins[1].style.left = '40%';
+			maincoins[1].style.top = '8%';
+			// coin to right
+			maincoins[2].style.left = '77.5%';
+			maincoins[2].style.top = '45%';
+			// coin to bottom
+			maincoins[3].style.left = '40%';
+			maincoins[3].style.top = '85%';
+
+			maincoins[3].classList.remove('maincoin');
+			maincoins[2].classList.remove('maincoin');
+			maincoins[1].classList.remove('maincoin');
+			maincoins[0].classList.remove('maincoin');
+		} else if (maincoins.length > 0) {
+			maincoins[0].removeAttribute("id");
+			maincoins[1].removeAttribute("id");
+			var clone0 = maincoins[0].cloneNode(false);
+			var clone1 = maincoins[1].cloneNode(false);
+			var container = document.getElementById('container');
+			container.appendChild(clone0);
+			clone0.style.top = window.getComputedStyle(maincoins[0],null).getPropertyValue('top');
+			clone0.style.left = window.getComputedStyle(maincoins[0],null).getPropertyValue('left');
+			clone0.style.clipPath = "inset(0% 50% 0% 0%)";
+			container.appendChild(clone1);
+			clone1.style.top = window.getComputedStyle(maincoins[1],null).getPropertyValue('top');
+			clone1.style.left = window.getComputedStyle(maincoins[1],null).getPropertyValue('left');
+			clone1.style.clipPath = "inset(0% 50% 0% 0%)";
+
+			// coin to left
+			maincoins[0].style.left = '18.5%';
+			maincoins[0].style.top = '50%';
+			maincoins[0].style.clipPath = "inset(0% 50% 0% 0%)";
+			// coin to top
+			maincoins[1].style.left = '56%';
+			maincoins[1].style.top = '13%';
+			maincoins[1].style.clipPath = "inset(0% 50% 0% 0%)";
+			// coin to right
+			clone0.style.left = '93.5%';
+			clone0.style.top = '50%';
+			// coin to bottom
+			clone1.style.left = '56%';
+			clone1.style.top = '90%';
+
+			clone1.classList.remove('maincoin');
+			clone0.classList.remove('maincoin');
+			maincoins[1].classList.remove('maincoin');
+			maincoins[0].classList.remove('maincoin');
+		}
+
+	}
+	catch(err) {
+	}
+}
+
+</script>
 {% endblock %}

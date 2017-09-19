@@ -1,0 +1,27 @@
+{% extends "global/Page.html" %}
+{% load staticfiles otree_tags %}
+
+
+
+{% block content %}
+
+<audio autoplay="autoplay">
+ <source src={% static 'public_good_kids/jingle.mp3' %} type="audio/mpeg">
+ Your browser does not support the audio element.
+</audio>
+
+<p>
+    This is a public goods game with
+    {{ Constants.players_per_group }} players per group,
+    an endowment of {{ Constants.endowment }},
+    and an efficiency factor of {{ Constants.multiplier }}.
+</p>
+
+
+
+
+
+
+{% next_button %}
+
+{% endblock %}

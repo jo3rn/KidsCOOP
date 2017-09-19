@@ -16,8 +16,8 @@ class Constants(BaseConstants):
     players_per_group = 4
     num_rounds = 1
 
-    endowment = c(2)
-    efficiency_factor = 2
+    endowment = 5
+    multiplier = 2
 
 
 class Subsession(BaseSubsession):
@@ -25,15 +25,15 @@ class Subsession(BaseSubsession):
 
 
 class Group(BaseGroup):
-    total_contribution = models.CurrencyField()
-    individual_share = models.CurrencyField()
+    total_contribution = models.FloatField()
+    individual_share = models.FloatField()
 
     def set_payoffs(self):
         self.total_contribution = sum([p.contribution for p in self.get_players()])
-        self.individual_share = self.total_contribution * Constants.efficiency_factor / Constants.players_per_group
+        self.individual_share = self.total_contribution * Constants.multiplier / Constants.players_per_group
         for p in self.get_players():
             p.payoff = Constants.endowment - p.contribution + self.individual_share
 
 
 class Player(BasePlayer):
-    contribution = models.CurrencyField(min=0, max=Constants.endowment)
+    contribution = models.FloatField()
