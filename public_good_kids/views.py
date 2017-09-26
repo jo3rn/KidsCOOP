@@ -4,7 +4,7 @@ from ._builtin import Page, WaitPage
 from .models import Constants
 
 
-class ContributeOld(Page):
+class Instructions(Page):
     pass
 
 class Contribute(Page):
@@ -55,7 +55,7 @@ class Results(Page):
 
 
 page_sequence = [
-    ContributeOld,
+    Instructions,
     Contribute,
     ResultsWaitPage,
     Results

@@ -1,6 +1,20 @@
 {% extends "global/Page.html" %}
 {% load staticfiles otree_tags %}
 
+{% block styles %}
+<style>
+    .otree-btn-next {
+        all: initial;
+        background-image: url({% static 'public_good_kids/confirm.png' %});
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: 100%;
+        border: 0px;
+        width: 100px;
+        height: 100px;
+    }
+</style>
+{% endblock %}
 
 
 {% block content %}
@@ -21,6 +35,6 @@
 
 
 
-{% next_button %}
+<button class="otree-btn-next btn next-button otree-next-button"></button>
 
 {% endblock %}
