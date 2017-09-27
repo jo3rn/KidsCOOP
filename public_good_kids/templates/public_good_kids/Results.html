@@ -10,7 +10,8 @@
     von denen du {{ player.contribution }} hergabst.
     Deine Gruppe gab insgesamt {{ group.total_contribution }} Münzen,
     sodass jeder {{ group.individual_share }} Münzen ausbezahlt bekommt.
-    Deine Gesamtauszahlung ist {{ player.payoff }}.
+    Deine Gesamtauszahlung ist {{ player.payoff }}.<br />
+    // Text verschwindet dann noch. //
 </p>
 
 <div id ="container">
@@ -37,7 +38,7 @@
 	<img src={% static 'public_good_kids/coins.png' %} class="coins {{class5}}" id="cb5" style="top: {{top5}}"/>
 
 	<!-- Bestätigungs-Button -->
-	<img src={% static 'public_good_kids/confirm.png' %} id="confirmbutton" onclick="confirm()"/>
+	<img src={% static 'public_good_kids/distribute.png' %} id="distributebutton" onclick="startDistribution()"/>
 </div>
 
 {% next_button %}
@@ -163,7 +164,7 @@
   left: 56%;
 }
 
-#confirmbutton {
+#distributebutton {
   /* Button, der Auswahl bestätigt */
   width: 10%;
   height: 10%;
@@ -180,10 +181,10 @@
 {% block scripts %}
 <script type="text/javascript">
 
-function confirm() {
+function startDistribution() {
 	try {
-		// hide confirm button
-		document.getElementById('confirmbutton').style.visibility = 'hidden';
+		// hide distribute button
+		document.getElementById('distributebutton').style.visibility = 'hidden';
 
 		var container = document.getElementById('container');
 		var contributionOthers = {{ otherchipin|json }};
@@ -233,6 +234,7 @@ function confirm() {
 		var amount = maincoins.length;
 
 		for (i=0; i < amount; i++) {
+      // prepare cloning of coins
 			var top = window.getComputedStyle(maincoins[i],null).getPropertyValue('top');
 			var left = window.getComputedStyle(maincoins[i],null).getPropertyValue('left');
 
@@ -246,7 +248,7 @@ function confirm() {
 			// rename IDs of clones
 			coinClone.id = 'maincoin' + (amount + i);
 			container.appendChild(coinClone);
-
+      // put clones on already existing coins
 			coinClone.style.top = top;
 			coinClone.style.left = left;
 		}
@@ -268,6 +270,7 @@ function confirm() {
 			}
 		}
 
+    // trigger coin distribution every second
 		setTimeout(distributeCoins, 3000);
 		setTimeout(distributeCoins, 4000);
 		setTimeout(distributeCoins, 5000);
@@ -289,6 +292,7 @@ function distributeCoins() {
 	try {
 		var maincoins = document.getElementsByClassName('maincoin');
 
+    // determine new position of coins
 		if (maincoins.length > 39) {
 			// coin to left
 			maincoins[0].style.left = '18.5%';
@@ -470,6 +474,7 @@ function distributeCoins() {
 			maincoins[1].classList.remove('maincoin');
 			maincoins[0].classList.remove('maincoin');
 		} else if (maincoins.length > 0) {
+      // split coins if only 4 coins (2 coin pairs) are left
 			maincoins[0].removeAttribute("id");
 			maincoins[1].removeAttribute("id");
 			var clone0 = maincoins[0].cloneNode(false);

@@ -16,6 +16,9 @@ class ResultsWaitPage(WaitPage):
     def after_all_players_arrive(self):
         self.group.set_payoffs()
 
+    template_name = 'PublicGoodKids/CustomWaitPage.html'
+    body_text = 'boom'
+
 
 class Results(Page):
     def vars_for_template(self):
