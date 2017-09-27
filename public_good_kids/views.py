@@ -9,7 +9,13 @@ class Instructions(Page):
 
 class Contribute(Page):
     form_model = models.Player
-    form_fields = ['contribution']
+    form_fields = ['contribution', 'p_label']
+
+    def vars_for_template(self):
+        return {
+            'p_label'   : self.participant.label
+        }
+
 
 class ResultsWaitPage(WaitPage):
 

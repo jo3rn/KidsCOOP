@@ -37,3 +37,4 @@ class Group(BaseGroup):
 
 class Player(BasePlayer):
     contribution = models.FloatField()
+    p_label = models.CharField(widget=widgets.HiddenInput(), verbose_name='')
