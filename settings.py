@@ -119,6 +119,14 @@ SESSION_CONFIGS = [
      }
 ]
 
+ROOMS = [
+    {
+        'name': 'klasse',
+        'display_name': 'Klasse',
+        'participant_label_file': 'klasse.txt',
+    }
+]
+
 # anything you put after the below line will override
 # oTree's default settings. Use with caution.
 otree.settings.augment_settings(globals())
