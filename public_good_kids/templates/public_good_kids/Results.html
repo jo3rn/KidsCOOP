@@ -31,11 +31,11 @@
 	<img src="{% static 'public_good_kids/figureblue.png' %}" class="figure figureBottom"/>
 
 	<!-- Münzen unten -->
-	<img src={% static 'public_good_kids/coins.png' %} class="coins {{class1}}" id="cb1" style="top: {{top1}}"/>
-	<img src={% static 'public_good_kids/coins.png' %} class="coins {{class2}}" id="cb2" style="top: {{top2}}"/>
-	<img src={% static 'public_good_kids/coins.png' %} class="coins {{class3}}" id="cb3" style="top: {{top3}}"/>
-	<img src={% static 'public_good_kids/coins.png' %} class="coins {{class4}}" id="cb4" style="top: {{top4}}"/>
-	<img src={% static 'public_good_kids/coins.png' %} class="coins {{class5}}" id="cb5" style="top: {{top5}}"/>
+	<img src={% static 'public_good_kids/twocoins.png' %} class="coins {{class1}}" id="cb1" style="top: {{top1}}"/>
+	<img src={% static 'public_good_kids/twocoins.png' %} class="coins {{class2}}" id="cb2" style="top: {{top2}}"/>
+	<img src={% static 'public_good_kids/twocoins.png' %} class="coins {{class3}}" id="cb3" style="top: {{top3}}"/>
+	<img src={% static 'public_good_kids/twocoins.png' %} class="coins {{class4}}" id="cb4" style="top: {{top4}}"/>
+	<img src={% static 'public_good_kids/twocoins.png' %} class="coins {{class5}}" id="cb5" style="top: {{top5}}"/>
 
 	<!-- Bestätigungs-Button -->
 	<img src={% static 'public_good_kids/distribute.png' %} id="distributebutton" onclick="startDistribution()"/>
@@ -198,7 +198,7 @@ function startDistribution() {
 		for (m=0; m < contributionOthers; m++) {
 			// create coin image and properties
 			var newcoin = document.createElement('img');
-			newcoin.src = '/static/public_good_kids/coins.png';
+			newcoin.src = '/static/public_good_kids/twocoins.png';
 			newcoin.classList.add('maincoin');
 			newcoin.style.position = 'absolute';
 			newcoin.style.width = '4%';
