@@ -14,7 +14,7 @@ this is a public good game for kids in elementary school
 class Constants(BaseConstants):
     name_in_url = 'pgk'
     players_per_group = 4
-    num_rounds = 1
+    num_rounds = 3
 
     endowment = 5
     multiplier = 2
@@ -36,6 +36,31 @@ class Group(BaseGroup):
 
 
 class Player(BasePlayer):
+
+    def set_image(self):
+        self.participant.vars['groupdesign'] = "outgroup"
+
+        if self.animal == "Elefant" and self.participant.vars['groupdesign'] == 'ingroup':
+            self.participant.vars['imagepathbottom'] = 'public_good_kids/elephant.png'
+            self.participant.vars['imagepathleft'] = 'public_good_kids/elephant.png'
+            self.participant.vars['imagepathtop'] = 'public_good_kids/elephant.png'
+            self.participant.vars['imagepathright'] = 'public_good_kids/elephant.png'
+        elif self.animal == "Schildkröte" and self.participant.vars['groupdesign'] == 'ingroup':
+            self.participant.vars['imagepathbottom'] = 'public_good_kids/turtle.png'
+            self.participant.vars['imagepathleft'] = 'public_good_kids/turtle.png'
+            self.participant.vars['imagepathtop'] = 'public_good_kids/turtle.png'
+            self.participant.vars['imagepathright'] = 'public_good_kids/turtle.png'
+        elif self.animal == "Elefant" and self.participant.vars['groupdesign'] == 'outgroup':
+            self.participant.vars['imagepathbottom'] = 'public_good_kids/elephant.png'
+            self.participant.vars['imagepathleft'] = 'public_good_kids/turtle.png'
+            self.participant.vars['imagepathtop'] = 'public_good_kids/elephant.png'
+            self.participant.vars['imagepathright'] = 'public_good_kids/turtle.png'
+        elif self.animal == "Schildkröte" and self.participant.vars['groupdesign'] == 'outgroup':
+            self.participant.vars['imagepathbottom'] = 'public_good_kids/turtle.png'
+            self.participant.vars['imagepathleft'] = 'public_good_kids/elephant.png'
+            self.participant.vars['imagepathtop'] = 'public_good_kids/turtle.png'
+            self.participant.vars['imagepathright'] = 'public_good_kids/elephant.png'
+
     contribution = models.FloatField()
     animal = models.CharField(widget=widgets.HiddenInput(), verbose_name='')
     p_label = models.CharField(widget=widgets.HiddenInput(), verbose_name='')

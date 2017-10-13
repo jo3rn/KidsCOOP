@@ -9,9 +9,21 @@ class Choose(Page):
     form_model = models.Player
     form_fields = ['animal']
 
+    def is_displayed(self):
+        return self.round_number == 1
+
+    def before_next_page(self):
+        self.player.set_image()
+
+class ChooseWaitPage(WaitPage):
+    template_name = 'PublicGoodKids/CustomWaitPage.html'
+    def is_displayed(self):
+        return self.round_number == 1
+
 
 class Instructions(Page):
-    pass
+    def is_displayed(self):
+        return self.round_number == 1
 
 class Contribute(Page):
     form_model = models.Player
@@ -19,7 +31,11 @@ class Contribute(Page):
 
     def vars_for_template(self):
         return {
-            'p_label'   : self.participant.label
+            'p_label'           : self.participant.label,
+            'imagepathleft'     : self.participant.vars['imagepathleft'],
+            'imagepathbottom'   : self.participant.vars['imagepathbottom'],
+            'imagepathright'    : self.participant.vars['imagepathright'],
+            'imagepathtop'      : self.participant.vars['imagepathtop']
         }
 
 
@@ -71,6 +87,7 @@ class Results(Page):
 
 page_sequence = [
     Choose,
+    #ChooseWaitPage,
     Instructions,
     Contribute,
     ResultsWaitPage,

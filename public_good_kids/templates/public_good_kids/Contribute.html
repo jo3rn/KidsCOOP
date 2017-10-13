@@ -22,6 +22,12 @@
 	<img src={% static 'public_good_kids/figurered.png' %} class="figure figureRight"/>
 	<img src="{% static 'public_good_kids/figureblue.png' %}" class="figure figureBottom" onclick="releaseCoins()"/>
 
+  <!--Tierbilder -->
+  <img src={% static imagepathleft %} class="animal animalLeft"/>
+  <img src={% static imagepathtop %} class="animal animalTop"/>
+  <img src={% static imagepathright %} class="animal animalRight"/>
+  <img src={% static imagepathbottom %} class="animal animalBottom"/>
+
 	<!-- Münzen links -->
 	<img src={% static 'public_good_kids/twocoins.png' %} class="coins hidaway" id="cl1"/>
 	<img src={% static 'public_good_kids/twocoins.png' %} class="coins hidaway" id="cl2"/>
@@ -158,7 +164,7 @@
 
 .figureTop {
   top: 22%;
-  left: 58%;
+  left: 59%;
 }
 
 .figureRight {
@@ -169,6 +175,33 @@
 .figureBottom {
   top: 68%;
   left: 35%;
+}
+
+.animal {
+  /* Tierfiguren neben den Spielfiguren */
+  width: 8%;
+  position: absolute;
+  z-index: 1;
+}
+
+.animalLeft {
+  top: 34%;
+  left: 15%;
+}
+
+.animalTop {
+  top: 16%;
+  left: 61%;
+}
+
+.animalRight {
+  top: 61%;
+  left: 78%;
+}
+
+.animalBottom {
+  top: 80%;
+  left: 31%;
 }
 
 .coins {
