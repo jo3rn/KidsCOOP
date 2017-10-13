@@ -37,4 +37,5 @@ class Group(BaseGroup):
 
 class Player(BasePlayer):
     contribution = models.FloatField()
+    animal = models.CharField(widget=widgets.HiddenInput(), verbose_name='')
     p_label = models.CharField(widget=widgets.HiddenInput(), verbose_name='')

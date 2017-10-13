@@ -4,6 +4,12 @@ from ._builtin import Page, WaitPage
 from .models import Constants
 
 
+class Choose(Page):
+    #value will be saved in self.player.animal for later group distinction
+    form_model = models.Player
+    form_fields = ['animal']
+
+
 class Instructions(Page):
     pass
 
@@ -64,6 +70,7 @@ class Results(Page):
 
 
 page_sequence = [
+    Choose,
     Instructions,
     Contribute,
     ResultsWaitPage,

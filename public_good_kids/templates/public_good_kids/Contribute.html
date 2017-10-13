@@ -61,12 +61,32 @@
 <input type="hidden" value="0" name="contribution" id="contribution"/>
 <input type="hidden" name="p_label" value="{{p_label}}" id="p_label"/>
 
+<br />
+<br />
+
+<div id="timer">
+  <div id="timeleft"></div>
+</div>
+
 {% endblock %}
 
 
 
 {% block styles %}
 <style>
+#timer {
+  width: 800px;
+  height: 25px;
+  background-color: white;
+}
+
+#timeleft {
+  width: 100%;
+  height: 100%;
+  background-color: green;
+  transition: width 0.3s linear;
+}
+
 #container {
   /* gesamte Spielfläche */
   width: 800px;
@@ -305,6 +325,21 @@
 
 {% block scripts %}
 <script type="text/javascript">
+function decreaseTimer() {
+  var elem = document.getElementById("timeleft");
+  var width = 100;
+  var id = setInterval(frame, 300); // decrease by 1% every 0.3 sec
+  function frame() {
+    if (width <= 0) {
+        clearInterval(id);
+    } else {
+        width--;
+        elem.style.width = width + '%';
+    }
+  }
+}
+
+
 function releaseCoins() {
 	// sets players coins in place
 	// also needed to initialize global variables
@@ -324,7 +359,10 @@ function releaseCoins() {
 				coins[j].style.visibility = 'visible';
 			}
 
-			// coin countdown to flag if all coins are distributed
+      // start timer
+      decreaseTimer();
+
+			// coin countdown to indicate if all coins are distributed
 			coinCountdown = 1;
 
 			// keep track of player's contribution
