@@ -3,18 +3,297 @@
 
 {% block styles %}
 <style>
-    .otree-btn-next {
-        all: initial;
-        background-image: url({% static 'public_good_kids/confirm.png' %});
-        background-repeat: no-repeat;
-        background-position: center;
-        background-size: 100%;
-        border: 0px;
-        width: 100px;
-        height: 100px;
-    }
+.otree-btn-next {
+    all: initial;
+    background-image: url({% static 'public_good_kids/confirm.png' %});
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 100%;
+    border: 0px;
+    width: 100px;
+    height: 100px;
+}
+
+.hidden {
+    visiblity: hidden;
+}
+
+#timer {
+  width: 800px;
+  height: 25px;
+  background-color: white;
+}
+
+#timeleft {
+  width: 100%;
+  height: 100%;
+  background-color: green;
+  transition: width 0.3s linear;
+}
+
+#container {
+  /* gesamte Spielfläche */
+  width: 800px;
+  height: 800px;
+  position: relative;
+  border: solid black;
+}
+
+.partner {
+  /* Geldtöpfe */
+  border-radius: 15%;
+  width: 20%;
+  height: 20%;
+  position: absolute;
+  z-index: -2;
+}
+
+#partnerLeft {
+  /* Geldtopf links */
+  background-color: rgb(255,255,1);
+  top: 40%;
+  left: 2.5%;
+}
+
+#partnerTop {
+  /* Geldtopf oben */
+  background-color: rgb(98,190,1);
+  top: 2.5%;
+  left: 40%;
+}
+
+#partnerRight {
+  /* Geldtopf rechts */
+  background-color: rgb(192,0,0);
+  top: 40%;
+  right: 2.5%;
+}
+
+#partnerBottom {
+  /* Geldtopf unten */
+  left: 40%;
+  bottom: 2.5%;
+  background-color: rgb(104,132,195);
+}
+
+#mainpot {
+  /* Gemeinschaftseldtopf in der Mitte */
+  border-radius: 15%;
+  width: 30%;
+  height: 30%;
+  left: 35%;
+  top: 35%;
+  position: absolute;
+  background-image: url({% static 'public_good_kids/main.png' %});
+  background-position: center;
+}
+
+.figure {
+  /* Spielerfiguren neben den Töpfen */
+  height: 10%;
+  position: absolute;
+  z-index: 2;
+}
+
+.figureLeft {
+  top: 35%;
+  left: 23%;
+}
+
+.figureTop {
+  top: 22%;
+  left: 59%;
+}
+
+.figureRight {
+  top: 55%;
+  left: 71%;
+}
+
+.figureBottom {
+  top: 68%;
+  left: 35%;
+}
+
+.animal {
+  /* Tierfiguren neben den Spielfiguren */
+  width: 8%;
+  position: absolute;
+  z-index: 1;
+}
+
+.animalLeft {
+  top: 34%;
+  left: 15%;
+}
+
+.animalTop {
+  top: 16%;
+  left: 61%;
+}
+
+.animalRight {
+  top: 61%;
+  left: 78%;
+}
+
+.animalBottom {
+  top: 80%;
+  left: 31%;
+}
+
+.coins {
+  width: 4%;
+  position: absolute;
+  transition: all 1.5s;
+}
+
+#cl1 {
+  top: 41%;
+  left: 27%;
+}
+
+#cl2 {
+  top: 44.5%;
+  left: 27%;
+}
+
+#cl3 {
+  top: 48%;
+  left: 27%;
+}
+
+#cl4 {
+  top: 51.5%;
+  left: 27%;
+}
+
+#cl5 {
+  top: 55%;
+  left: 27%;
+}
+
+#ct1 {
+  top: 27%;
+  left: 40%;
+}
+
+#ct2 {
+  top: 27%;
+  left: 44%;
+}
+
+#ct3 {
+  top: 27%;
+  left: 48%;
+}
+
+#ct4 {
+  top: 27%;
+  left: 52%;
+}
+
+#ct5 {
+  top: 27%;
+  left: 56%;
+}
+
+#cr1 {
+  top: 41%;
+  left: 70%;
+}
+
+#cr2 {
+  top: 44.5%;
+  left: 70%;
+}
+
+#cr3 {
+  top: 48%;
+  left: 70%;
+}
+
+#cr4 {
+  top: 51.5%;
+  left: 70%;
+}
+
+#cr5 {
+  top: 55%;
+  left: 70%;
+}
+
+#cb1 {
+  top: 70%;
+  left: 40%;
+}
+
+#cb2 {
+  top: 70%;
+  left: 44%;
+}
+
+#cb3 {
+  top: 70%;
+  left: 48%;
+}
+
+#cb4 {
+  top: 70%;
+  left: 52%;
+}
+
+#cb5 {
+  top: 70%;
+  left: 56%;
+}
+
+.hiddenCoin {
+  visibility: hidden;
+}
+
+.arrow {
+  /* Pfeile zum Verteilen der Münzen */
+  position: absolute;
+  left: 47%;
+  height: 6%;
+  visibility: hidden;
+  /* img in den Vordergrund */
+  z-index: 1;
+}
+
+#arrow-up {
+  /* Pfeil Richtung Geldtopf in der Mitte */
+  top: 62.5%;
+}
+
+#arrow-down {
+  /* Pfeil Richtung Geldtopf unten */
+  transform: rotate(180deg);
+  top: 74.5%;
+}
+
+.otree-btn-next {
+    all: initial;
+    background-image: url({% static 'public_good_kids/confirm.png' %});
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 100%;
+}
+
+#confirmbutton {
+  /* Button, der Auswahl bestätigt */
+  width: 10%;
+  height: 10%;
+  position: absolute;
+  bottom: 5%;
+  right: 5%;
+  visibility: hidden;
+}
+
 </style>
 {% endblock %}
+
 
 
 {% block content %}
@@ -26,17 +305,166 @@
 </audio>
 -->
 
-<p>
-    Hier kommen die Instruktionen hin (aktuelles Audio nur zu Testzwecken). <br />
-    Spieler in der Gruppe: {{ Constants.players_per_group }} <br />
-    Münzpaare: {{ Constants.endowment }}
-</p>
+<div id ="container">
+	<!-- Geldtöpfe -->
+	<div class="partner hidden players" id="partnerLeft"></div>
+	<div class="partner hidden players" id ="partnerTop"></div>
+	<div class="partner hidden players" id ="partnerRight"></div>
+	<div class="partner players" id ="partnerBottom"></div>
 
+	<!-- Gemeinschaftstopf -->
+	<div id="mainpot players hidden"></div>
 
+	<!-- Spielerfiguren -->
+	<img src={% static 'public_good_kids/figureyellow.png' %} class="figure figureLeft hidden players"/>
+	<img src={% static 'public_good_kids/figuregreen.png' %} class="figure figureTop hidden players"/>
+	<img src={% static 'public_good_kids/figurered.png' %} class="figure figureRight hidden players"/>
+	<img src="{% static 'public_good_kids/figureblue.png' %}" class="figure figureBottom players"/>
+
+  <!--Tierbilder -->
+  <img src={% static imagepathleft %} class="animal animalLeft hidden players"/>
+  <img src={% static imagepathtop %} class="animal animalTop hidden players"/>
+  <img src={% static imagepathright %} class="animal animalRight hidden players"/>
+  <img onload="runInstructions()" src={% static imagepathbottom %} class="animal animalBottom hidden" id="ownAnimal"/>
+
+	<!-- Münzen links -->
+	<img src={% static 'public_good_kids/twocoins.png' %} class="coins hidaway hidden" id="cl1"/>
+	<img src={% static 'public_good_kids/twocoins.png' %} class="coins hidaway hidden" id="cl2"/>
+	<img src={% static 'public_good_kids/twocoins.png' %} class="coins hidaway hidden" id="cl3"/>
+	<img src={% static 'public_good_kids/twocoins.png' %} class="coins hidaway hidden" id="cl4"/>
+	<img src={% static 'public_good_kids/twocoins.png' %} class="coins hidaway hidden" id="cl5"/>
+
+	<!-- Münzen oben -->
+	<img src={% static 'public_good_kids/twocoins.png' %} class="coins hidaway hidden" id="ct1"/>
+	<img src={% static 'public_good_kids/twocoins.png' %} class="coins hidaway hidden" id="ct2"/>
+	<img src={% static 'public_good_kids/twocoins.png' %} class="coins hidaway hidden" id="ct3"/>
+	<img src={% static 'public_good_kids/twocoins.png' %} class="coins hidaway hidden" id="ct4"/>
+	<img src={% static 'public_good_kids/twocoins.png' %} class="coins hidaway hidden" id="ct5"/>
+
+	<!-- Münzen rechts -->
+	<img src={% static 'public_good_kids/twocoins.png' %} class="coins hidaway hidden" id="cr1"/>
+	<img src={% static 'public_good_kids/twocoins.png' %} class="coins hidaway hidden" id="cr2"/>
+	<img src={% static 'public_good_kids/twocoins.png' %} class="coins hidaway hidden" id="cr3"/>
+	<img src={% static 'public_good_kids/twocoins.png' %} class="coins hidaway hidden" id="cr4"/>
+	<img src={% static 'public_good_kids/twocoins.png' %} class="coins hidaway hidden" id="cr5"/>
+
+	<!-- Münzen unten -->
+	<img src={% static 'public_good_kids/twocoins.png' %} class="coins hidden owncoins" id="cb1"/>
+	<img src={% static 'public_good_kids/twocoins.png' %} class="coins hidden owncoins" id="cb2"/>
+	<img src={% static 'public_good_kids/twocoins.png' %} class="coins hidden owncoins" id="cb3"/>
+	<img src={% static 'public_good_kids/twocoins.png' %} class="coins hidden owncoins" id="cb4"/>
+	<img src={% static 'public_good_kids/twocoins.png' %} class="coins hidden owncoins" id="cb5"/>
+
+	<!-- Pfeile zum Münzen verteilen -->
+	<img src={% static 'public_good_kids/arrow.png' %} class="arrow hidden" id="arrow-up"/>
+	<img src={% static 'public_good_kids/arrow.png' %} class="arrow hidden" id="arrow-down"/>
+
+	<!-- Bestätigungs-Button -->
+  <button class="otree-btn-next btn next-button otree-next-button" id="confirmbutton"></button>
+</div>
 
 
 
 
 <button class="otree-btn-next btn next-button otree-next-button"></button>
 
+{% endblock %}
+
+
+
+
+
+{% block scripts %}
+<script type="text/javascript">
+function loadImage() {
+  alert("Image is loaded");
+}
+
+function runInstructions(){
+  console.log("runInstructions");
+  // functions to call for Instructions
+  setTimeout(showAnimal, 1000);
+  setTimeout(showPlayers, 3000);
+  setTimeout(showCoins, 5000);
+  setTimeout(highlightCoin, 6000);
+  setTimeout(dehighlightCoin, 9500);
+  setTimeout(highlightCoins, 10500);
+  setTimeout(dehighlight, 12500);
+}
+
+function showAnimal(){
+  // shows the own animal symbol
+  console.log("showAnimal");
+  var audio = new Audio({{ Instructions1|json }});
+  audio.play();
+  document.getElementById('ownAnimal').classList.remove('hidden');
+}
+
+function showPlayers(){
+  // shows pots, figures
+  console.log("showPlayers");
+
+  var i;
+  var players = document.getElementsByClassName('players');
+  for (i=0; i < players.length; i++) {
+    players[i].classList.remove('hidden');
+  }
+}
+
+function showCoins(){
+  // shows coins
+  console.log("showCoins");
+  var j;
+  var coins = document.getElementsByClassName('coins');
+  for (j=0; j < coins.length; j++) {
+    coins[j].classList.remove('hidden');
+  }
+}
+
+function highlightCoin() {
+  var elem = document.getElementById("cb3");
+  elem.style.top = '35%';
+  elem.style.left = '30%';
+  elem.style.width = '40%';
+
+  var el = document.querySelectorAll('*');
+  for(var i=0;i<el.length;i++){
+    if (el[i].id == 'cb3' || el[i].hasChildNodes()) {
+
+    } else {
+    el[i].style.opacity = '0.3';
+    }
+  }
+}
+
+function dehighlightCoin() {
+  var el = document.querySelectorAll('*');
+  for(var i=0;i<el.length;i++){
+    el[i].style.opacity = '1';
+  }
+  var elem = document.getElementById("cb3");
+  elem.style.top = '70%';
+  elem.style.left = '48%';
+  elem.style.width = '4%';
+}
+
+function highlightCoins() {
+  var el = document.querySelectorAll('*');
+  for(var i=0;i<el.length;i++){
+    if (el[i].classList.contains('owncoins') || el[i].hasChildNodes()) {
+
+    } else {
+    el[i].style.opacity = '0.3';
+    }
+  }
+}
+
+function dehighlight() {
+  var el = document.querySelectorAll('*');
+  for(var i=0;i<el.length;i++){
+    el[i].style.opacity = '1';
+  }
+}
+
+</script>
 {% endblock %}

@@ -4,6 +4,18 @@ from ._builtin import Page, WaitPage
 from .models import Constants
 
 
+class GroupTreatment(Page):
+    # value will be saved in self.player.groupTreatment
+    form_model = models.Player
+    form_fields = ['groupTreatment']
+
+    def is_displayed(self):
+        return self.round_number == 1
+
+    def before_next_page(self):
+        self.participant.vars['groupdesign'] = self.player.groupTreatment
+
+
 class Choose(Page):
     #value will be saved in self.player.animal for later group distinction
     form_model = models.Player
@@ -24,6 +36,15 @@ class ChooseWaitPage(WaitPage):
 class Instructions(Page):
     def is_displayed(self):
         return self.round_number == 1
+
+    def vars_for_template(self):
+        return {
+            'imagepathleft'     : self.participant.vars['imagepathleft'],
+            'imagepathbottom'   : self.participant.vars['imagepathbottom'],
+            'imagepathright'    : self.participant.vars['imagepathright'],
+            'imagepathtop'      : self.participant.vars['imagepathtop'],
+            'Instructions1'     : '/static/public_good_kids/jingle.mp3'
+        }
 
 class Contribute(Page):
     form_model = models.Player
@@ -86,6 +107,8 @@ class Results(Page):
 
 
 page_sequence = [
+    #GroupTreatment,
+    #ChooseWaitPage,
     Choose,
     #ChooseWaitPage,
     Instructions,
