@@ -313,7 +313,7 @@
 	<div class="partner players" id ="partnerBottom"></div>
 
 	<!-- Gemeinschaftstopf -->
-	<div id="mainpot players hidden"></div>
+	<div id="mainpot" class="players hidden"></div>
 
 	<!-- Spielerfiguren -->
 	<img src={% static 'public_good_kids/figureyellow.png' %} class="figure figureLeft hidden players"/>
@@ -365,8 +365,9 @@
 
 
 
-
+<!--
 <button class="otree-btn-next btn next-button otree-next-button"></button>
+-->
 
 {% endblock %}
 
@@ -390,6 +391,10 @@ function runInstructions(){
   setTimeout(dehighlightCoin, 9500);
   setTimeout(highlightCoins, 10500);
   setTimeout(dehighlight, 12500);
+  setTimeout(highlightPots, 13500);
+  setTimeout(rotateMain, 14500);
+  setTimeout(rotateOwn, 16700);
+  setTimeout(showConfirm, 20000);
 }
 
 function showAnimal(){
@@ -403,7 +408,6 @@ function showAnimal(){
 function showPlayers(){
   // shows pots, figures
   console.log("showPlayers");
-
   var i;
   var players = document.getElementsByClassName('players');
   for (i=0; i < players.length; i++) {
@@ -422,6 +426,8 @@ function showCoins(){
 }
 
 function highlightCoin() {
+  // highlights the middle coin pair
+  console.log("highlightCoin");
   var elem = document.getElementById("cb3");
   elem.style.top = '35%';
   elem.style.left = '30%';
@@ -432,12 +438,14 @@ function highlightCoin() {
     if (el[i].id == 'cb3' || el[i].hasChildNodes()) {
 
     } else {
-    el[i].style.opacity = '0.3';
+    el[i].style.opacity = '0.2';
     }
   }
 }
 
 function dehighlightCoin() {
+  // removes highlighting of middle coin pair
+  console.log("dehighlightCoin");
   var el = document.querySelectorAll('*');
   for(var i=0;i<el.length;i++){
     el[i].style.opacity = '1';
@@ -449,21 +457,58 @@ function dehighlightCoin() {
 }
 
 function highlightCoins() {
+  // highlights own 5 coin pairs
+  console.log("highlightCoins");
   var el = document.querySelectorAll('*');
   for(var i=0;i<el.length;i++){
     if (el[i].classList.contains('owncoins') || el[i].hasChildNodes()) {
 
     } else {
-    el[i].style.opacity = '0.3';
+    el[i].style.opacity = '0.2';
     }
   }
 }
 
 function dehighlight() {
+  // changes opacity of all elements to normal (1)
+  console.log("dehighlight");
   var el = document.querySelectorAll('*');
   for(var i=0;i<el.length;i++){
     el[i].style.opacity = '1';
   }
+}
+
+function highlightPots() {
+  // highlights own pot and main pots
+  console.log("highlightPots");
+  var el = document.querySelectorAll('*');
+  for(var i=0;i<el.length;i++){
+    if (el[i].id == 'mainpot' || el[i].id == 'partnerBottom' || el[i].hasChildNodes()) {
+
+    } else {
+    el[i].style.opacity = '0.2';
+    }
+  }
+}
+
+function rotateMain() {
+  console.log("rotateMain");
+  var div = document.getElementById('mainpot');
+  div.style.transition = 'all 2s';
+  div.style.transform = 'rotate(360deg)';
+}
+
+function rotateOwn() {
+  console.log("rotateOwn");
+  var div = document.getElementById('partnerBottom');
+  div.style.transition = 'all 2s';
+  div.style.transform = 'rotate(360deg)';
+}
+
+function showConfirm() {
+  // shows confirm button (green tick)
+  console.log("showConfirm");
+  document.getElementById('confirmbutton').style.visibility = 'visible';
 }
 
 </script>
