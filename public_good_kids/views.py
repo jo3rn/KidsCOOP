@@ -39,11 +39,12 @@ class Instructions(Page):
 
     def vars_for_template(self):
         return {
+            'groupdesign'       : self.participant.vars['groupdesign'],
             'imagepathleft'     : self.participant.vars['imagepathleft'],
             'imagepathbottom'   : self.participant.vars['imagepathbottom'],
             'imagepathright'    : self.participant.vars['imagepathright'],
             'imagepathtop'      : self.participant.vars['imagepathtop'],
-            'Instructions1'     : '/static/public_good_kids/jingle.mp3'
+            'instructions1a'    : self.participant.vars['instructions1a']
         }
 
 class Contribute(Page):
@@ -107,7 +108,7 @@ class Results(Page):
 
 
 page_sequence = [
-    #GroupTreatment,
+    GroupTreatment,
     #ChooseWaitPage,
     Choose,
     #ChooseWaitPage,

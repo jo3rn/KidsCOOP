@@ -38,29 +38,31 @@ class Group(BaseGroup):
 class Player(BasePlayer):
 
     def set_image(self):
-        #TO DO: delete this line
-        self.participant.vars['groupdesign'] = 'in'
 
         if self.animal == "Elefant" and self.participant.vars['groupdesign'] == 'in':
             self.participant.vars['imagepathbottom'] = 'public_good_kids/elephant.png'
             self.participant.vars['imagepathleft'] = 'public_good_kids/elephant.png'
             self.participant.vars['imagepathtop'] = 'public_good_kids/elephant.png'
             self.participant.vars['imagepathright'] = 'public_good_kids/elephant.png'
+            self.participant.vars['instructions1a'] = '../../../../../static/public_good_kids/Instruktion1a_ElefantIngroup_v1.mp3'
         elif self.animal == "Schildkröte" and self.participant.vars['groupdesign'] == 'in':
             self.participant.vars['imagepathbottom'] = 'public_good_kids/turtle.png'
             self.participant.vars['imagepathleft'] = 'public_good_kids/turtle.png'
             self.participant.vars['imagepathtop'] = 'public_good_kids/turtle.png'
             self.participant.vars['imagepathright'] = 'public_good_kids/turtle.png'
+            self.participant.vars['instructions1a'] = '../../../../../static/public_good_kids/Instruktion1a_SchildIngroup_v1.mp3'
         elif self.animal == "Elefant" and self.participant.vars['groupdesign'] == 'out':
             self.participant.vars['imagepathbottom'] = 'public_good_kids/elephant.png'
             self.participant.vars['imagepathleft'] = 'public_good_kids/turtle.png'
             self.participant.vars['imagepathtop'] = 'public_good_kids/elephant.png'
             self.participant.vars['imagepathright'] = 'public_good_kids/turtle.png'
+            self.participant.vars['instructions1a'] = '../../../../../static/public_good_kids/Instruktion1a_ElefantOutgroup_v1.mp3'
         elif self.animal == "Schildkröte" and self.participant.vars['groupdesign'] == 'out':
             self.participant.vars['imagepathbottom'] = 'public_good_kids/turtle.png'
             self.participant.vars['imagepathleft'] = 'public_good_kids/elephant.png'
             self.participant.vars['imagepathtop'] = 'public_good_kids/turtle.png'
             self.participant.vars['imagepathright'] = 'public_good_kids/elephant.png'
+            self.participant.vars['instructions1a'] = '../../../../../static/public_good_kids/Instruktion1a_SchildOutgroup_v1.mp3'
 
     groupTreatment = models.CharField(widget=widgets.HiddenInput(), verbose_name='')
     contribution = models.FloatField()

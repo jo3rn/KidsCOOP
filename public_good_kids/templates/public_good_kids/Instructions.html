@@ -313,7 +313,7 @@
 	<div class="partner players" id ="partnerBottom"></div>
 
 	<!-- Gemeinschaftstopf -->
-	<div id="mainpot" class="players hidden"></div>
+	<div id="mainpot"></div>
 
 	<!-- Spielerfiguren -->
 	<img src={% static 'public_good_kids/figureyellow.png' %} class="figure figureLeft hidden players"/>
@@ -322,9 +322,9 @@
 	<img src="{% static 'public_good_kids/figureblue.png' %}" class="figure figureBottom players"/>
 
   <!--Tierbilder -->
-  <img src={% static imagepathleft %} class="animal animalLeft hidden players"/>
-  <img src={% static imagepathtop %} class="animal animalTop hidden players"/>
-  <img src={% static imagepathright %} class="animal animalRight hidden players"/>
+  <img src={% static imagepathleft %} class="animal animalLeft hidden"/>
+  <img src={% static imagepathtop %} class="animal animalTop hidden"/>
+  <img src={% static imagepathright %} class="animal animalRight hidden"/>
   <img onload="runInstructions()" src={% static imagepathbottom %} class="animal animalBottom hidden" id="ownAnimal"/>
 
 	<!-- Münzen links -->
@@ -373,8 +373,6 @@
 
 
 
-
-
 {% block scripts %}
 <script type="text/javascript">
 function loadImage() {
@@ -383,27 +381,82 @@ function loadImage() {
 
 function runInstructions(){
   console.log("runInstructions");
-  // functions to call for Instructions
-  setTimeout(showAnimal, 1000);
-  setTimeout(showPlayers, 3000);
-  setTimeout(showCoins, 5000);
-  setTimeout(highlightCoin, 6000);
-  setTimeout(dehighlightCoin, 9500);
-  setTimeout(highlightCoins, 10500);
-  setTimeout(dehighlight, 12500);
-  setTimeout(highlightPots, 13500);
-  setTimeout(rotateMain, 14500);
-  setTimeout(rotateOwn, 16700);
-  setTimeout(showConfirm, 20000);
+  /*
+  #####################################################################################################
+  //Instruktion1a
+  setTimeout(startAudioI1a, 1000);
+  setTimeout(showPlayers, 5000);
+  setTimeout(showAnimal, 21000);
+  setTimeout(showOtherAnimals, 27000);
+
+  //call Instruktion1b
+  // je nachdem ob in- oder outgroup unterscheiden sich die Audios um 10sek
+  if ({{ groupdesign|json }} == 'in') {
+    setTimeout(runInstructions1b, 42000);
+  } else {
+    setTimeout(runInstructions1b, 52000);
+  }
 }
 
-function showAnimal(){
-  // shows the own animal symbol
-  console.log("showAnimal");
-  var audio = new Audio({{ Instructions1|json }});
+function runInstructions1b(){
+  //Instruktion1b
+  var audio = new Audio('../../../../../static/public_good_kids/Instruktion1b_v1.mp3');
   audio.play();
-  document.getElementById('ownAnimal').classList.remove('hidden');
+
+  setTimeout(showCoins, 1500);
+  setTimeout(highlightCoin, 4000);
+  setTimeout(dehighlightCoin, 12000);
+
+  // call Instruktion2
+  setTimeout(runInstructions2, 41000);
 }
+
+function runInstructions2(){
+  //Instruktion2
+  var audio = new Audio('../../../../../static/public_good_kids/Instruktion2_v2.mp3');
+  audio.play();
+
+  setTimeout(highlightCoins, 3000);
+  setTimeout(dehighlight, 10000);
+  setTimeout(highlightPots, 12000);
+  setTimeout(rotateOwn, 14000);
+  setTimeout(rotateMain, 16500);
+  setTimeout(dehighlight, 20000);
+  setTimeout(contributeOneCoin, 39000);
+  setTimeout(doubleCoin, 45000);
+  setTimeout(othersContribute, 50000);
+  setTimeout(doubleCoins, 56000);
+  setTimeout(highlightPlayer, 77000);
+  setTimeout(highlightOtherPlayers, 80000);
+
+  //setTimeout(showConfirm, 12000);
+
+  //call Instruktion3
+  setTimeout(runInstructions3, 130000)
+
+  #####################################################################################################
+  */
+  showCoins();
+  setTimeout(contributeOneCoin, 1000);
+  setTimeout(doubleCoin, 3000);
+  setTimeout(othersContribute, 7000);
+  setTimeout(doubleCoins, 9000);
+  setTimeout(repositionAndDelete, 13000);
+
+
+}
+
+function runInstructions3(){
+  var audio = new Audio('../../../../../static/public_good_kids/Instruktion3_v1.mp3');
+  audio.play();
+}
+
+
+function startAudioI1a(){
+  var audio = new Audio({{ instructions1a|json }});
+  audio.play();
+}
+
 
 function showPlayers(){
   // shows pots, figures
@@ -414,6 +467,25 @@ function showPlayers(){
     players[i].classList.remove('hidden');
   }
 }
+
+
+function showAnimal(){
+  // shows the own animal symbol
+  console.log("showAnimals");
+
+  document.getElementById('ownAnimal').classList.remove('hidden');
+}
+
+function showOtherAnimals(){
+  // shows pots, figures
+  console.log("showOtherAnimals");
+  var i;
+  var animals = document.getElementsByClassName('animal');
+  for (i=0; i < animals.length; i++) {
+    animals[i].classList.remove('hidden');
+  }
+}
+
 
 function showCoins(){
   // shows coins
@@ -504,6 +576,79 @@ function rotateOwn() {
   div.style.transition = 'all 2s';
   div.style.transform = 'rotate(360deg)';
 }
+
+function contributeOneCoin() {
+  var cb3 = document.getElementById('cb3');
+  cb3.style.top = '61%';
+
+}
+
+function doubleCoin() {
+  var cb3 = document.getElementById('cb3');
+  var coinClone = cb3.cloneNode();
+  coinClone.id = 'cb3clone';
+  container.appendChild(coinClone);
+  coinClone.style.top = '61%';
+  coinClone.style.left = '48%';
+  setTimeout(shift, 100);
+  function shift() {
+    coinClone.style.top = '58%';
+  }
+
+}
+
+function othersContribute() {
+  var cl3 = document.getElementById('cl3');
+  cl3.style.left = '48%';
+  cl3.style.top = '54%';
+  var ct3 = document.getElementById('ct3');
+  ct3.style.left = '48%';
+  ct3.style.top = '39%';
+  var cr3 = document.getElementById('cr3');
+  cr3.style.left = '48%';
+  cr3.style.top = '47%';
+}
+
+function doubleCoins() {
+  var cl3 = document.getElementById('cl3');
+  var ct3 = document.getElementById('ct3');
+  var cr3 = document.getElementById('cr3');
+  var coinClone2 = cl3.cloneNode();
+  var coinClone3 = ct3.cloneNode();
+  var coinClone4 = cr3.cloneNode();
+  coinClone2.id = 'cl3clone';
+  coinClone3.id = 'ct3clone';
+  coinClone4.id = 'cr3clone';
+  container.appendChild(coinClone2);
+  container.appendChild(coinClone3);
+  container.appendChild(coinClone4);
+  coinClone2.style.top = '54%';
+  coinClone3.style.top = '39%';
+  coinClone4.style.top = '47%';
+  coinClone2.style.left = '48%';
+  coinClone2.style.left = '48%';
+  coinClone2.style.left = '48%';
+  setTimeout(shift, 100);
+  function shift() {
+    coinClone2.style.top = '51%';
+    coinClone3.style.top = '36%';
+    coinClone4.style.top = '44%';
+  }
+}
+
+function repositionAndDelete() {
+
+}
+
+function highlightPlayer() {
+
+}
+
+function highlightOtherPlayers() {
+
+}
+
+
 
 function showConfirm() {
   // shows confirm button (green tick)
