@@ -319,13 +319,13 @@
 	<img src={% static 'public_good_kids/figureyellow.png' %} class="figure figureLeft hidden players"/>
 	<img src={% static 'public_good_kids/figuregreen.png' %} class="figure figureTop hidden players"/>
 	<img src={% static 'public_good_kids/figurered.png' %} class="figure figureRight hidden players"/>
-	<img src="{% static 'public_good_kids/figureblue.png' %}" class="figure figureBottom players"/>
+	<img onload="runInstructions()" src="{% static 'public_good_kids/figureblue.png' %}" class="figure figureBottom players"/>
 
   <!--Tierbilder -->
   <img src={% static imagepathleft %} class="animal animalLeft hidden"/>
   <img src={% static imagepathtop %} class="animal animalTop hidden"/>
   <img src={% static imagepathright %} class="animal animalRight hidden"/>
-  <img onload="runInstructions()" src={% static imagepathbottom %} class="animal animalBottom hidden" id="ownAnimal"/>
+  <img src={% static imagepathbottom %} class="animal animalBottom hidden" id="ownAnimal"/>
 
 	<!-- Münzen links -->
 	<img src={% static 'public_good_kids/twocoins.png' %} class="coins hidaway hidden" id="cl1"/>
@@ -375,16 +375,10 @@
 
 {% block scripts %}
 <script type="text/javascript">
-function loadImage() {
-  alert("Image is loaded");
-}
-
 function runInstructions(){
   console.log("runInstructions");
-  /*
-  #####################################################################################################
   //Instruktion1a
-  setTimeout(startAudioI1a, 1000);
+  setTimeout(startAudioI1a, 900);
   setTimeout(showPlayers, 5000);
   setTimeout(showAnimal, 21000);
   setTimeout(showOtherAnimals, 27000);
@@ -426,28 +420,29 @@ function runInstructions2(){
   setTimeout(doubleCoin, 45000);
   setTimeout(othersContribute, 50000);
   setTimeout(doubleCoins, 56000);
-  setTimeout(highlightPlayer, 77000);
+  setTimeout(repositionAndDelete, 58000);
+  setTimeout(contributeOneCoin, 60000);
+  setTimeout(doubleCoin, 62000);
+  setTimeout(distributeFour, 73000);
+  setTimeout(repositionAndDelete, 76500);
+  setTimeout(highlightPlayer, 78000);
   setTimeout(highlightOtherPlayers, 80000);
 
   //setTimeout(showConfirm, 12000);
 
   //call Instruktion3
-  setTimeout(runInstructions3, 130000)
-
-  #####################################################################################################
-  */
-  showCoins();
-  setTimeout(contributeOneCoin, 1000);
-  setTimeout(doubleCoin, 3000);
-  setTimeout(othersContribute, 7000);
-  setTimeout(doubleCoins, 9000);
-  setTimeout(repositionAndDelete, 13000);
-
-
+  setTimeout(runInstructions3, 130000);
 }
 
 function runInstructions3(){
   var audio = new Audio('../../../../../static/public_good_kids/Instruktion3_v1.mp3');
+  audio.play();
+
+  setTimeout(runBeispiel3, 30500);
+}
+
+function runBeispiel3() {
+  var audio = new Audio('../../../../../static/public_good_kids/Beispiel3.mp3');
   audio.play();
 }
 
@@ -580,12 +575,12 @@ function rotateOwn() {
 function contributeOneCoin() {
   var cb3 = document.getElementById('cb3');
   cb3.style.top = '61%';
-
 }
 
 function doubleCoin() {
   var cb3 = document.getElementById('cb3');
   var coinClone = cb3.cloneNode();
+  coinClone.classList.add('clone');
   coinClone.id = 'cb3clone';
   container.appendChild(coinClone);
   coinClone.style.top = '61%';
@@ -594,7 +589,6 @@ function doubleCoin() {
   function shift() {
     coinClone.style.top = '58%';
   }
-
 }
 
 function othersContribute() {
@@ -619,6 +613,9 @@ function doubleCoins() {
   coinClone2.id = 'cl3clone';
   coinClone3.id = 'ct3clone';
   coinClone4.id = 'cr3clone';
+  coinClone2.classList.add('clone');
+  coinClone3.classList.add('clone');
+  coinClone4.classList.add('clone');
   container.appendChild(coinClone2);
   container.appendChild(coinClone3);
   container.appendChild(coinClone4);
@@ -637,7 +634,53 @@ function doubleCoins() {
 }
 
 function repositionAndDelete() {
+  var clones = document.getElementsByClassName('clone');
+  var k = clones.length - 1;
+  for (k; k >= 0; k--) {
+    clones[k].parentNode.removeChild(clones[k]);
+  }
+  cb3.style.clipPath = 'none';
+  cb3.style.left = '48%';
+  cb3.style.top = '70%';
+  cl3.style.left = '27%';
+  cl3.style.top = '48%';
+  ct3.style.left = '48%';
+  ct3.style.top = '27%';
+  cr3.style.left = '70%';
+  cr3.style.top = '48%';
+}
 
+function distributeFour() {
+  var cb3 = document.getElementById('cb3');
+  var cb3clone = document.getElementById('cb3clone');
+  var clone2 = cb3.cloneNode(false);
+  clone2.classList.add('clone');
+  var clone3 = cb3clone.cloneNode(false);
+  clone3.classList.add('clone');
+  var container = document.getElementById('container');
+  container.appendChild(clone2);
+  clone2.style.top = window.getComputedStyle(cb3,null).getPropertyValue('top');
+  clone2.style.left = window.getComputedStyle(cb3,null).getPropertyValue('left');
+  clone2.style.clipPath = "inset(0% 50% 0% 0%)";
+  container.appendChild(clone3);
+  clone3.style.top = window.getComputedStyle(cb3clone,null).getPropertyValue('top');
+  clone3.style.left = window.getComputedStyle(cb3clone,null).getPropertyValue('left');
+  clone3.style.clipPath = "inset(0% 50% 0% 0%)";
+
+  // coin to left
+  clone3.style.left = '10%';
+  clone3.style.top = '48%';
+  // coin to top
+  cb3clone.style.left = '47%';
+  cb3clone.style.top = '15%';
+  cb3clone.style.clipPath = "inset(0% 00% 0% 50%)";
+  // coin to right
+  clone2.style.left = '90%';
+  clone2.style.top = '48%';
+  // coin to bottom
+  cb3.style.left = '47%';
+  cb3.style.top = '85%';
+  cb3.style.clipPath = "inset(0% 0% 0% 50%)";
 }
 
 function highlightPlayer() {
