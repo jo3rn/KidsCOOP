@@ -72,16 +72,114 @@ class NotUnderstood(Page):
 
 class Contribute(Page):
     form_model = models.Player
-    form_fields = ['contribution', 'p_label']
+    form_fields = ['contribution', 'p_label', 'gameTreatment', 'groupTreatment']
+
+    def is_displayed(self):
+        return self.round_number < 4
 
     def vars_for_template(self):
         return {
+            'groupTreatment'    : self.participant.vars['groupdesign'],
+            'gameTreatment'     : 'PublicGoods',
+            'roundnumber'       : self.round_number,
             'p_label'           : self.participant.label,
             'imagepathleft'     : self.participant.vars['imagepathleft'],
             'imagepathbottom'   : self.participant.vars['imagepathbottom'],
             'imagepathright'    : self.participant.vars['imagepathright'],
             'imagepathtop'      : self.participant.vars['imagepathtop']
         }
+
+class UKStrategy(Page):
+    form_model = models.Player
+    form_fields = ['contribution', 'p_label', 'gameTreatment', 'groupTreatment']
+
+    def vars_for_template(self):
+        return {
+            'groupTreatment'    : self.participant.vars['groupdesign'],
+            'gameTreatment'     : 'UKStrategy',
+            'p_label'           : self.participant.label,
+            'imagepathleft'     : self.participant.vars['imagepathleft'],
+            'imagepathbottom'   : self.participant.vars['imagepathbottom'],
+            'imagepathright'    : self.participant.vars['imagepathright'],
+            'imagepathtop'      : self.participant.vars['imagepathtop']
+        }
+
+    def is_displayed(self):
+        return self.round_number == 4
+
+class K0Strategy(Page):
+    form_model = models.Player
+    form_fields = ['contribution', 'p_label', 'gameTreatment', 'groupTreatment']
+
+    def vars_for_template(self):
+        return {
+            'groupTreatment'    : self.participant.vars['groupdesign'],
+            'gameTreatment'     : 'K0Strategy',
+            'p_label'           : self.participant.label,
+            'imagepathleft'     : self.participant.vars['imagepathleft'],
+            'imagepathbottom'   : self.participant.vars['imagepathbottom'],
+            'imagepathright'    : self.participant.vars['imagepathright'],
+            'imagepathtop'      : self.participant.vars['imagepathtop']
+        }
+
+    def is_displayed(self):
+        return self.round_number == 5
+
+class K1Strategy(Page):
+    form_model = models.Player
+    form_fields = ['contribution', 'p_label', 'gameTreatment', 'groupTreatment']
+
+    def vars_for_template(self):
+        return {
+            'groupTreatment'    : self.participant.vars['groupdesign'],
+            'gameTreatment'     : 'K1Strategy',
+            'p_label'           : self.participant.label,
+            'imagepathleft'     : self.participant.vars['imagepathleft'],
+            'imagepathbottom'   : self.participant.vars['imagepathbottom'],
+            'imagepathright'    : self.participant.vars['imagepathright'],
+            'imagepathtop'      : self.participant.vars['imagepathtop']
+        }
+
+    def is_displayed(self):
+        return self.round_number == 6
+
+class K2Strategy(Page):
+    form_model = models.Player
+    form_fields = ['contribution', 'p_label', 'gameTreatment', 'groupTreatment']
+
+    def vars_for_template(self):
+        return {
+            'groupTreatment'    : self.participant.vars['groupdesign'],
+            'gameTreatment'     : 'K2Strategy',
+            'p_label'           : self.participant.label,
+            'imagepathleft'     : self.participant.vars['imagepathleft'],
+            'imagepathbottom'   : self.participant.vars['imagepathbottom'],
+            'imagepathright'    : self.participant.vars['imagepathright'],
+            'imagepathtop'      : self.participant.vars['imagepathtop']
+        }
+
+    def is_displayed(self):
+        return self.round_number == 7
+
+class K3Strategy(Page):
+    form_model = models.Player
+    form_fields = ['contribution', 'p_label', 'gameTreatment', 'groupTreatment']
+
+    def vars_for_template(self):
+        return {
+            'groupTreatment'    : self.participant.vars['groupdesign'],
+            'gameTreatment'     : 'K3Strategy',
+            'p_label'           : self.participant.label,
+            'imagepathleft'     : self.participant.vars['imagepathleft'],
+            'imagepathbottom'   : self.participant.vars['imagepathbottom'],
+            'imagepathright'    : self.participant.vars['imagepathright'],
+            'imagepathtop'      : self.participant.vars['imagepathtop']
+        }
+
+    def is_displayed(self):
+        return self.round_number == 8
+
+
 
 
 class ResultsWaitPage(WaitPage):
@@ -132,15 +230,17 @@ class Results(Page):
 
 page_sequence = [
     GroupTreatment,
-    ChooseWaitPage,
+    #ChooseWaitPage,
     Choose,
-    ChooseWaitPage,
-    Instructions,
-    TestRun,
+    #ChooseWaitPage,
+    #Instructions,
+    #TestRun,
     Understood,
     NotUnderstood,
-    ChooseWaitPage,
+    #ChooseWaitPage,
     Contribute,
-    ResultsWaitPage,
-    Results
+    UKStrategy,
+    K0Strategy,
+    #ResultsWaitPage,
+    #Results
 ]

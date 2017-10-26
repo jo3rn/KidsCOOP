@@ -14,7 +14,7 @@ this is a public good game for kids in elementary school
 class Constants(BaseConstants):
     name_in_url = 'pgk'
     players_per_group = 4
-    num_rounds = 3
+    num_rounds = 8
 
     endowment = 5
     multiplier = 2
@@ -65,6 +65,7 @@ class Player(BasePlayer):
             self.participant.vars['instructions1a'] = '../../../../../static/public_good_kids/Instruktion1a_SchildOutgroup_v1.mp3'
 
     groupTreatment = models.CharField(widget=widgets.HiddenInput(), verbose_name='')
+    gameTreatment = models.CharField(widget=widgets.HiddenInput(), verbose_name='')
     contribution = models.FloatField()
     animal = models.CharField(widget=widgets.HiddenInput(), verbose_name='')
     understood = models.CharField(widget=widgets.HiddenInput(), verbose_name='')
