@@ -57,10 +57,6 @@
 	<img src={% static 'public_good_kids/twocoins.png' %} class="coins hidden owncoins" id="cb4"/>
 	<img src={% static 'public_good_kids/twocoins.png' %} class="coins hidden owncoins" id="cb5"/>
 
-	<!-- Pfeile zum Münzen verteilen -->
-	<img src={% static 'public_good_kids/arrow.png' %} class="arrow hidden" id="arrow-up"/>
-	<img src={% static 'public_good_kids/arrow.png' %} class="arrow hidden" id="arrow-down"/>
-
 	<!-- Bestätigungs-Button -->
   <button class="otree-btn-next btn next-button otree-next-button" id="confirmbutton"></button>
 </div>
@@ -117,6 +113,8 @@ function runInstructions1b(){
   showCoins();
   showAnimal();
   showOtherAnimals();
+
+  setTimeout(advanceToNextPage, 2500);
 
 
 
@@ -193,23 +191,9 @@ function runBeispiel3() {
   setTimeout(distributeCoins, 88000);
   setTimeout(distributeCoins, 89000);
 
-
-
-  setTimeout(runInstructions4, 166000);
 }
 
-function runInstructions4() {
-  var audio = new Audio('../../../../../static/public_good_kids/Instruktion4_v1.mp3');
-  audio.play();
 
-  setTimeout(runInstructions5, 67000);
-}
-
-function runInstructions5() {
-  var audio = new Audio('../../../../../static/public_good_kids/Instruktion5_v1.mp3');
-  audio.play();
-
-}
 
 function startAudioI1a(){
   var audio = new Audio({{ instructions1a|json }});
@@ -830,6 +814,10 @@ function highlightClass(theClass) {
     el[i].style.opacity = '0.2';
     }
   }
+}
+
+function advanceToNextPage() {
+  document.getElementById("form").submit();
 }
 
 function showConfirm() {

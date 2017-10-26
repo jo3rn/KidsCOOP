@@ -1,0 +1,47 @@
+{% extends "global/Page.html" %}
+{% load staticfiles otree_tags %}
+
+{% block styles %}
+<style>
+    .otree-btn-next {
+        all: initial;
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: 100%;
+        border: 0px;
+        width: 300px;
+        height: 450px;
+    }
+
+    #hand {
+        background-image: url({% static 'public_good_kids/handraised.png' %});
+    }
+
+    #center {
+        text-align: center;
+    }
+
+</style>
+{% endblock %}
+
+
+{% block content %}
+
+<div id="center">
+  <button id="hand" class="otree-btn-next btn next-button otree-next-button"></button>
+</div>
+
+{% endblock %}
+
+{% block scripts %}
+<script type="text/javascript">
+
+window.onload = playAudio();
+
+function playAudio() {
+  var audio = new Audio('../../../../../static/public_good_kids/Testleiterhilfe_v1.mp3');
+  audio.play();
+}
+
+</script>
+{% endblock %}

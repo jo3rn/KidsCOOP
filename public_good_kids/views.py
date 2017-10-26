@@ -47,6 +47,29 @@ class Instructions(Page):
             'instructions1a'    : self.participant.vars['instructions1a']
         }
 
+class TestRun(Page):
+    def is_displayed(self):
+        return self.round_number == 1
+
+    def vars_for_template(self):
+        return {
+            'imagepathleft'     : self.participant.vars['imagepathleft'],
+            'imagepathbottom'   : self.participant.vars['imagepathbottom'],
+            'imagepathright'    : self.participant.vars['imagepathright'],
+            'imagepathtop'      : self.participant.vars['imagepathtop']
+        }
+
+class Understood(Page):
+    form_model = models.Player
+    form_fields = ['understood']
+
+    def is_displayed(self):
+        return self.round_number == 1
+
+class NotUnderstood(Page):
+    def is_displayed(self):
+        return (self.round_number == 1 and self.player.understood == "no")
+
 class Contribute(Page):
     form_model = models.Player
     form_fields = ['contribution', 'p_label']
@@ -109,10 +132,14 @@ class Results(Page):
 
 page_sequence = [
     GroupTreatment,
-    #ChooseWaitPage,
+    ChooseWaitPage,
     Choose,
-    #ChooseWaitPage,
+    ChooseWaitPage,
     Instructions,
+    TestRun,
+    Understood,
+    NotUnderstood,
+    ChooseWaitPage,
     Contribute,
     ResultsWaitPage,
     Results

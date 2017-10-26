@@ -1,0 +1,68 @@
+{% extends "global/Page.html" %}
+{% load staticfiles otree_tags %}
+
+{% block styles %}
+<style>
+    .otree-btn-next {
+        all: initial;
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: 100%;
+        border: 0px;
+        width: 300px;
+        height: 400px;
+    }
+
+    #no {
+        background-image: url({% static 'public_good_kids/no.png' %});
+        float: left;
+    }
+
+    #yes {
+        background-image: url({% static 'public_good_kids/yes.png' %});
+        float: right;
+    }
+
+    .clear {
+        clear:both;
+    }
+</style>
+{% endblock %}
+
+
+{% block content %}
+
+<p>
+    Hast du das Spiel verstanden?
+</p>
+
+<div>
+  <button id="no" class="otree-btn-next btn next-button otree-next-button" onclick="writeNo()"></button>
+
+  <button id="yes" class="otree-btn-next btn next-button otree-next-button" onclick="writeYes()"></button>
+  <div class="clear"></div>
+</div>
+
+<input type="hidden" name="understood" value="" id="understood"/>
+
+{% endblock %}
+
+{% block scripts %}
+<script type="text/javascript">
+
+window.onload = playAudio();
+
+function playAudio() {
+  var audio = new Audio('../../../../../static/public_good_kids/Verstanden_v1.mp3');
+  audio.play();
+}
+
+function writeNo() {
+  document.getElementById("understood").value = "no";
+}
+
+function writeYes() {
+  document.getElementById("understood").value = "yes";
+}
+</script>
+{% endblock %}

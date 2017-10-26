@@ -13,19 +13,6 @@
     visiblity: hidden;
 }
 
-#timer {
-  width: 800px;
-  height: 25px;
-  background-color: white;
-}
-
-#timeleft {
-  width: 100%;
-  height: 100%;
-  background-color: green;
-  transition: width 0.3s linear;
-}
-
 #container {
   /* gesamte Spielfläche */
   width: 800px;
@@ -245,27 +232,6 @@
 
 .hiddenCoin {
   visibility: hidden;
-}
-
-.arrow {
-  /* Pfeile zum Verteilen der Münzen */
-  position: absolute;
-  left: 47%;
-  height: 6%;
-  visibility: hidden;
-  /* img in den Vordergrund */
-  z-index: 1;
-}
-
-#arrow-up {
-  /* Pfeil Richtung Geldtopf in der Mitte */
-  top: 62.5%;
-}
-
-#arrow-down {
-  /* Pfeil Richtung Geldtopf unten */
-  transform: rotate(180deg);
-  top: 74.5%;
 }
 
 .otree-btn-next {

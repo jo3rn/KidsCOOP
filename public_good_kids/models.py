@@ -67,4 +67,5 @@ class Player(BasePlayer):
     groupTreatment = models.CharField(widget=widgets.HiddenInput(), verbose_name='')
     contribution = models.FloatField()
     animal = models.CharField(widget=widgets.HiddenInput(), verbose_name='')
+    understood = models.CharField(widget=widgets.HiddenInput(), verbose_name='')
     p_label = models.CharField(widget=widgets.HiddenInput(), verbose_name='')
