@@ -380,11 +380,11 @@ function initialize() {
 	// also needed to initialize global variables
 	try {
 		if (typeof coinCountdown === 'undefined') {
-			var audio = new Audio('../../../../../static/public_good_kids/K0_strategy_v1.mp3');
+			var audio = new Audio('../../../../../static/public_good_kids/KII_strategy_v1.mp3');
 		  audio.play();
 
-			setTimeout(distributeOtherCoins, 26000);
-			setTimeout(showArrows, 48000);
+			setTimeout(distributeOtherCoins, 7000);
+			setTimeout(showArrows, 29000);
 			function showArrows() {
 				// make arrows visible
 				var arrows = document.getElementsByClassName('arrow');
@@ -395,7 +395,7 @@ function initialize() {
 			}
 
       // start timer
-      setTimeout(decreaseTimer, 48000);
+      setTimeout(decreaseTimer, 29000);
 
 			// coin countdown to indicate if all coins are distributed
 			coinCountdown = 1;
@@ -426,27 +426,27 @@ function distributeOtherCoins() {
 	var cr4 = document.getElementById('cr4');
 	var cr5 = document.getElementById('cr5');
 
-	cl1.style.left = '2.5%';
-	cl2.style.left = '6.5%';
-	cl3.style.left = '10.5%';
-	cl4.style.left = '14.5%';
-	cl5.style.left = '18.5%';
-	cl1.style.top = '55%';
-	cl2.style.top = '55%';
-	cl3.style.top = '55%';
-	cl4.style.top = '55%';
-	cl5.style.top = '55%';
+	cl1.style.left = '40%';
+	cl2.style.left = '44%';
+	cl3.style.left = '48%';
+	cl4.style.left = '52%';
+	cl5.style.left = '56%';
+	cl1.style.top = '51%';
+	cl2.style.top = '51%';
+	cl3.style.top = '51%';
+	cl4.style.top = '51%';
+	cl5.style.top = '51%';
 
 	ct1.style.left = '40%';
 	ct2.style.left = '44%';
 	ct3.style.left = '48%';
 	ct4.style.left = '52%';
 	ct5.style.left = '56%';
-	ct1.style.top = '18%';
-	ct2.style.top = '18%';
-	ct3.style.top = '18%';
-	ct4.style.top = '18%';
-	ct5.style.top = '18%';
+	ct1.style.top = '47%';
+	ct2.style.top = '47%';
+	ct3.style.top = '47%';
+	ct4.style.top = '47%';
+	ct5.style.top = '47%';
 
 	cr1.style.left = '93.5%';
 	cr2.style.left = '89.5%';

@@ -62,11 +62,6 @@
 </div>
 
 
-
-<!--
-<button class="otree-btn-next btn next-button otree-next-button"></button>
--->
-
 {% endblock %}
 
 
@@ -78,9 +73,6 @@ window.onload = runInstructions();
 function runInstructions(){
   console.log("runInstructions");
   //Instruktion1a
-
-  /*
-  ############################################################################################################
   setTimeout(startAudioI1a, 900);
   setTimeout(showPlayers, 5000);
   setTimeout(showAnimal, 21000);
@@ -106,18 +98,15 @@ function runInstructions1b(){
 
   // call Instruktion2
   setTimeout(runInstructions2, 41000);
-  ############################################################################################################
-  */
 
+	/* for debugging purposes only
   showPlayers();
   showCoins();
   showAnimal();
   showOtherAnimals();
 
   setTimeout(advanceToNextPage, 2500);
-
-
-
+	*/
 
 }
 
@@ -162,8 +151,6 @@ function runInstructions3(){
 function runBeispiel3() {
   var audio = new Audio('../../../../../static/public_good_kids/Beispiel3.mp3');
   audio.play();
-  var audio = new Audio('../../../../../static/public_good_kids/Beispiel3.mp3');
-  audio.play();
   setTimeout(highlightPlayer, 5000);
   setTimeout(highlightClassAlso, 8000, ['owncoins']);
   setTimeout(highlightIdAlso, 14000, ['mainpot']);
@@ -190,6 +177,8 @@ function runBeispiel3() {
   setTimeout(distributeCoins, 87000);
   setTimeout(distributeCoins, 88000);
   setTimeout(distributeCoins, 89000);
+
+	setTimeout(advanceToNextPage, 166000);
 
 }
 

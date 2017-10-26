@@ -19,17 +19,38 @@
 	<img src={% static 'public_good_kids/figurered.png' %} class="figure figureRight"/>
 	<img src="{% static 'public_good_kids/figureblue.png' %}" class="figure figureBottom"/>
 
+	<!-- Münzen links -->
+	<img src={% static 'public_good_kids/twocoins.png' %} class="coins hidaway {{leftclass}}" id="cl1" style="top: {{lefttop}}; left: {{left1}}"/>
+	<img src={% static 'public_good_kids/twocoins.png' %} class="coins hidaway {{leftclass}}" id="cl2" style="top: {{lefttop}}; left: {{left2}}"/>
+	<img src={% static 'public_good_kids/twocoins.png' %} class="coins hidaway {{leftclass}}" id="cl3" style="top: {{lefttop}}; left: {{left3}}"/>
+	<img src={% static 'public_good_kids/twocoins.png' %} class="coins hidaway {{leftclass}}" id="cl4" style="top: {{lefttop}}; left: {{left4}}"/>
+	<img src={% static 'public_good_kids/twocoins.png' %} class="coins hidaway {{leftclass}}" id="cl5" style="top: {{lefttop}}; left: {{left5}}"/>
+
+	<!-- Münzen oben -->
+	<img src={% static 'public_good_kids/twocoins.png' %} class="coins hidaway {{topclass}}" id="ct1" style="top: {{toptop}}; left: {{top1}}"/>
+	<img src={% static 'public_good_kids/twocoins.png' %} class="coins hidaway {{topclass}}" id="ct2" style="top: {{toptop}}; left: {{top2}}"/>
+	<img src={% static 'public_good_kids/twocoins.png' %} class="coins hidaway {{topclass}}" id="ct3" style="top: {{toptop}}; left: {{top3}}"/>
+	<img src={% static 'public_good_kids/twocoins.png' %} class="coins hidaway {{topclass}}" id="ct4" style="top: {{toptop}}; left: {{top4}}"/>
+	<img src={% static 'public_good_kids/twocoins.png' %} class="coins hidaway {{topclass}}" id="ct5" style="top: {{toptop}}; left: {{top5}}"/>
+
+	<!-- Münzen rechts -->
+	<img src={% static 'public_good_kids/twocoins.png' %} class="coins hidaway {{rightclass}}" id="cr1" style="top: {{righttop}}; left: {{right1}}"/>
+	<img src={% static 'public_good_kids/twocoins.png' %} class="coins hidaway {{rightclass}}" id="cr2" style="top: {{righttop}}; left: {{right2}}"/>
+	<img src={% static 'public_good_kids/twocoins.png' %} class="coins hidaway {{rightclass}}" id="cr3" style="top: {{righttop}}; left: {{right3}}"/>
+	<img src={% static 'public_good_kids/twocoins.png' %} class="coins hidaway {{rightclass}}" id="cr4" style="top: {{righttop}}; left: {{right4}}"/>
+	<img src={% static 'public_good_kids/twocoins.png' %} class="coins hidaway {{rightclass}}" id="cr5" style="top: {{righttop}}; left: {{right5}}"/>
+
 	<!-- Münzen unten -->
-	<img src={% static 'public_good_kids/twocoins.png' %} class="coins {{class1}}" id="cb1" style="top: {{top1}}"/>
-	<img src={% static 'public_good_kids/twocoins.png' %} class="coins {{class2}}" id="cb2" style="top: {{top2}}"/>
-	<img src={% static 'public_good_kids/twocoins.png' %} class="coins {{class3}}" id="cb3" style="top: {{top3}}"/>
-	<img src={% static 'public_good_kids/twocoins.png' %} class="coins {{class4}}" id="cb4" style="top: {{top4}}"/>
-	<img src={% static 'public_good_kids/twocoins.png' %} class="coins {{class5}}" id="cb5" style="top: {{top5}}"/>
+	<img src={% static 'public_good_kids/twocoins.png' %} class="coins {{bottomclass}}" id="cb1" style="top: {{bottomtop}}"/>
+	<img src={% static 'public_good_kids/twocoins.png' %} class="coins {{bottomclass}}" id="cb2" style="top: {{bottomtop}}"/>
+	<img src={% static 'public_good_kids/twocoins.png' %} class="coins {{bottomclass}}" id="cb3" style="top: {{bottomtop}}"/>
+	<img src={% static 'public_good_kids/twocoins.png' %} class="coins {{bottomclass}}" id="cb4" style="top: {{bottomtop}}"/>
+	<img src={% static 'public_good_kids/twocoins.png' %} class="coins {{bottomclass}}" id="cb5" style="top: {{bottomtop}}"/>
 
 	<!-- Verteil-Button -->
 	<img src={% static 'public_good_kids/distribute.png' %} id="distributebutton" onclick="startDistribution()"/>
   <!-- Next(Bestätigungs)-Button -->
-  <button class="otree-btn-next btn next-button otree-next-button" id="confirmbutton" onclick="confirm()"></button>
+  <button class="otree-btn-next btn next-button otree-next-button" id="confirmbutton"></button>
 </div>
 
 
@@ -148,6 +169,81 @@
   transition: all 1.5s;
 }
 
+#cl1 {
+  top: 41%;
+  left: 27%;
+}
+
+#cl2 {
+  top: 44.5%;
+  left: 27%;
+}
+
+#cl3 {
+  top: 48%;
+  left: 27%;
+}
+
+#cl4 {
+  top: 51.5%;
+  left: 27%;
+}
+
+#cl5 {
+  top: 55%;
+  left: 27%;
+}
+
+#ct1 {
+  top: 27%;
+  left: 40%;
+}
+
+#ct2 {
+  top: 27%;
+  left: 44%;
+}
+
+#ct3 {
+  top: 27%;
+  left: 48%;
+}
+
+#ct4 {
+  top: 27%;
+  left: 52%;
+}
+
+#ct5 {
+  top: 27%;
+  left: 56%;
+}
+
+#cr1 {
+  top: 41%;
+  left: 70%;
+}
+
+#cr2 {
+  top: 44.5%;
+  left: 70%;
+}
+
+#cr3 {
+  top: 48%;
+  left: 70%;
+}
+
+#cr4 {
+  top: 51.5%;
+  left: 70%;
+}
+
+#cr5 {
+  top: 55%;
+  left: 70%;
+}
+
 #cb1 {
   top: 70%;
   left: 40%;
@@ -203,6 +299,7 @@ function startDistribution() {
 		div.style.transition = 'all 2s';
 		div.style.transform = 'rotate(360deg)';
 
+		/*
 		// put contributed coins of other participants in mainpot
 		for (m=0; m < contributionOthers; m++) {
 			// create coin image and properties
@@ -236,7 +333,7 @@ function startDistribution() {
 				newcoin.style.left = '56%';
 			}
 		}
-
+		*/
 
 		var maincoins = document.getElementsByClassName('maincoin');
 		var i;
@@ -279,7 +376,7 @@ function startDistribution() {
 			}
 		}
 
-    setTimeout(showConfirm, 4000)
+		setTimeout(showConfirm, 4000)
     // trigger coin distribution every second
 		setTimeout(distributeCoins, 3000);
 		setTimeout(distributeCoins, 4000);
@@ -300,7 +397,6 @@ function startDistribution() {
 function showConfirm() {
   document.getElementById('confirmbutton').style.visibility = 'visible';
 }
-
 
 function distributeCoins() {
 	try {

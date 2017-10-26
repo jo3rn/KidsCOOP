@@ -185,13 +185,17 @@ class K3Strategy(Page):
 class ResultsWaitPage(WaitPage):
 
     def after_all_players_arrive(self):
-        self.group.set_payoffs()
+        if self.round_number < 5:
+            self.group.set_payoffs()
 
     template_name = 'PublicGoodKids/CustomWaitPage.html'
     body_text = 'boom'
 
 
 class Results(Page):
+    def is_displayed(self):
+        return self.round_number < 5
+
     def vars_for_template(self):
         if self.player.contribution == 0:
             coinclass = ['owncoin', 'owncoin', 'owncoin', 'owncoin', 'owncoin']
@@ -227,20 +231,90 @@ class Results(Page):
             'otherchipin'   : sum([p.contribution for p in self.group.get_players()]) - self.player.contribution
         }
 
+class ResultsStrategy(Page):
+    def is_displayed(self):
+        return self.round_number > 4
+
+    def vars_for_template(self):
+        bottomclass = ''
+        if self.player.contribution == 0:
+            bottomclass = 'owncoin'
+            bottom = '80%'
+        elif self.player.contribution == 5:
+            bottomclass = 'maincoin'
+            bottom = '61%'
+
+        if self.round_number == 5:
+            # all ego
+            otherchipin = 0
+            # attributes: top, 5xleft, class
+            left = ['55%', '18.5%', '14.5%', '10.5%', '6.5%', '2.5%', '']
+            top = ['17%', '56%', '52%', '48%', '44%', '40%', '']
+            right = ['55%', '93.5%', '89.5%', '85.5%', '81.5%', '77.5%', '']
+        elif self.round_number == 6:
+            # left coop
+            otherchipin = 5
+            left = ['54%', '56%', '52%', '48%', '44%', '40%', 'maincoin']
+            top = ['17%', '56%', '52%', '48%', '44%', '40%', '']
+            right = ['55%', '93.5%', '89.5%', '85.5%', '81.5%', '77.5%', '']
+        elif self.round_number == 7:
+            # left and top coop
+            otherchipin = 10
+            left = ['54%', '56%', '52%', '48%', '44%', '40%', 'maincoin']
+            top = ['47%', '56%', '52%', '48%', '44%', '40%', 'maincoin']
+            right = ['55%', '93.5%', '89.5%', '85.5%', '81.5%', '77.5%', '']
+        elif self.round_number == 8:
+            # all coop
+            otherchipin = 15
+            left = ['54%', '56%', '52%', '48%', '44%', '40%', 'maincoin']
+            top = ['47%', '56%', '52%', '48%', '44%', '40%', 'maincoin']
+            right = ['39%', '56%', '52%', '48%', '44%', '40%', 'maincoin']
+
+        return {
+            'bottomclass'   : bottomclass,
+            'bottomtop'     : bottom,
+            'lefttop'       : left[0],
+            'left1'         : left[1],
+            'left2'         : left[2],
+            'left3'         : left[3],
+            'left4'         : left[4],
+            'left5'         : left[5],
+            'leftclass'     : left[6],
+            'toptop'        : top[0],
+            'top1'          : top[1],
+            'top2'          : top[2],
+            'top3'          : top[3],
+            'top4'          : top[4],
+            'top5'          : top[5],
+            'topclass'      : top[6],
+            'righttop'      : right[0],
+            'right1'        : right[1],
+            'right2'        : right[2],
+            'right3'        : right[3],
+            'right4'        : right[4],
+            'right5'        : right[5],
+            'rightclass'    : right[6],
+            'contribution'  : self.player.contribution,
+            'otherchipin'   : otherchipin
+        }
 
 page_sequence = [
     GroupTreatment,
-    #ChooseWaitPage,
+    ChooseWaitPage,
     Choose,
-    #ChooseWaitPage,
-    #Instructions,
-    #TestRun,
+    ChooseWaitPage,
+    Instructions,
+    TestRun,
     Understood,
     NotUnderstood,
-    #ChooseWaitPage,
+    ChooseWaitPage,
     Contribute,
     UKStrategy,
     K0Strategy,
-    #ResultsWaitPage,
-    #Results
+    K1Strategy,
+    K2Strategy,
+    K3Strategy,
+    ResultsWaitPage,
+    Results,
+    ResultsStrategy
 ]
