@@ -5,15 +5,29 @@ from .models import Constants
 
 
 class GroupTreatment(Page):
-    # value will be saved in self.player.groupTreatment
-    form_model = models.Player
+    # value will be saved in self.group.groupTreatment
+    form_model = models.Group
     form_fields = ['groupTreatment']
+
+    def is_displayed(self):
+        return (self.round_number == 1 and self.player.id_in_group == 1)
+
+    def before_next_page(self):
+        for p in self.group.get_players():
+            p.participant.vars['groupdesign'] = p.group.groupTreatment
+
+
+
+class PlayerID(Page):
+    # value will be saved in self.player.playerID
+    form_model = models.Player
+    form_fields = ['playerID']
 
     def is_displayed(self):
         return self.round_number == 1
 
     def before_next_page(self):
-        self.participant.vars['groupdesign'] = self.player.groupTreatment
+        self.participant.vars['playerID'] = self.player.playerID
 
 
 class Choose(Page):
@@ -72,7 +86,7 @@ class NotUnderstood(Page):
 
 class Contribute(Page):
     form_model = models.Player
-    form_fields = ['contribution', 'p_label', 'gameTreatment', 'groupTreatment']
+    form_fields = ['contribution', 'p_label', 'gameTreatment']
 
     def is_displayed(self):
         return self.round_number < 4
@@ -91,7 +105,7 @@ class Contribute(Page):
 
 class UKStrategy(Page):
     form_model = models.Player
-    form_fields = ['contribution', 'p_label', 'gameTreatment', 'groupTreatment']
+    form_fields = ['contribution', 'p_label', 'gameTreatment']
 
     def vars_for_template(self):
         return {
@@ -109,7 +123,7 @@ class UKStrategy(Page):
 
 class K0Strategy(Page):
     form_model = models.Player
-    form_fields = ['contribution', 'p_label', 'gameTreatment', 'groupTreatment']
+    form_fields = ['contribution', 'p_label', 'gameTreatment']
 
     def vars_for_template(self):
         return {
@@ -127,7 +141,7 @@ class K0Strategy(Page):
 
 class K1Strategy(Page):
     form_model = models.Player
-    form_fields = ['contribution', 'p_label', 'gameTreatment', 'groupTreatment']
+    form_fields = ['contribution', 'p_label', 'gameTreatment']
 
     def vars_for_template(self):
         return {
@@ -145,7 +159,7 @@ class K1Strategy(Page):
 
 class K2Strategy(Page):
     form_model = models.Player
-    form_fields = ['contribution', 'p_label', 'gameTreatment', 'groupTreatment']
+    form_fields = ['contribution', 'p_label', 'gameTreatment']
 
     def vars_for_template(self):
         return {
@@ -163,7 +177,7 @@ class K2Strategy(Page):
 
 class K3Strategy(Page):
     form_model = models.Player
-    form_fields = ['contribution', 'p_label', 'gameTreatment', 'groupTreatment']
+    form_fields = ['contribution', 'p_label', 'gameTreatment']
 
     def vars_for_template(self):
         return {
@@ -300,14 +314,16 @@ class ResultsStrategy(Page):
 
 page_sequence = [
     GroupTreatment,
-    ChooseWaitPage,
+    #ChooseWaitPage,
+    #PlayerID,
+    #ChooseWaitPage,
     Choose,
-    ChooseWaitPage,
-    Instructions,
-    TestRun,
-    Understood,
-    NotUnderstood,
-    ChooseWaitPage,
+    #ChooseWaitPage,
+    #Instructions,
+    #TestRun,
+    #Understood,
+    #NotUnderstood,
+    #ChooseWaitPage,
     Contribute,
     UKStrategy,
     K0Strategy,

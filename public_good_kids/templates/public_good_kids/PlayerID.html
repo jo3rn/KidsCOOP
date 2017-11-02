@@ -1,0 +1,120 @@
+{% extends "global/Page.html" %}
+{% load staticfiles otree_tags %}
+
+{% block styles %}
+<style>
+    #wrapper {
+      width: 60vw;
+    }
+
+
+    #input {
+        height: 100%;
+        display: flex;
+        flex-flow: row wrap;
+        justify-content: center;
+        align-items: flex-start;
+        font-size: 1.5em;
+    }
+
+    .result {
+        min-height: 70px;
+        line-height: 60px;
+        border: 1px solid black;
+        justify-content: flex-end;
+        background: #000;
+        color:#fff;
+        padding:0 10px;
+        font-size: 2em;
+    }
+
+    .buttons, .result {
+        display: flex;
+        flex-wrap: wrap;
+        flex: 0 1 100%;
+        justify-content: flex-start;
+    }
+
+    .calcButton {
+        line-height: 80px;
+        border: 1px solid black;
+        background-color: lightgrey;
+        padding: 10%;
+        text-align: center;
+        width: 33.3%;
+
+    }
+
+    .delete {
+        flex-grow: 2;
+        background-color: lightcoral;
+    }
+
+    #okay {
+        justify-content: flex-end;
+        margin-top: 30px;
+        width: 100%;
+        min-height: 75px;
+        display: none;
+        font-size: 1.5em;
+        background-color: lightgreen;
+    }
+
+
+
+</style>
+{% endblock %}
+
+
+{% block content %}
+
+<p>
+    Bitte ID eingeben.
+</p>
+
+
+<div id="input">
+  <div class="result" id="result"></div>
+  <div class="buttons">
+    <span class="calcButton" onclick="setResult(7)">7</span>
+    <span class="calcButton" onclick="setResult(8)">8</span>
+    <span class="calcButton" onclick="setResult(9)">9</span>
+    <span class="calcButton" onclick="setResult(4)">4</span>
+    <span class="calcButton" onclick="setResult(5)">5</span>
+    <span class="calcButton" onclick="setResult(6)">6</span>
+    <span class="calcButton" onclick="setResult(1)">1</span>
+    <span class="calcButton" onclick="setResult(2)">2</span>
+    <span class="calcButton" onclick="setResult(3)">3</span>
+    <span class="calcButton" onclick="setResult(0)">0</span>
+    <span class="calcButton delete" onclick="deleteResult()">DEL</span>
+
+  </div>
+  <button id="okay" class="otree-btn-next btn next-button otree-next-button" onclick="writePlayerID()">OK</button>
+</div>
+
+
+<input type="hidden" name="playerID" value="" id="playerID"/>
+
+{% endblock %}
+
+{% block scripts %}
+<script type="text/javascript">
+
+function writePlayerID() {
+  document.getElementById("playerID").value = document.getElementById('result').innerHTML;
+}
+
+function setResult(x) {
+  document.getElementById("okay").style.display = 'block';
+
+  var oldContent = document.getElementById('result').innerHTML;
+  document.getElementById('result').innerHTML = oldContent + x;
+}
+
+function deleteResult(x) {
+  document.getElementById("okay").style.display = 'none';
+  document.getElementById('result').innerHTML = '';
+}
+
+</script>
+{% endblock %}

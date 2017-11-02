@@ -29,7 +29,7 @@
 	<!-- Verteil-Button -->
 	<img src={% static 'public_good_kids/distribute.png' %} id="distributebutton" onclick="startDistribution()"/>
   <!-- Next(Bestätigungs)-Button -->
-  <button class="otree-btn-next btn next-button otree-next-button" id="confirmbutton" onclick="confirm()"></button>
+  <button class="otree-btn-next btn next-button otree-next-button" id="confirmbutton"></button>
 </div>
 
 
@@ -282,16 +282,16 @@ function startDistribution() {
     setTimeout(showConfirm, 4000)
     // trigger coin distribution every second
 		setTimeout(distributeCoins, 3000);
-		setTimeout(distributeCoins, 4000);
-		setTimeout(distributeCoins, 5000);
-		setTimeout(distributeCoins, 6000);
-		setTimeout(distributeCoins, 7000);
-		setTimeout(distributeCoins, 8000);
-		setTimeout(distributeCoins, 9000);
-		setTimeout(distributeCoins, 10000);
-		setTimeout(distributeCoins, 11000);
-		setTimeout(distributeCoins, 12000);
-		setTimeout(distributeCoins, 13000);
+		setTimeout(distributeCoins, 3000);
+		setTimeout(distributeCoins, 3000);
+		setTimeout(distributeCoins, 3000);
+		setTimeout(distributeCoins, 3000);
+		setTimeout(distributeCoins, 3000);
+		setTimeout(distributeCoins, 3000);
+		setTimeout(distributeCoins, 3000);
+		setTimeout(distributeCoins, 3000);
+		setTimeout(distributeCoins, 3000);
+
 	}
 	catch(err) {
 	}

@@ -27,6 +27,7 @@ class Subsession(BaseSubsession):
 class Group(BaseGroup):
     total_contribution = models.FloatField()
     individual_share = models.FloatField()
+    groupTreatment = models.CharField(widget=widgets.HiddenInput(), verbose_name='')
 
     def set_payoffs(self):
         self.total_contribution = sum([p.contribution for p in self.get_players()])
@@ -64,7 +65,8 @@ class Player(BasePlayer):
             self.participant.vars['imagepathright'] = 'public_good_kids/elephant.png'
             self.participant.vars['instructions1a'] = '../../../../../static/public_good_kids/Instruktion1a_SchildOutgroup_v1.mp3'
 
-    groupTreatment = models.CharField(widget=widgets.HiddenInput(), verbose_name='')
+
+    playerID = models.CharField(widget=widgets.HiddenInput(), verbose_name='')
     gameTreatment = models.CharField(widget=widgets.HiddenInput(), verbose_name='')
     contribution = models.FloatField()
     animal = models.CharField(widget=widgets.HiddenInput(), verbose_name='')
