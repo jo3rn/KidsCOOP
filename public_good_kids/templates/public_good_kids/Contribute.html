@@ -33,11 +33,11 @@
 	<img src={% static 'public_good_kids/twocoins.png' %} class="coins hidaway" id="cl5"/>
 
 	<!-- Münzen oben -->
-	<img src={% static 'public_good_kids/twocoins.png' %} class="coins hidaway" id="ct1"/>
-	<img src={% static 'public_good_kids/twocoins.png' %} class="coins hidaway" id="ct2"/>
-	<img src={% static 'public_good_kids/twocoins.png' %} class="coins hidaway" id="ct3"/>
-	<img src={% static 'public_good_kids/twocoins.png' %} class="coins hidaway" id="ct4"/>
-	<img src={% static 'public_good_kids/twocoins.png' %} class="coins hidaway" id="ct5"/>
+	<img src={% static 'public_good_kids/twocoins.png' %} class="coins hidaway rotatedcoin" id="ct1"/>
+	<img src={% static 'public_good_kids/twocoins.png' %} class="coins hidaway rotatedcoin" id="ct2"/>
+	<img src={% static 'public_good_kids/twocoins.png' %} class="coins hidaway rotatedcoin" id="ct3"/>
+	<img src={% static 'public_good_kids/twocoins.png' %} class="coins hidaway rotatedcoin" id="ct4"/>
+	<img src={% static 'public_good_kids/twocoins.png' %} class="coins hidaway rotatedcoin" id="ct5"/>
 
 	<!-- Münzen rechts -->
 	<img src={% static 'public_good_kids/twocoins.png' %} class="coins hidaway" id="cr1"/>
@@ -47,11 +47,11 @@
 	<img src={% static 'public_good_kids/twocoins.png' %} class="coins hidaway" id="cr5"/>
 
 	<!-- Münzen unten -->
-	<img src={% static 'public_good_kids/twocoins.png' %} class="coins" id="cb1"/>
-	<img src={% static 'public_good_kids/twocoins.png' %} class="coins" id="cb2"/>
-	<img src={% static 'public_good_kids/twocoins.png' %} class="coins" id="cb3"/>
-	<img src={% static 'public_good_kids/twocoins.png' %} class="coins" id="cb4"/>
-	<img src={% static 'public_good_kids/twocoins.png' %} class="coins" id="cb5"/>
+	<img src={% static 'public_good_kids/twocoins.png' %} class="coins rotatedcoin" id="cb1"/>
+	<img src={% static 'public_good_kids/twocoins.png' %} class="coins rotatedcoin" id="cb2"/>
+	<img src={% static 'public_good_kids/twocoins.png' %} class="coins rotatedcoin" id="cb3"/>
+	<img src={% static 'public_good_kids/twocoins.png' %} class="coins rotatedcoin" id="cb4"/>
+	<img src={% static 'public_good_kids/twocoins.png' %} class="coins rotatedcoin" id="cb5"/>
 
 	<!-- Pfeile zum Münzen verteilen -->
 	<img src={% static 'public_good_kids/arrowcolor.png' %} class="arrow" id="arrow-up"  onclick="moveToMain()"/>
@@ -105,6 +105,7 @@
   height: 20%;
   position: absolute;
   z-index: -2;
+
 }
 
 #partnerLeft {
@@ -112,6 +113,7 @@
   background-color: rgb(255,255,1);
   top: 40%;
   left: 2.5%;
+	box-shadow: 10px 10px rgb(204,204,0);
 }
 
 #partnerTop {
@@ -119,6 +121,7 @@
   background-color: rgb(98,190,1);
   top: 2.5%;
   left: 40%;
+	box-shadow: 10px 10px rgb(78,152,1);
 }
 
 #partnerRight {
@@ -126,6 +129,7 @@
   background-color: rgb(192,0,0);
   top: 40%;
   right: 2.5%;
+	box-shadow: 10px 10px rgb(153,0,0);
 }
 
 #partnerBottom {
@@ -133,6 +137,7 @@
   left: 40%;
   bottom: 2.5%;
   background-color: rgb(104,132,195);
+	box-shadow: 10px 10px rgb(83,105,156);
 }
 
 #mainpot {
@@ -145,6 +150,7 @@
   position: absolute;
   background-image: url({% static 'public_good_kids/main.png' %});
   background-position: center;
+	box-shadow: 10px 10px rgb(150,150,150);
 }
 
 .figure {
@@ -305,6 +311,10 @@
 #cb5 {
   top: 70%;
   left: 56%;
+}
+
+.rotatedcoin {
+	transform: rotate(40deg);
 }
 
 .arrow {
