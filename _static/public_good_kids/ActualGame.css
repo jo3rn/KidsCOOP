@@ -1,16 +1,15 @@
-.otree-btn-next {
-    all: initial;
-    background-image: url('confirm.png');
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: 100%;
-    border: 0px;
-    width: 100px;
-    height: 100px;
+#timer {
+  width: 800px;
+  height: 25px;
+  background-color: white;
 }
 
-.hidden {
-    visiblity: hidden;
+#timeleft {
+  width: 100%;
+  height: 100%;
+  background-color: grey;
+  transition: width 0.3s linear;
+  visibility: hidden;
 }
 
 #container {
@@ -243,6 +242,27 @@
   visibility: hidden;
 }
 
+.arrow {
+  /* Pfeile zum Verteilen der Münzen */
+  position: absolute;
+  left: 47%;
+  height: 6%;
+  visibility: hidden;
+  /* img in den Vordergrund */
+  z-index: 1;
+  transition: all 1s;
+}
+
+#arrow-up {
+  /* Pfeil Richtung Geldtopf in der Mitte */
+  top: 62.5%;
+}
+
+#arrow-down {
+  /* Pfeil Richtung Geldtopf unten */
+  top: 74.5%;
+}
+
 .otree-btn-next {
     all: initial;
     background-image: url('confirm.png');
@@ -259,4 +279,6 @@
   bottom: 5%;
   right: 5%;
   visibility: hidden;
+  transition: all 1s;
+  transition-timing-function: ease;
 }

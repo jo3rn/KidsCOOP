@@ -242,7 +242,11 @@ class Results(Page):
             'top4'          : styletop[3],
             'top5'          : styletop[4],
             'contribution'  : self.player.contribution,
-            'otherchipin'   : sum([p.contribution for p in self.group.get_players()]) - self.player.contribution
+            'otherchipin'   : sum([p.contribution for p in self.group.get_players()]) - self.player.contribution,
+            'imagepathleft'     : self.participant.vars['imagepathleft'],
+            'imagepathbottom'   : self.participant.vars['imagepathbottom'],
+            'imagepathright'    : self.participant.vars['imagepathright'],
+            'imagepathtop'      : self.participant.vars['imagepathtop']
         }
 
 class ResultsStrategy(Page):
@@ -312,6 +316,10 @@ class ResultsStrategy(Page):
             'otherchipin'   : otherchipin
         }
 
+class Disbursement(Page):
+    def is_displayed(self):
+        return self.round_number == 8
+
 page_sequence = [
     GroupTreatment,
     #ChooseWaitPage,
@@ -332,5 +340,6 @@ page_sequence = [
     K3Strategy,
     ResultsWaitPage,
     Results,
-    ResultsStrategy
+    ResultsStrategy,
+    Disbursement
 ]

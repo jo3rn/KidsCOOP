@@ -37,11 +37,11 @@
 	<img src={% static 'public_good_kids/twocoins.png' %} class="coins coinsLeft hidden" id="cl5"/>
 
 	<!-- Münzen oben -->
-	<img src={% static 'public_good_kids/twocoins.png' %} class="coins coinsTop hidden" id="ct1"/>
-	<img src={% static 'public_good_kids/twocoins.png' %} class="coins coinsTop hidden" id="ct2"/>
-	<img src={% static 'public_good_kids/twocoins.png' %} class="coins coinsTop hidden" id="ct3"/>
-	<img src={% static 'public_good_kids/twocoins.png' %} class="coins coinsTop hidden" id="ct4"/>
-	<img src={% static 'public_good_kids/twocoins.png' %} class="coins coinsTop hidden" id="ct5"/>
+	<img src={% static 'public_good_kids/twocoins.png' %} class="coins coinsTop hidden rotatedcoin" id="ct1"/>
+	<img src={% static 'public_good_kids/twocoins.png' %} class="coins coinsTop hidden rotatedcoin" id="ct2"/>
+	<img src={% static 'public_good_kids/twocoins.png' %} class="coins coinsTop hidden rotatedcoin" id="ct3"/>
+	<img src={% static 'public_good_kids/twocoins.png' %} class="coins coinsTop hidden rotatedcoin" id="ct4"/>
+	<img src={% static 'public_good_kids/twocoins.png' %} class="coins coinsTop hidden rotatedcoin" id="ct5"/>
 
 	<!-- Münzen rechts -->
 	<img src={% static 'public_good_kids/twocoins.png' %} class="coins coinsRight hidden" id="cr1"/>
@@ -51,11 +51,11 @@
 	<img src={% static 'public_good_kids/twocoins.png' %} class="coins coinsRight hidden" id="cr5"/>
 
 	<!-- Münzen unten -->
-	<img src={% static 'public_good_kids/twocoins.png' %} class="coins hidden owncoins" id="cb1"/>
-	<img src={% static 'public_good_kids/twocoins.png' %} class="coins hidden owncoins" id="cb2"/>
-	<img src={% static 'public_good_kids/twocoins.png' %} class="coins hidden owncoins" id="cb3"/>
-	<img src={% static 'public_good_kids/twocoins.png' %} class="coins hidden owncoins" id="cb4"/>
-	<img src={% static 'public_good_kids/twocoins.png' %} class="coins hidden owncoins" id="cb5"/>
+	<img src={% static 'public_good_kids/twocoins.png' %} class="coins hidden owncoins rotatedcoin" id="cb1"/>
+	<img src={% static 'public_good_kids/twocoins.png' %} class="coins hidden owncoins rotatedcoin" id="cb2"/>
+	<img src={% static 'public_good_kids/twocoins.png' %} class="coins hidden owncoins rotatedcoin" id="cb3"/>
+	<img src={% static 'public_good_kids/twocoins.png' %} class="coins hidden owncoins rotatedcoin" id="cb4"/>
+	<img src={% static 'public_good_kids/twocoins.png' %} class="coins hidden owncoins rotatedcoin" id="cb5"/>
 
 	<!-- Bestätigungs-Button -->
   <button class="otree-btn-next btn next-button otree-next-button" id="confirmbutton"></button>
@@ -68,32 +68,32 @@
 
 {% block scripts %}
 <script>
-window.onload = runInstructions();
+window.onload = runInstructions1a();
 
-function runInstructions(){
-  console.log("runInstructions");
-  //Instruktion1a
-  setTimeout(startAudioI1a, 900);
-  setTimeout(showPlayers, 5000);
-  setTimeout(showAnimal, 21000);
-  setTimeout(showOtherAnimals, 27000);
+function runInstructions1a(){
+  var audio = new Audio({{ instructions1a|json }});
+  audio.play();
+	setTimeout(showPlayers, 3500);
+  setTimeout(showAnimal, 19000);
+  setTimeout(showOtherAnimals, 26000);
 
-  //call Instruktion1b
+	//call Instruktion1b
   // je nachdem ob in- oder outgroup unterscheiden sich die Audios um 10sek
   if ({{ groupdesign|json }} == 'in') {
-    setTimeout(runInstructions1b, 42000);
+    setTimeout(runInstructions1b, 39000);
   } else {
-    setTimeout(runInstructions1b, 52000);
+    setTimeout(runInstructions1b, 48000);
   }
+
 }
 
 function runInstructions1b(){
   //Instruktion1b
-  var audio = new Audio('../../../../../static/public_good_kids/Instruktion1b_v1.mp3');
+  var audio = new Audio('../../../../../static/public_good_kids/Instruktion1b_v2.mp3');
   audio.play();
 
   setTimeout(showCoins, 1500);
-  setTimeout(highlightCoin, 4000);
+  setTimeout(highlightCoin, 8000);
   setTimeout(dehighlightCoin, 12000);
 
   // call Instruktion2
@@ -112,81 +112,82 @@ function runInstructions1b(){
 
 function runInstructions2(){
   //Instruktion2
-  var audio = new Audio('../../../../../static/public_good_kids/Instruktion2_v2.mp3');
+  var audio = new Audio('../../../../../static/public_good_kids/Instruktion2b_v2.mp3');
   audio.play();
 
-  setTimeout(highlightCoins, 3000);
+  setTimeout(highlightCoins, 6000);
   setTimeout(dehighlight, 10000);
-  setTimeout(highlightPots, 12000);
-  setTimeout(rotateOwn, 14000);
-  setTimeout(rotateMain, 16500);
-  setTimeout(dehighlight, 20000);
-  setTimeout(contributeOneCoin, 39000);
-  setTimeout(doubleCoin, 45000);
-  setTimeout(othersContribute, 50000);
-  setTimeout(doubleCoins, 56000);
+  setTimeout(highlightPots, 10000);
+  setTimeout(rotateOwn, 11000);
+  setTimeout(rotateMain, 13500);
+  setTimeout(dehighlight, 17000);
+  /*setTimeout(contributeOneCoin, 21000);
+  setTimeout(doubleCoin, 24000);
+  setTimeout(othersContribute, 21000);
+  setTimeout(doubleCoins, 24000);
   setTimeout(repositionAndDelete, 58000);
-  setTimeout(contributeOneCoin, 60000);
-  setTimeout(doubleCoin, 62000);
-  setTimeout(distributeFour, 73000);
-  setTimeout(repositionAndDelete, 76500);
+	*/
+  setTimeout(contributeOneCoin, 21000);
+  setTimeout(doubleCoin, 24000);
+  setTimeout(distributeFour, 29500);
+  setTimeout(repositionAndDelete, 33000);
+	/*
   setTimeout(highlightPlayer, 78000);
   setTimeout(dehighlight, 79500);
   setTimeout(highlightOtherPlayers, 80000);
   setTimeout(dehighlight, 81500);
+	*/
 
   //setTimeout(showConfirm, 12000);
 
   //call Instruktion3
-  setTimeout(runInstructions3, 130000);
+  setTimeout(runInstructions3, 41000);
 }
 
 function runInstructions3(){
-  var audio = new Audio('../../../../../static/public_good_kids/Instruktion3_v1.mp3');
+  var audio = new Audio('../../../../../static/public_good_kids/Instruktion3_v2.mp3');
   audio.play();
 
-  setTimeout(runBeispiel3, 30500);
+  setTimeout(runBeispiel3, 18000);
 }
 
 function runBeispiel3() {
-  var audio = new Audio('../../../../../static/public_good_kids/Beispiel3.mp3');
+  var audio = new Audio('../../../../../static/public_good_kids/Beispiel3_v2.mp3');
   audio.play();
   setTimeout(highlightPlayer, 5000);
-  setTimeout(highlightClassAlso, 8000, ['owncoins']);
-  setTimeout(highlightIdAlso, 14000, ['mainpot']);
-  setTimeout(highlightIdAlso, 24000, ['partnerBottom']);
-  setTimeout(move2ToOwn, 24000);
-  setTimeout(move3ToMain, 29000);
-  setTimeout(highlightIdAlso, 34000, ['partnerLeft']);
-  setTimeout(highlightClassAlso, 34000, ['figureLeft']);
-  setTimeout(highlightClassAlso, 34000, ['coinsLeft']);
-  setTimeout(move2ToOwn2, 36000);
-  setTimeout(move3ToMain2, 36000);
-  setTimeout(highlightIdAlso, 39000, ['partnerTop']);
-  setTimeout(highlightClassAlso, 39000, ['figureTop']);
-  setTimeout(highlightClassAlso, 39000, ['coinsTop']);
-  setTimeout(move5ToMain, 43000);
-  setTimeout(highlightIdAlso, 47000, ['partnerRight']);
-  setTimeout(highlightClassAlso, 47000, ['figureRight']);
-  setTimeout(highlightClassAlso, 47000, ['coinsRight']);
-  setTimeout(move5ToOwn, 51000);
-  setTimeout(cloneMaincoins, 76000);
-  setTimeout(distributeCoins, 84000);
-  setTimeout(distributeCoins, 85000);
-  setTimeout(distributeCoins, 86000);
-  setTimeout(distributeCoins, 87000);
-  setTimeout(distributeCoins, 88000);
-  setTimeout(distributeCoins, 89000);
+  setTimeout(highlightClassAlso, 5000, ['owncoins']);
+	setTimeout(highlightIdAlso, 9000, ['partnerBottom']);
+  setTimeout(move2ToOwn, 9000);
 
-	setTimeout(advanceToNextPage, 166000);
+  setTimeout(highlightIdAlso, 13000, ['mainpot']);
+  setTimeout(move3ToMain, 13000);
 
-}
+  setTimeout(highlightIdAlso, 16000, ['partnerLeft']);
+  setTimeout(highlightClassAlso, 16000, ['figureLeft']);
+  setTimeout(highlightClassAlso, 16000, ['coinsLeft']);
+  setTimeout(move2ToOwn2, 17500);
+  setTimeout(move3ToMain2, 17500);
 
+  setTimeout(highlightIdAlso, 20500, ['partnerTop']);
+  setTimeout(highlightClassAlso, 20500, ['figureTop']);
+  setTimeout(highlightClassAlso, 20500, ['coinsTop']);
+  setTimeout(move5ToMain, 24000);
 
+  setTimeout(highlightIdAlso, 26000, ['partnerRight']);
+  setTimeout(highlightClassAlso, 26000, ['figureRight']);
+  setTimeout(highlightClassAlso, 26000, ['coinsRight']);
+  setTimeout(move5ToOwn, 31000);
 
-function startAudioI1a(){
-  var audio = new Audio({{ instructions1a|json }});
-  audio.play();
+  setTimeout(cloneMaincoins, 36000);
+  setTimeout(distributeCoins, 41500);
+  setTimeout(distributeCoins, 42000);
+  setTimeout(distributeCoins, 42500);
+  setTimeout(distributeCoins, 43000);
+  setTimeout(distributeCoins, 43500);
+  setTimeout(distributeCoins, 44000);
+
+	setTimeout(advanceToNextPage, 79000);
+
 }
 
 
@@ -466,7 +467,9 @@ function highlightIdAlso(id) {
 
 function move2ToOwn(){
   document.getElementById('cb1').style.top = '80%';
+	document.getElementById('cb1').classList.remove("rotatedcoin");
   document.getElementById('cb2').style.top = '80%';
+	document.getElementById('cb2').classList.remove("rotatedcoin");
 }
 
 function move3ToMain() {
@@ -476,6 +479,10 @@ function move3ToMain() {
   document.getElementById('cb4').classList.add('maincoin');
   document.getElementById('cb5').style.top = '61%';
   document.getElementById('cb5').classList.add('maincoin');
+	document.getElementById('cb3').classList.remove("rotatedcoin");
+	document.getElementById('cb4').classList.remove("rotatedcoin");
+	document.getElementById('cb5').classList.remove("rotatedcoin");
+
 }
 
 function move2ToOwn2() {
@@ -508,6 +515,11 @@ function move5ToMain() {
   document.getElementById('ct3').classList.add('maincoin');
   document.getElementById('ct4').classList.add('maincoin');
   document.getElementById('ct5').classList.add('maincoin');
+	document.getElementById('ct1').classList.remove("rotatedcoin");
+  document.getElementById('ct2').classList.remove("rotatedcoin");
+  document.getElementById('ct3').classList.remove("rotatedcoin");
+  document.getElementById('ct4').classList.remove("rotatedcoin");
+  document.getElementById('ct5').classList.remove("rotatedcoin");
 }
 
 function move5ToOwn() {

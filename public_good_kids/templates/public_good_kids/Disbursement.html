@@ -1,0 +1,29 @@
+{% extends "global/Page.html" %}
+{% load staticfiles otree_tags %}
+
+{% block styles %}
+
+{% endblock %}
+
+
+{% block content %}
+
+<p>
+    Deine Auszahlung.
+</p>
+
+
+{% endblock %}
+
+{% block scripts %}
+<script>
+window.onload = runAbschluss();
+
+function runAbschluss(){
+  //Abschluss
+  var audio = new Audio('../../../../../static/public_good_kids/Abschluss_v2.mp3');
+  audio.play();
+}
+
+</script>
+{% endblock %}

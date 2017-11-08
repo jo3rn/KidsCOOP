@@ -1,6 +1,10 @@
 {% extends "global/Page.html" %}
 {% load staticfiles otree_tags %}
 
+{% block styles %}
+<link href="{% static "public_good_kids/ActualGame.css" %}" rel="stylesheet" />
+{% endblock %}
+
 {% block content %}
 
 <div id ="container">
@@ -19,6 +23,12 @@
 	<img src={% static 'public_good_kids/figurered.png' %} class="figure figureRight"/>
 	<img src="{% static 'public_good_kids/figureblue.png' %}" class="figure figureBottom"/>
 
+	<!--Tierbilder -->
+	<img src={% static imagepathleft %} class="animal animalLeft"/>
+	<img src={% static imagepathtop %} class="animal animalTop"/>
+	<img src={% static imagepathright %} class="animal animalRight"/>
+	<img src={% static imagepathbottom %} class="animal animalBottom"/>
+
 	<!-- Münzen unten -->
 	<img src={% static 'public_good_kids/twocoins.png' %} class="coins {{class1}}" id="cb1" style="top: {{top1}}"/>
 	<img src={% static 'public_good_kids/twocoins.png' %} class="coins {{class2}}" id="cb2" style="top: {{top2}}"/>
@@ -26,174 +36,27 @@
 	<img src={% static 'public_good_kids/twocoins.png' %} class="coins {{class4}}" id="cb4" style="top: {{top4}}"/>
 	<img src={% static 'public_good_kids/twocoins.png' %} class="coins {{class5}}" id="cb5" style="top: {{top5}}"/>
 
-	<!-- Verteil-Button -->
-	<img src={% static 'public_good_kids/distribute.png' %} id="distributebutton" onclick="startDistribution()"/>
+
   <!-- Next(Bestätigungs)-Button -->
   <button class="otree-btn-next btn next-button otree-next-button" id="confirmbutton"></button>
 </div>
 
-
 {% endblock %}
-
-
-{% block styles %}
-<style>
-#container {
-  /* gesamte Spielfläche */
-  width: 800px;
-  height: 800px;
-  position: relative;
-  border: solid black;
-}
-
-.otree-btn-next {
-    all: initial;
-    background-image: url({% static 'public_good_kids/confirm.png' %});
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: 100%;
-}
-
-#confirmbutton {
-  /* Button, der Auswahl bestätigt */
-  width: 10%;
-  height: 10%;
-  position: absolute;
-  bottom: 5%;
-  right: 5%;
-  visibility: hidden;
-  transition: all 1s;
-  transition-timing-function: ease;
-}
-
-.partner {
-  /* Geldtöpfe */
-  border-radius: 15%;
-  width: 20%;
-  height: 20%;
-  position: absolute;
-  z-index: -2;
-}
-
-#partnerLeft {
-  /* Geldtopf links */
-  background-color: rgb(255,255,1);
-  top: 40%;
-  left: 2.5%;
-}
-
-#partnerTop {
-  /* Geldtopf oben */
-  background-color: rgb(98,190,1);
-  top: 2.5%;
-  left: 40%;
-}
-
-#partnerRight {
-  /* Geldtopf rechts */
-  background-color: rgb(192,0,0);
-  top: 40%;
-  right: 2.5%;
-}
-
-#partnerBottom {
-  /* Geldtopf unten */
-  left: 40%;
-  bottom: 2.5%;
-  background-color: rgb(104,132,195);
-}
-
-#mainpot {
-  /* Gemeinschaftseldtopf in der Mitte */
-  border-radius: 15%;
-  width: 30%;
-  height: 30%;
-  left: 35%;
-  top: 35%;
-  position: absolute;
-  background-image: url({% static 'public_good_kids/main.png' %});
-  background-position: center;
-}
-
-.figure {
-  /* Spielerfiguren neben den Töpfen */
-  height: 10%;
-  position: absolute;
-  z-index: 2;
-}
-
-.figureLeft {
-  top: 35%;
-  left: 23%;
-}
-
-.figureTop {
-  top: 22%;
-  left: 58%;
-}
-
-.figureRight {
-  top: 55%;
-  left: 71%;
-}
-
-.figureBottom {
-  top: 68%;
-  left: 35%;
-}
-
-.coins {
-  width: 4%;
-  position: absolute;
-  transition: all 1.5s;
-}
-
-#cb1 {
-  top: 70%;
-  left: 40%;
-}
-
-#cb2 {
-  top: 70%;
-  left: 44%;
-}
-
-#cb3 {
-  top: 70%;
-  left: 48%;
-}
-
-#cb4 {
-  top: 70%;
-  left: 52%;
-}
-
-#cb5 {
-  top: 70%;
-  left: 56%;
-}
-
-#distributebutton {
-  /* Button, der Auswahl bestätigt */
-  width: 10%;
-  height: 10%;
-  position: absolute;
-  bottom: 5%;
-  right: 5%;
-  /*visibility: hidden;*/
-}
-
-</style>
-{% endblock %}
-
 
 {% block scripts %}
 <script type="text/javascript">
 
+window.onload = changeCSSVisibility();
+
+function changeCSSVisibility() {
+	var audio = new Audio('../../../../../static/public_good_kids/Rundenauszahlung.mp3');
+	audio.play();
+
+	setTimeout(startDistribution, 6000);
+}
+
 function startDistribution() {
 	try {
-		// hide distribute button
-		document.getElementById('distributebutton').style.visibility = 'hidden';
 
 		var container = document.getElementById('container');
 		var contributionOthers = {{ otherchipin|json }};
