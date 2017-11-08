@@ -1,6 +1,9 @@
 {% extends "global/Page.html" %}
 {% load staticfiles otree_tags %}
 
+{% block styles %}
+<link href="{% static "public_good_kids/ActualGame.css" %}" rel="stylesheet" />
+{% endblock %}
 
 {% block content %}
 <div id ="container">
@@ -33,11 +36,11 @@
 	<img src={% static 'public_good_kids/twocoins.png' %} class="coins hidaway" id="cl5"/>
 
 	<!-- Münzen oben -->
-	<img src={% static 'public_good_kids/twocoins.png' %} class="coins hidaway" id="ct1"/>
-	<img src={% static 'public_good_kids/twocoins.png' %} class="coins hidaway" id="ct2"/>
-	<img src={% static 'public_good_kids/twocoins.png' %} class="coins hidaway" id="ct3"/>
-	<img src={% static 'public_good_kids/twocoins.png' %} class="coins hidaway" id="ct4"/>
-	<img src={% static 'public_good_kids/twocoins.png' %} class="coins hidaway" id="ct5"/>
+	<img src={% static 'public_good_kids/twocoins.png' %} class="coins hidaway rotatedcoin" id="ct1"/>
+	<img src={% static 'public_good_kids/twocoins.png' %} class="coins hidaway rotatedcoin" id="ct2"/>
+	<img src={% static 'public_good_kids/twocoins.png' %} class="coins hidaway rotatedcoin" id="ct3"/>
+	<img src={% static 'public_good_kids/twocoins.png' %} class="coins hidaway rotatedcoin" id="ct4"/>
+	<img src={% static 'public_good_kids/twocoins.png' %} class="coins hidaway rotatedcoin" id="ct5"/>
 
 	<!-- Münzen rechts -->
 	<img src={% static 'public_good_kids/twocoins.png' %} class="coins hidaway" id="cr1"/>
@@ -47,11 +50,11 @@
 	<img src={% static 'public_good_kids/twocoins.png' %} class="coins hidaway" id="cr5"/>
 
 	<!-- Münzen unten -->
-	<img src={% static 'public_good_kids/twocoins.png' %} class="coins" id="cb1"/>
-	<img src={% static 'public_good_kids/twocoins.png' %} class="coins" id="cb2"/>
-	<img src={% static 'public_good_kids/twocoins.png' %} class="coins" id="cb3"/>
-	<img src={% static 'public_good_kids/twocoins.png' %} class="coins" id="cb4"/>
-	<img src={% static 'public_good_kids/twocoins.png' %} class="coins" id="cb5"/>
+	<img src={% static 'public_good_kids/twocoins.png' %} class="coins rotatedcoin" id="cb1"/>
+	<img src={% static 'public_good_kids/twocoins.png' %} class="coins rotatedcoin" id="cb2"/>
+	<img src={% static 'public_good_kids/twocoins.png' %} class="coins rotatedcoin" id="cb3"/>
+	<img src={% static 'public_good_kids/twocoins.png' %} class="coins rotatedcoin" id="cb4"/>
+	<img src={% static 'public_good_kids/twocoins.png' %} class="coins rotatedcoin" id="cb5"/>
 
 	<!-- Pfeile zum Münzen verteilen -->
 	<img src={% static 'public_good_kids/arrowcolor.png' %} class="arrow" id="arrow-up"  onclick="moveToMain()"/>
@@ -72,282 +75,6 @@
   <div id="timeleft"></div>
 </div>
 
-{% endblock %}
-
-
-
-{% block styles %}
-<style>
-#timer {
-  width: 800px;
-  height: 25px;
-  background-color: white;
-}
-
-#timeleft {
-  width: 100%;
-  height: 100%;
-  background-color: green;
-  transition: width 0.3s linear;
-}
-
-#container {
-  /* gesamte Spielfläche */
-  width: 800px;
-  height: 800px;
-  position: relative;
-  border: solid black;
-}
-
-.partner {
-  /* Geldtöpfe */
-  border-radius: 15%;
-  width: 20%;
-  height: 20%;
-  position: absolute;
-  z-index: -2;
-}
-
-#partnerLeft {
-  /* Geldtopf links */
-  background-color: rgb(255,255,1);
-  top: 40%;
-  left: 2.5%;
-}
-
-#partnerTop {
-  /* Geldtopf oben */
-  background-color: rgb(98,190,1);
-  top: 2.5%;
-  left: 40%;
-}
-
-#partnerRight {
-  /* Geldtopf rechts */
-  background-color: rgb(192,0,0);
-  top: 40%;
-  right: 2.5%;
-}
-
-#partnerBottom {
-  /* Geldtopf unten */
-  left: 40%;
-  bottom: 2.5%;
-  background-color: rgb(104,132,195);
-}
-
-#mainpot {
-  /* Gemeinschaftseldtopf in der Mitte */
-  border-radius: 15%;
-  width: 30%;
-  height: 30%;
-  left: 35%;
-  top: 35%;
-  position: absolute;
-  background-image: url({% static 'public_good_kids/main.png' %});
-  background-position: center;
-}
-
-.figure {
-  /* Spielerfiguren neben den Töpfen */
-  height: 10%;
-  position: absolute;
-  z-index: 2;
-}
-
-.figureLeft {
-  top: 35%;
-  left: 23%;
-}
-
-.figureTop {
-  top: 22%;
-  left: 59%;
-}
-
-.figureRight {
-  top: 55%;
-  left: 71%;
-}
-
-.figureBottom {
-  top: 68%;
-  left: 35%;
-}
-
-.animal {
-  /* Tierfiguren neben den Spielfiguren */
-  width: 8%;
-  position: absolute;
-  z-index: 1;
-}
-
-.animalLeft {
-  top: 34%;
-  left: 15%;
-}
-
-.animalTop {
-  top: 16%;
-  left: 61%;
-}
-
-.animalRight {
-  top: 61%;
-  left: 78%;
-}
-
-.animalBottom {
-  top: 80%;
-  left: 31%;
-}
-
-.coins {
-  width: 4%;
-  position: absolute;
-  transition: all 1.5s;
-}
-
-#cl1 {
-  top: 41%;
-  left: 27%;
-}
-
-#cl2 {
-  top: 44.5%;
-  left: 27%;
-}
-
-#cl3 {
-  top: 48%;
-  left: 27%;
-}
-
-#cl4 {
-  top: 51.5%;
-  left: 27%;
-}
-
-#cl5 {
-  top: 55%;
-  left: 27%;
-}
-
-#ct1 {
-  top: 27%;
-  left: 40%;
-}
-
-#ct2 {
-  top: 27%;
-  left: 44%;
-}
-
-#ct3 {
-  top: 27%;
-  left: 48%;
-}
-
-#ct4 {
-  top: 27%;
-  left: 52%;
-}
-
-#ct5 {
-  top: 27%;
-  left: 56%;
-}
-
-#cr1 {
-  top: 41%;
-  left: 70%;
-}
-
-#cr2 {
-  top: 44.5%;
-  left: 70%;
-}
-
-#cr3 {
-  top: 48%;
-  left: 70%;
-}
-
-#cr4 {
-  top: 51.5%;
-  left: 70%;
-}
-
-#cr5 {
-  top: 55%;
-  left: 70%;
-}
-
-#cb1 {
-  top: 70%;
-  left: 40%;
-}
-
-#cb2 {
-  top: 70%;
-  left: 44%;
-}
-
-#cb3 {
-  top: 70%;
-  left: 48%;
-}
-
-#cb4 {
-  top: 70%;
-  left: 52%;
-}
-
-#cb5 {
-  top: 70%;
-  left: 56%;
-}
-
-.arrow {
-  /* Pfeile zum Verteilen der Münzen */
-  position: absolute;
-  left: 47%;
-  height: 6%;
-  visibility: hidden;
-  /* img in den Vordergrund */
-  z-index: 1;
-}
-
-#arrow-up {
-  /* Pfeil Richtung Geldtopf in der Mitte */
-  top: 62.5%;
-}
-
-#arrow-down {
-  /* Pfeil Richtung Geldtopf unten */
-  transform: rotate(180deg);
-  top: 74.5%;
-}
-
-.otree-btn-next {
-    all: initial;
-    background-image: url({% static 'public_good_kids/confirm.png' %});
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: 100%;
-}
-
-#confirmbutton {
-  /* Button, der Auswahl bestätigt */
-  width: 10%;
-  height: 10%;
-  position: absolute;
-  bottom: 5%;
-  right: 5%;
-  visibility: hidden;
-}
-
-</style>
 {% endblock %}
 
 {% block scripts %}
@@ -379,12 +106,13 @@ function initialize() {
 	// starts audio, timer and sets arrows in place
 	// also needed to initialize global variables
 	try {
+		document.getElementById("timeleft").style.visibility = 'visible';
 		if (typeof coinCountdown === 'undefined') {
-			var audio = new Audio('../../../../../static/public_good_kids/UK_strategy_v1.mp3');
+			var audio = new Audio('../../../../../static/public_good_kids/UK_strategy_v2.mp3');
 		  audio.play();
 
 
-			setTimeout(showArrows, 37000);
+			setTimeout(showArrows, 20000);
 			function showArrows() {
 				// make arrows visible
 				var arrows = document.getElementsByClassName('arrow');
@@ -395,7 +123,7 @@ function initialize() {
 			}
 
       // start timer
-      setTimeout(decreaseTimer, 37000);
+      setTimeout(decreaseTimer, 20000);
 
 			// coin countdown to indicate if all coins are distributed
 			coinCountdown = 1;
@@ -423,14 +151,19 @@ function moveToMain() {
 		if (coinCountdown == 1) {
 			cb1.style.top = '61%';
 			cb1.classList.add('maincoin');
+			cb1.classList.remove("rotatedcoin");
 			cb2.style.top = '61%';
 			cb2.classList.add('maincoin');
+			cb2.classList.remove("rotatedcoin");
 			cb3.style.top = '61%';
 			cb3.classList.add('maincoin');
+			cb3.classList.remove("rotatedcoin");
 			cb4.style.top = '61%';
 			cb4.classList.add('maincoin');
+			cb4.classList.remove("rotatedcoin");
 			cb5.style.top = '61%';
 			cb5.classList.add('maincoin');
+			cb5.classList.remove("rotatedcoin");
 			coinCountdown -= 1;
 			contribution += 5;
 			// show confirm button when all coins are distributed
@@ -478,14 +211,19 @@ function moveToOwn() {
 		if (coinCountdown == 1) {
 			cb1.style.top = '80%';
 			cb1.classList.add('owncoin');
+			cb1.classList.remove("rotatedcoin");
 			cb2.style.top = '80%';
 			cb2.classList.add('owncoin');
+			cb2.classList.remove("rotatedcoin");
 			cb3.style.top = '80%';
 			cb3.classList.add('owncoin');
+			cb3.classList.remove("rotatedcoin");
 			cb4.style.top = '80%';
 			cb4.classList.add('owncoin');
+			cb4.classList.remove("rotatedcoin");
 			cb5.style.top = '80%';
 			cb5.classList.add('owncoin');
+			cb5.classList.remove("rotatedcoin");
 			coinCountdown -= 1;
 			// show confirm button when all coins are distributed
 			confirm.style.visibility = 'visible';

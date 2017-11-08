@@ -106,16 +106,19 @@ function initialize() {
 	// starts audio, timer and sets arrows in place
 	// also needed to initialize global variables
 	try {
+		document.getElementById("timeleft").style.visibility = 'visible';
 		if (typeof coinCountdown === 'undefined') {
 			if({{ roundnumber|json }} == 1) {
 				var audio = new Audio('../../../../../static/public_good_kids/Ueberleitung_v2.mp3');
 			  audio.play();
-				setTimeout(showArrows, 15000);
+
+				setTimeout(playStart, 16000);
+				setTimeout(showArrows, 16000);
 
 	      // start timer
-				document.getElementById("timeleft").style.visibility = 'visible';
-	      setTimeout(decreaseTimer, 15000);
+	      setTimeout(decreaseTimer, 16000);
 			} else {
+				playNext();
 				showArrows();
 				decreaseTimer();
 			}
@@ -131,6 +134,16 @@ function initialize() {
 	}
 	catch(err) {
 	}
+}
+
+function playStart() {
+	var audio = new Audio('../../../../../static/public_good_kids/Start_v1.mp3');
+	audio.play();
+}
+
+function playNext() {
+	var audio = new Audio('../../../../../static/public_good_kids/Next_v1.mp3');
+	audio.play();
 }
 
 function showArrows() {

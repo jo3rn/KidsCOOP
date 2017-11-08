@@ -197,6 +197,8 @@ class K3Strategy(Page):
 
 
 class ResultsWaitPage(WaitPage):
+    def is_displayed(self):
+        return self.round_number < 5
 
     def after_all_players_arrive(self):
         if self.round_number < 5:
@@ -249,6 +251,7 @@ class Results(Page):
             'imagepathtop'      : self.participant.vars['imagepathtop']
         }
 
+''' TO DO: DAS KANN WAHRSCHEINLICH WEG
 class ResultsStrategy(Page):
     def is_displayed(self):
         return self.round_number > 4
@@ -315,6 +318,7 @@ class ResultsStrategy(Page):
             'contribution'  : self.player.contribution,
             'otherchipin'   : otherchipin
         }
+'''
 
 class Disbursement(Page):
     def is_displayed(self):
@@ -322,15 +326,15 @@ class Disbursement(Page):
 
 page_sequence = [
     GroupTreatment,
-    #ChooseWaitPage,
-    #PlayerID,
-    #ChooseWaitPage,
+    ChooseWaitPage,
+    PlayerID,
+    ChooseWaitPage,
     Choose,
-    #ChooseWaitPage,
-    #Instructions,
-    #TestRun,
-    #Understood,
-    #NotUnderstood,
+    ChooseWaitPage,
+    Instructions,
+    TestRun,
+    Understood,
+    NotUnderstood,
     #ChooseWaitPage,
     Contribute,
     UKStrategy,
@@ -340,6 +344,6 @@ page_sequence = [
     K3Strategy,
     ResultsWaitPage,
     Results,
-    ResultsStrategy,
+    #ResultsStrategy, #kann wahrscheinlich weg
     Disbursement
 ]
