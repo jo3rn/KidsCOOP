@@ -47,4 +47,4 @@ Temporary Items
 .apdisk
 
 #sql file
-db.sqlite3
+.sqlite3
