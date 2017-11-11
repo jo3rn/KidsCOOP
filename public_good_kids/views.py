@@ -139,6 +139,9 @@ class K0Strategy(Page):
     def is_displayed(self):
         return self.round_number == 5
 
+    def before_next_page(self):
+        self.player.set_payoffs_generic()
+
 class K1Strategy(Page):
     form_model = models.Player
     form_fields = ['contribution', 'p_label', 'gameTreatment']
@@ -156,6 +159,9 @@ class K1Strategy(Page):
 
     def is_displayed(self):
         return self.round_number == 6
+
+    def before_next_page(self):
+        self.player.set_payoffs_generic()
 
 class K2Strategy(Page):
     form_model = models.Player
@@ -175,6 +181,9 @@ class K2Strategy(Page):
     def is_displayed(self):
         return self.round_number == 7
 
+    def before_next_page(self):
+        self.player.set_payoffs_generic()
+
 class K3Strategy(Page):
     form_model = models.Player
     form_fields = ['contribution', 'p_label', 'gameTreatment']
@@ -193,6 +202,11 @@ class K3Strategy(Page):
     def is_displayed(self):
         return self.round_number == 8
 
+    def before_next_page(self):
+        self.player.set_payoffs_generic()
+        self.player.set_final_payoff()
+
+
 
 
 
@@ -203,6 +217,8 @@ class ResultsWaitPage(WaitPage):
     def after_all_players_arrive(self):
         if self.round_number < 5:
             self.group.set_payoffs()
+        else:
+            self.group.set_payoffs_generic()
 
     template_name = 'PublicGoodKids/CustomWaitPage.html'
     body_text = 'boom'
@@ -321,8 +337,19 @@ class ResultsStrategy(Page):
 '''
 
 class Disbursement(Page):
+    form_model = models.Player
+    form_fields = ['final_pay', 'payround']
+
     def is_displayed(self):
         return self.round_number == 8
+
+    def vars_for_template(self):
+        return {
+            'finalpay'  : int(self.participant.vars['finalpay']),
+            'payround'  : self.participant.vars['payround']
+    }
+
+
 
 page_sequence = [
     GroupTreatment,
@@ -335,7 +362,7 @@ page_sequence = [
     TestRun,
     Understood,
     NotUnderstood,
-    #ChooseWaitPage,
+    ChooseWaitPage,
     Contribute,
     UKStrategy,
     K0Strategy,

@@ -104,29 +104,29 @@
 
 .animal {
   /* Tierfiguren neben den Spielfiguren */
-  width: 8%;
+  width: 12%;
   position: absolute;
   z-index: 1;
 }
 
 .animalLeft {
-  top: 34%;
-  left: 15%;
+  top: 31%;
+  left: 12%;
 }
 
 .animalTop {
-  top: 16%;
-  left: 61%;
+  top: 14%;
+  left: 63%;
 }
 
 .animalRight {
-  top: 61%;
+  top: 62%;
   left: 78%;
 }
 
 .animalBottom {
   top: 80%;
-  left: 31%;
+  left: 27%;
 }
 
 .coins {

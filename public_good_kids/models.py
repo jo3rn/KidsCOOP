@@ -3,6 +3,8 @@ from otree.api import (
     Currency as c, currency_range
 )
 
+import random
+
 
 author = 'Jörn'
 
@@ -33,8 +35,7 @@ class Group(BaseGroup):
         self.total_contribution = sum([p.contribution for p in self.get_players()])
         self.individual_share = self.total_contribution * Constants.multiplier / Constants.players_per_group
         for p in self.get_players():
-            p.payoff = Constants.endowment - p.contribution + self.individual_share
-
+            p.payoff = 2 * (Constants.endowment - p.contribution + self.individual_share)
 
 class Player(BasePlayer):
 
@@ -65,6 +66,21 @@ class Player(BasePlayer):
             self.participant.vars['imagepathright'] = 'public_good_kids/elephant.png'
             self.participant.vars['instructions1a'] = '../../../../../static/public_good_kids/Instruktion1a_SchildOutgroup_v1.mp3'
 
+    def set_payoffs_generic(self):
+        if self.round_number == 5:
+            self.payoff = 2 * (Constants.endowment - self.contribution + Constants.multiplier * self.contribution / Constants.players_per_group)
+        elif self.round_number == 6:
+            self.payoff = 2 * (Constants.endowment - self.contribution + Constants.multiplier * (self.contribution + 5) / Constants.players_per_group)
+        elif self.round_number == 7:
+            self.payoff = 2 * (Constants.endowment - self.contribution + Constants.multiplier * (self.contribution + 10) / Constants.players_per_group)
+        elif self.round_number == 8:
+            self.payoff = 2 * (Constants.endowment - self.contribution + Constants.multiplier * (self.contribution + 15) / Constants.players_per_group)
+
+    def set_final_payoff(self):
+        pay_round = random.choice(list(range(0, 8)))
+        self.participant.vars['finalpay'] = [p.payoff for p in self.in_all_rounds()][pay_round]
+        self.participant.vars['payround'] = pay_round + 1
+
 
     playerID = models.CharField(widget=widgets.HiddenInput(), verbose_name='')
     gameTreatment = models.CharField(widget=widgets.HiddenInput(), verbose_name='')
@@ -72,3 +88,5 @@ class Player(BasePlayer):
     animal = models.CharField(widget=widgets.HiddenInput(), verbose_name='')
     understood = models.CharField(widget=widgets.HiddenInput(), verbose_name='')
     p_label = models.CharField(widget=widgets.HiddenInput(), verbose_name='')
+    final_pay = models.FloatField(widget=widgets.HiddenInput(), verbose_name='')
+    payround = models.FloatField(widget=widgets.HiddenInput(), verbose_name='')

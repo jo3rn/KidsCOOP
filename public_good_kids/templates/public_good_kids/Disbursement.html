@@ -2,15 +2,30 @@
 {% load staticfiles otree_tags %}
 
 {% block styles %}
+<style>
+#flexcontainer {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
 
+.coins {
+  width: 17%;
+  margin: 1.5%;
+  border-bottom: 20px solid white;
+}
+
+</style>
 {% endblock %}
 
 
 {% block content %}
 
-<p>
-    Deine Auszahlung.
-</p>
+<div id="flexcontainer"></div>
+<div id="text"></div>
+
+<input type="hidden" value="{{finalpay}}" name="final_pay" id="final_pay"/>
+<input type="hidden" value="{{payround}}" name="payround" id="payround"/>
 
 
 {% endblock %}
@@ -23,6 +38,41 @@ function runAbschluss(){
   //Abschluss
   var audio = new Audio('../../../../../static/public_good_kids/Abschluss_v2.mp3');
   audio.play();
+
+  setTimeout(showPayOff, 8000);
+
+}
+
+function showPayOff() {
+  var amount = Math.floor({{ finalpay|json }} / 2);
+  var i;
+
+  for (i = 1; i <= amount; i++) {
+    // add coin pairs according to pay off
+    var img = document.createElement("img");
+    img.src = '../../../../../static/public_good_kids/twocoins.png';
+    img.classList.add('coins');
+    document.getElementById("flexcontainer").appendChild(img);
+    console.log("added");
+  }
+
+
+  if (amount % 2) {
+    // odd amount of pay off -> add one extra coin (half of the image)
+    console.log("amount is odd");
+    var img = document.createElement("img");
+    img.src = '../../../../../static/public_good_kids/twocoins.png';
+    img.classList.add('coins');
+    img.style.clipPath = "inset(0% 50% 0% 0%)";
+    document.getElementById("flexcontainer").appendChild(img);
+  }
+
+  var paragraph = document.createElement('p');
+  var node = document.createTextNode("{{finalpay}} Taler aus Runde {{payround}}");
+
+  paragraph.appendChild(node);
+  document.getElementById("text").appendChild(paragraph);
+
 }
 
 </script>
