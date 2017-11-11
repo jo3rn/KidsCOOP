@@ -95,9 +95,21 @@ function decreaseTimer() {
   }
 
 	setTimeout(startReminder, 28000);
+
+  var warned = false;
 	function startReminder() {
 		var audio = new Audio('../../../../../static/public_good_kids/Erinnerung_v2.mp3');
 	  audio.play();
+
+    if (!warned) {
+			var img = document.createElement("img");
+	    img.src = '../../../../../static/public_good_kids/exclamation.png';
+			img.classList.add('fixtopright');
+			document.body.appendChild(img);
+			warned = true;
+		}
+
+    setTimeout(startReminder, 25000);
 	}
 }
 

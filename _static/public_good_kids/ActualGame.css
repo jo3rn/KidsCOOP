@@ -282,3 +282,9 @@
   transition: all 1s;
   transition-timing-function: ease;
 }
+
+.fixtopright {
+  position: fixed;
+  top: 0;
+  right: 0;
+}
