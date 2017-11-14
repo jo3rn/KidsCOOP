@@ -176,6 +176,8 @@ function dehighlightArrowDown() {
 
 function showTimer() {
   document.getElementById("timeleft").style.visibility = 'visible';
+	setTimeout(function(){document.getElementById("timeleft").style.transform = 'scale(2,2)'; }, 100);
+	setTimeout(function(){document.getElementById("timeleft").style.transform = 'scale(1,1)'; }, 2000);
 }
 
 function addOnClickEvent() {

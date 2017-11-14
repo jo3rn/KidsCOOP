@@ -236,7 +236,7 @@
 }
 
 .rotatedcoin {
-	transform: rotate(40deg);
+	transform: rotate(90deg);
 }
 
 .hiddenCoin {

@@ -123,6 +123,10 @@ function initialize() {
 			var audio = new Audio('../../../../../static/public_good_kids/UK_strategy_v2.mp3');
 		  audio.play();
 
+			setTimeout(runExampleToOwn, 8000);
+			setTimeout(runExampleToMain, 15000);
+			setTimeout(resetExample, 18500);
+
 
 			setTimeout(showArrows, 20000);
 			function showArrows() {
@@ -149,6 +153,50 @@ function initialize() {
 	}
 }
 
+
+function runExampleToOwn() {
+	cb1.style.top = '80%';
+	cb1.classList.remove("rotatedcoin");
+	cb2.style.top = '80%';
+	cb2.classList.remove("rotatedcoin");
+	cb3.style.top = '80%';
+	cb3.classList.remove("rotatedcoin");
+	cb4.style.top = '80%';
+	cb4.classList.remove("rotatedcoin");
+	cb5.style.top = '80%';
+	cb5.classList.remove("rotatedcoin");
+}
+
+function runExampleToMain() {
+	var cb1 = document.getElementById('cb1');
+	var cb2 = document.getElementById('cb2');
+	var cb3 = document.getElementById('cb3');
+	var cb4 = document.getElementById('cb4');
+	var cb5 = document.getElementById('cb5');
+	cb1.style.top = '61%';
+	cb2.style.top = '61%';
+	cb3.style.top = '61%';
+	cb4.style.top = '61%';
+	cb5.style.top = '61%';
+}
+
+function resetExample() {
+	var cb1 = document.getElementById('cb1');
+	var cb2 = document.getElementById('cb2');
+	var cb3 = document.getElementById('cb3');
+	var cb4 = document.getElementById('cb4');
+	var cb5 = document.getElementById('cb5');
+	cb1.style.top = '70%';
+	cb1.classList.add("rotatedcoin");
+	cb2.style.top = '70%';
+	cb2.classList.add("rotatedcoin");
+	cb3.style.top = '70%';
+	cb3.classList.add("rotatedcoin");
+	cb4.style.top = '70%';
+	cb4.classList.add("rotatedcoin");
+	cb5.style.top = '70%';
+	cb5.classList.add("rotatedcoin");
+}
 
 function moveToMain() {
 	// moves coin in mainpot

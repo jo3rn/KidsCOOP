@@ -82,7 +82,7 @@ function startDistribution() {
 			} else if (m < 10) {
 				newcoin.style.top = '47%';
 			} else if (m < 15) {
-				newcoin.style.top = '39%';
+				newcoin.style.top = '40%';
 			}
 
 			// determine horizontal position of new coin
@@ -137,11 +137,11 @@ function startDistribution() {
 			} else if (j < amount + {{ contribution|json }} + 10) {
 				maincoins[j].style.top = '44%';
 			} else {
-				maincoins[j].style.top = '36%';
+				maincoins[j].style.top = '37%';
 			}
 		}
 
-    setTimeout(showConfirm, 4000)
+    setTimeout(advanceToNextPage, 8000)
     // trigger coin distribution every second
 		setTimeout(distributeCoins, 3000);
 		setTimeout(distributeCoins, 3000);
@@ -389,6 +389,10 @@ function distributeCoins() {
 	}
 	catch(err) {
 	}
+}
+
+function advanceToNextPage() {
+  document.getElementById("form").submit();
 }
 
 </script>

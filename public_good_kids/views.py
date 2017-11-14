@@ -84,6 +84,14 @@ class NotUnderstood(Page):
     def is_displayed(self):
         return (self.round_number == 1 and self.player.understood == "no")
 
+    def vars_for_template(self):
+        return {
+            'imagepathleft'     : self.participant.vars['imagepathleft'],
+            'imagepathbottom'   : self.participant.vars['imagepathbottom'],
+            'imagepathright'    : self.participant.vars['imagepathright'],
+            'imagepathtop'      : self.participant.vars['imagepathtop']
+        }
+
 class Contribute(Page):
     form_model = models.Player
     form_fields = ['contribution', 'p_label', 'gameTreatment']
