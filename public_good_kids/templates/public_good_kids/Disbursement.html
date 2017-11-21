@@ -53,13 +53,11 @@ function showPayOff() {
     img.src = '../../../../../static/public_good_kids/twocoins.png';
     img.classList.add('coins');
     document.getElementById("flexcontainer").appendChild(img);
-    console.log("added");
   }
 
 
-  if (amount % 2) {
+  if ({{ finalpay|json }} % 2) {
     // odd amount of pay off -> add one extra coin (half of the image)
-    console.log("amount is odd");
     var img = document.createElement("img");
     img.src = '../../../../../static/public_good_kids/twocoins.png';
     img.classList.add('coins');
@@ -72,7 +70,6 @@ function showPayOff() {
 
   paragraph.appendChild(node);
   document.getElementById("text").appendChild(paragraph);
-
 }
 
 </script>
