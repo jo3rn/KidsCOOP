@@ -6,7 +6,7 @@ from .models import Constants
 
 class GroupTreatment(Page):
     # value will be saved in self.group.groupTreatment
-    form_model = models.Group
+    form_model = 'group'
     form_fields = ['groupTreatment']
 
     def is_displayed(self):
@@ -20,7 +20,7 @@ class GroupTreatment(Page):
 
 class PlayerID(Page):
     # value will be saved in self.player.playerID
-    form_model = models.Player
+    form_model = 'player'
     form_fields = ['playerID']
 
     def is_displayed(self):
@@ -32,7 +32,7 @@ class PlayerID(Page):
 
 class Choose(Page):
     #value will be saved in self.player.animal for later group distinction
-    form_model = models.Player
+    form_model = 'player'
     form_fields = ['animal']
 
     def is_displayed(self):
@@ -42,7 +42,7 @@ class Choose(Page):
         self.player.set_image()
 
 class ChooseWaitPage(WaitPage):
-    template_name = 'PublicGoodKids/CustomWaitPage.html'
+    template_name = 'public_good_kids/CustomWaitPage.html'
     def is_displayed(self):
         return self.round_number == 1
 
@@ -74,7 +74,7 @@ class TestRun(Page):
         }
 
 class Understood(Page):
-    form_model = models.Player
+    form_model = 'player'
     form_fields = ['understood']
 
     def is_displayed(self):
@@ -93,7 +93,7 @@ class NotUnderstood(Page):
         }
 
 class Contribute(Page):
-    form_model = models.Player
+    form_model = 'player'
     form_fields = ['contribution', 'p_label', 'gameTreatment']
 
     def is_displayed(self):
@@ -112,7 +112,7 @@ class Contribute(Page):
         }
 
 class UKStrategy(Page):
-    form_model = models.Player
+    form_model = 'player'
     form_fields = ['contribution', 'p_label', 'gameTreatment']
 
     def vars_for_template(self):
@@ -130,7 +130,7 @@ class UKStrategy(Page):
         return self.round_number == 4
 
 class K0Strategy(Page):
-    form_model = models.Player
+    form_model = 'player'
     form_fields = ['contribution', 'p_label', 'gameTreatment']
 
     def vars_for_template(self):
@@ -151,7 +151,7 @@ class K0Strategy(Page):
         self.player.set_payoffs_generic()
 
 class K1Strategy(Page):
-    form_model = models.Player
+    form_model = 'player'
     form_fields = ['contribution', 'p_label', 'gameTreatment']
 
     def vars_for_template(self):
@@ -172,7 +172,7 @@ class K1Strategy(Page):
         self.player.set_payoffs_generic()
 
 class K2Strategy(Page):
-    form_model = models.Player
+    form_model = 'player'
     form_fields = ['contribution', 'p_label', 'gameTreatment']
 
     def vars_for_template(self):
@@ -193,7 +193,7 @@ class K2Strategy(Page):
         self.player.set_payoffs_generic()
 
 class K3Strategy(Page):
-    form_model = models.Player
+    form_model = 'player'
     form_fields = ['contribution', 'p_label', 'gameTreatment']
 
     def vars_for_template(self):
@@ -345,7 +345,7 @@ class ResultsStrategy(Page):
 '''
 
 class Disbursement(Page):
-    form_model = models.Player
+    form_model = 'player'
     form_fields = ['final_pay', 'payround']
 
     def is_displayed(self):

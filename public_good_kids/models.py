@@ -29,7 +29,7 @@ class Subsession(BaseSubsession):
 class Group(BaseGroup):
     total_contribution = models.FloatField()
     individual_share = models.FloatField()
-    groupTreatment = models.CharField(widget=widgets.HiddenInput(), verbose_name='')
+    groupTreatment = models.StringField(widget=widgets.HiddenInput(), verbose_name='')
 
     def set_payoffs(self):
         self.total_contribution = sum([p.contribution for p in self.get_players()])
@@ -82,11 +82,11 @@ class Player(BasePlayer):
         self.participant.vars['payround'] = pay_round + 1
 
 
-    playerID = models.CharField(widget=widgets.HiddenInput(), verbose_name='')
-    gameTreatment = models.CharField(widget=widgets.HiddenInput(), verbose_name='')
+    playerID = models.StringField(widget=widgets.HiddenInput(), verbose_name='')
+    gameTreatment = models.StringField(widget=widgets.HiddenInput(), verbose_name='')
     contribution = models.FloatField()
-    animal = models.CharField(widget=widgets.HiddenInput(), verbose_name='')
-    understood = models.CharField(widget=widgets.HiddenInput(), verbose_name='')
-    p_label = models.CharField(widget=widgets.HiddenInput(), verbose_name='')
+    animal = models.StringField(widget=widgets.HiddenInput(), verbose_name='')
+    understood = models.StringField(widget=widgets.HiddenInput(), verbose_name='')
+    p_label = models.StringField(widget=widgets.HiddenInput(), verbose_name='')
     final_pay = models.FloatField(widget=widgets.HiddenInput(), verbose_name='')
     payround = models.FloatField(widget=widgets.HiddenInput(), verbose_name='')
