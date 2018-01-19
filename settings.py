@@ -127,8 +127,10 @@ ROOMS = [
     }
 ]
 
+STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
+
 # anything you put after the below line will override
 # oTree's default settings. Use with caution.
 otree.settings.augment_settings(globals())
 
-DEBUG = False
+DEBUG = True

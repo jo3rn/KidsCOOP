@@ -23,12 +23,6 @@
 	<img src={% static 'public_good_kids/figurered.png' %} class="figure figureRight hidden players highthem rightboi"/>
 	<img src="{% static 'public_good_kids/figureblue.png' %}" class="figure figureBottom players highyou bottomboi"/>
 
-  <!--Tierbilder -->
-  <img src={% static imagepathleft %} class="animal animalLeft figureLeft hidden highthem leftboi"/>
-  <img src={% static imagepathtop %} class="animal animalTop figureTop hidden highthem topboi"/>
-  <img src={% static imagepathright %} class="animal animalRight figureRight hidden highthem rightboi"/>
-  <img src={% static imagepathbottom %} class="animal animalBottom hidden highyou bottomboi" id="ownAnimal"/>
-
 	<!-- Münzen links -->
 	<img src={% static 'public_good_kids/twocoins.png' %} class="coins coinsLeft hidden" id="cl1"/>
 	<img src={% static 'public_good_kids/twocoins.png' %} class="coins coinsLeft hidden" id="cl2"/>
@@ -78,13 +72,7 @@ function runInstructions1a(){
   setTimeout(showOtherAnimals, 26000);
 
 	//call Instruktion1b
-  // je nachdem ob in- oder outgroup unterscheiden sich die Audios um 10sek
-  if ({{ groupdesign|json }} == 'in') {
-    setTimeout(runInstructions1b, 39000);
-  } else {
-    setTimeout(runInstructions1b, 48000);
-  }
-
+  setTimeout(runInstructions1b, 48000);
 }
 
 function runInstructions1b(){

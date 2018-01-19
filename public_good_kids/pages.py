@@ -4,19 +4,17 @@ from ._builtin import Page, WaitPage
 from .models import Constants
 
 
-class GroupTreatment(Page):
-    # value will be saved in self.group.groupTreatment
-    form_model = 'group'
-    form_fields = ['groupTreatment']
+
+class Gender(Page):
+    # value will be saved in self.player.gender
+    form_model = 'player'
+    form_fields = ['gender']
 
     def is_displayed(self):
-        return (self.round_number == 1 and self.player.id_in_group == 1)
+        return self.round_number == 1
 
     def before_next_page(self):
-        for p in self.group.get_players():
-            p.participant.vars['groupdesign'] = p.group.groupTreatment
-
-
+        self.participant.vars['gender'] = self.player.gender
 
 class PlayerID(Page):
     # value will be saved in self.player.playerID
@@ -30,17 +28,6 @@ class PlayerID(Page):
         self.participant.vars['playerID'] = self.player.playerID
 
 
-class Choose(Page):
-    #value will be saved in self.player.animal for later group distinction
-    form_model = 'player'
-    form_fields = ['animal']
-
-    def is_displayed(self):
-        return self.round_number == 1
-
-    def before_next_page(self):
-        self.player.set_image()
-
 class ChooseWaitPage(WaitPage):
     template_name = 'public_good_kids/CustomWaitPage.html'
     def is_displayed(self):
@@ -53,11 +40,6 @@ class Instructions(Page):
 
     def vars_for_template(self):
         return {
-            'groupdesign'       : self.participant.vars['groupdesign'],
-            'imagepathleft'     : self.participant.vars['imagepathleft'],
-            'imagepathbottom'   : self.participant.vars['imagepathbottom'],
-            'imagepathright'    : self.participant.vars['imagepathright'],
-            'imagepathtop'      : self.participant.vars['imagepathtop'],
             'instructions1a'    : self.participant.vars['instructions1a']
         }
 
@@ -275,74 +257,6 @@ class Results(Page):
             'imagepathtop'      : self.participant.vars['imagepathtop']
         }
 
-''' TO DO: DAS KANN WAHRSCHEINLICH WEG
-class ResultsStrategy(Page):
-    def is_displayed(self):
-        return self.round_number > 4
-
-    def vars_for_template(self):
-        bottomclass = ''
-        if self.player.contribution == 0:
-            bottomclass = 'owncoin'
-            bottom = '80%'
-        elif self.player.contribution == 5:
-            bottomclass = 'maincoin'
-            bottom = '61%'
-
-        if self.round_number == 5:
-            # all ego
-            otherchipin = 0
-            # attributes: top, 5xleft, class
-            left = ['55%', '18.5%', '14.5%', '10.5%', '6.5%', '2.5%', '']
-            top = ['17%', '56%', '52%', '48%', '44%', '40%', '']
-            right = ['55%', '93.5%', '89.5%', '85.5%', '81.5%', '77.5%', '']
-        elif self.round_number == 6:
-            # left coop
-            otherchipin = 5
-            left = ['54%', '56%', '52%', '48%', '44%', '40%', 'maincoin']
-            top = ['17%', '56%', '52%', '48%', '44%', '40%', '']
-            right = ['55%', '93.5%', '89.5%', '85.5%', '81.5%', '77.5%', '']
-        elif self.round_number == 7:
-            # left and top coop
-            otherchipin = 10
-            left = ['54%', '56%', '52%', '48%', '44%', '40%', 'maincoin']
-            top = ['47%', '56%', '52%', '48%', '44%', '40%', 'maincoin']
-            right = ['55%', '93.5%', '89.5%', '85.5%', '81.5%', '77.5%', '']
-        elif self.round_number == 8:
-            # all coop
-            otherchipin = 15
-            left = ['54%', '56%', '52%', '48%', '44%', '40%', 'maincoin']
-            top = ['47%', '56%', '52%', '48%', '44%', '40%', 'maincoin']
-            right = ['39%', '56%', '52%', '48%', '44%', '40%', 'maincoin']
-
-        return {
-            'bottomclass'   : bottomclass,
-            'bottomtop'     : bottom,
-            'lefttop'       : left[0],
-            'left1'         : left[1],
-            'left2'         : left[2],
-            'left3'         : left[3],
-            'left4'         : left[4],
-            'left5'         : left[5],
-            'leftclass'     : left[6],
-            'toptop'        : top[0],
-            'top1'          : top[1],
-            'top2'          : top[2],
-            'top3'          : top[3],
-            'top4'          : top[4],
-            'top5'          : top[5],
-            'topclass'      : top[6],
-            'righttop'      : right[0],
-            'right1'        : right[1],
-            'right2'        : right[2],
-            'right3'        : right[3],
-            'right4'        : right[4],
-            'right5'        : right[5],
-            'rightclass'    : right[6],
-            'contribution'  : self.player.contribution,
-            'otherchipin'   : otherchipin
-        }
-'''
 
 class Disbursement(Page):
     form_model = 'player'
@@ -360,11 +274,9 @@ class Disbursement(Page):
 
 
 page_sequence = [
-    GroupTreatment,
+    Gender,
     ChooseWaitPage,
     PlayerID,
-    ChooseWaitPage,
-    Choose,
     ChooseWaitPage,
     Instructions,
     TestRun,
@@ -379,6 +291,5 @@ page_sequence = [
     K3Strategy,
     ResultsWaitPage,
     Results,
-    #ResultsStrategy, #kann wahrscheinlich weg
     Disbursement
 ]
