@@ -1,4 +1,7 @@
-# PublicGoodKids
+# Remark
+This is a fork of [PublicGoodKids](https://github.com/jo3rn/PublicGoodKids) with variations (removal of in-/outgroup treatment) and additional features.
+
+# KidsCOOP
 An [oTree application](https://otree.readthedocs.io/) for a 4-player public goods game to be played in a browser.
 The player is firstly audio-instructed and then proceeds through the app by touchscreen or mouse interaction.
 
