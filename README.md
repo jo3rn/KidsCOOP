@@ -21,3 +21,8 @@ Clone or download this repository to your device. Jump inside the directory and 
 Open your browser and enter http://127.0.0.1:8000 in the address bar. You will have access to invitation links for participants in the same network.
 
 Remark: While this works for a small number of concurrent participants in a local network, you might want to consider hosting the application on a server. Read the [corresponding chapter in the oTree documentation](https://otree.readthedocs.io/en/latest/server/intro.html) for further details.
+
+
+# Disclaimer (source: [otree FAQ](http://www.otree.org/faq/))
+Can I use oTree for free?
+"Yes, oTree is licensed under the MIT open source license with the added requirement of a citation of [our paper](http://dx.doi.org/10.1016/j.jbef.2015.12.001)."
