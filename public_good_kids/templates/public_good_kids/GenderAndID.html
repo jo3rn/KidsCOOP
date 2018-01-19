@@ -60,7 +60,27 @@
         background-color: lightgreen;
     }
 
+    #content{
+        heigth:100px;
+        margin 0 10% 0 10%;
+    }
 
+    .pictures{
+        height:100px;
+        float: left;
+    }
+
+    label > input{ /* HIDE RADIO */
+        visibility: hidden; /* Makes input not-clickable */
+        position: absolute; /* Remove input from document flow */
+    }
+    label > input + img{ /* IMAGE STYLES */
+        cursor:pointer;
+        border:8px solid transparent;
+    }
+    label > input:checked + img{ /* (RADIO CHECKED) IMAGE STYLES */
+        border:8px solid #0f0;
+    }
 
 </style>
 {% endblock %}
@@ -68,8 +88,34 @@
 
 {% block content %}
 
+
+<input type="hidden" name="gender" value="" id="gender"/>
+
+
 <p>
-    Bitte ID eingeben.
+    Bitte Geschlecht auswählen:
+</p>
+
+<form>
+<div id="content">
+
+<label for="male">
+  <input name="gender" type="radio" id="male" value="male"/>
+  <img class="pictures" src="{% static 'public_good_kids/male.png' %}">
+</label>
+
+<label for="female">
+  <input name="gender" type="radio" id="female" value="female"/>
+  <img class="pictures" src="{% static 'public_good_kids/female.png' %}">
+</label>
+
+</div>
+</form>
+
+
+
+<p>
+    Bitte ID eingeben:
 </p>
 
 

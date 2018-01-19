@@ -4,28 +4,17 @@ from ._builtin import Page, WaitPage
 from .models import Constants
 
 
-
-class Gender(Page):
-    # value will be saved in self.player.gender
-    form_model = 'player'
-    form_fields = ['gender']
-
-    def is_displayed(self):
-        return self.round_number == 1
-
-    def before_next_page(self):
-        self.participant.vars['gender'] = self.player.gender
-
-class PlayerID(Page):
+class GenderAndID(Page):
     # value will be saved in self.player.playerID
     form_model = 'player'
-    form_fields = ['playerID']
+    form_fields = ['playerID', 'gender']
 
     def is_displayed(self):
         return self.round_number == 1
 
     def before_next_page(self):
         self.participant.vars['playerID'] = self.player.playerID
+        self.participant.vars['gender'] = self.player.gender
 
 
 class ChooseWaitPage(WaitPage):
@@ -274,9 +263,7 @@ class Disbursement(Page):
 
 
 page_sequence = [
-    Gender,
-    ChooseWaitPage,
-    PlayerID,
+    GenderAndID,
     ChooseWaitPage,
     Instructions,
     TestRun,
