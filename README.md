@@ -23,6 +23,5 @@ Open your browser and enter http://127.0.0.1:8000 in the address bar. You will h
 Remark: While this works for a small number of concurrent participants in a local network, you might want to consider hosting the application on a server. Read the [corresponding chapter in the oTree documentation](https://otree.readthedocs.io/en/latest/server/intro.html) for further details.
 
 
-# Disclaimer (source: [otree FAQ](http://www.otree.org/faq/))
-Can I use oTree for free?
-"Yes, oTree is licensed under the MIT open source license with the added requirement of a citation of [our paper](http://dx.doi.org/10.1016/j.jbef.2015.12.001)."
+## Disclaimer
+If you publish research conducted using oTree, you are required by the oTree license to cite [this paper](http://dx.doi.org/10.1016/j.jbef.2015.12.001). (Citation: Chen, D.L., Schonger, M., Wickens, C., 2016. oTree - An open-source platform for laboratory, online and field experiments. Journal of Behavioral and Experimental Finance, vol 9: 88-97)
