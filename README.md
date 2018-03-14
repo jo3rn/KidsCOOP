@@ -1,13 +1,13 @@
-# Remark
+## Remark
 This is a fork of [PublicGoodKids](https://github.com/jo3rn/PublicGoodKids) with variations (removal of in-/outgroup treatment) and additional features.
 
-# KidsCOOP
+## KidsCOOP
 An [oTree application](https://otree.readthedocs.io/) for a 4-player public goods game to be played in a browser.
 The player is firstly audio-instructed and then proceeds through the app by touchscreen or mouse interaction.
 
 The public goods game is a standard of experimental economics - [read more on Wikipedia](https://en.wikipedia.org/wiki/Public_goods_game).
 
-# Installation
+## Installation
 To use this Django application you need to install oTree, which is a software platform for economics experiments.
 - [official oTree Homepage](http://www.otree.org)
 - [Installation Guidelines](https://otree.readthedocs.io/en/latest/install.html)
@@ -15,9 +15,13 @@ To use this Django application you need to install oTree, which is a software pl
 
 If you have Python 3 already installed, you only need to run `pip3 install -U otree` in a terminal.
 
-# Start the application
+## Start the application
 
 Clone or download this repository to your device. Jump inside the directory and open a terminal window (e.g. PowerShell on Windows). Enter `otree runserver`.
 Open your browser and enter http://127.0.0.1:8000 in the address bar. You will have access to invitation links for participants in the same network.
 
 Remark: While this works for a small number of concurrent participants in a local network, you might want to consider hosting the application on a server. Read the [corresponding chapter in the oTree documentation](https://otree.readthedocs.io/en/latest/server/intro.html) for further details.
+
+
+## Disclaimer
+If you publish research conducted using oTree, you are required by the oTree license to cite [this paper](http://dx.doi.org/10.1016/j.jbef.2015.12.001). (Citation: Chen, D.L., Schonger, M., Wickens, C., 2016. oTree - An open-source platform for laboratory, online and field experiments. Journal of Behavioral and Experimental Finance, vol 9: 88-97)
