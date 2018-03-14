@@ -1,0 +1,53 @@
+{% load staticfiles otree %}
+
+<div id ="container" class="hideThis">
+	<!-- Geldtöpfe -->
+	<div class="partner hidden players leftboi" id="partnerLeft"></div>
+	<div class="partner hidden players topboi" id="partnerTop"></div>
+	<div class="partner hidden players rightboi" id="partnerRight"></div>
+	<div class="partner players bottomboi" id="partnerBottom"></div>
+
+	<!-- Gemeinschaftstopf -->
+	<div id="mainpot"></div>
+
+	<!-- Spielerfiguren -->
+	<img src={% static 'public_good_kids/img/figureyellow.png' %} class="figure figureLeft hidden players highthem leftboi"/>
+	<img src={% static 'public_good_kids/img/figuregreen.png' %} class="figure figureTop hidden players highthem topboi"/>
+	<img src={% static 'public_good_kids/img/figurered.png' %} class="figure figureRight hidden players highthem rightboi"/>
+	<img src={% static 'public_good_kids/img/figureblue.png' %} class="figure figureBottom players highyou bottomboi"/>
+
+	<!-- Münzen links -->
+	<img src={% static 'public_good_kids/img/twocoins.png' %} class="coins coinsLeft hidaway hidden" id="cl1"/>
+	<img src={% static 'public_good_kids/img/twocoins.png' %} class="coins coinsLeft hidaway hidden" id="cl2"/>
+	<img src={% static 'public_good_kids/img/twocoins.png' %} class="coins coinsLeft hidaway hidden" id="cl3"/>
+	<img src={% static 'public_good_kids/img/twocoins.png' %} class="coins coinsLeft hidaway hidden" id="cl4"/>
+	<img src={% static 'public_good_kids/img/twocoins.png' %} class="coins coinsLeft hidaway hidden" id="cl5"/>
+
+	<!-- Münzen oben -->
+	<img src={% static 'public_good_kids/img/twocoins.png' %} class="coins coinsTop hidden hidaway rotatedcoin" id="ct1"/>
+	<img src={% static 'public_good_kids/img/twocoins.png' %} class="coins coinsTop hidden hidaway rotatedcoin" id="ct2"/>
+	<img src={% static 'public_good_kids/img/twocoins.png' %} class="coins coinsTop hidden hidaway rotatedcoin" id="ct3"/>
+	<img src={% static 'public_good_kids/img/twocoins.png' %} class="coins coinsTop hidden hidaway rotatedcoin" id="ct4"/>
+	<img src={% static 'public_good_kids/img/twocoins.png' %} class="coins coinsTop hidden hidaway rotatedcoin" id="ct5"/>
+
+	<!-- Münzen rechts -->
+	<img src={% static 'public_good_kids/img/twocoins.png' %} class="coins coinsRight hidaway hidden" id="cr1"/>
+	<img src={% static 'public_good_kids/img/twocoins.png' %} class="coins coinsRight hidaway hidden" id="cr2"/>
+	<img src={% static 'public_good_kids/img/twocoins.png' %} class="coins coinsRight hidaway hidden" id="cr3"/>
+	<img src={% static 'public_good_kids/img/twocoins.png' %} class="coins coinsRight hidaway hidden" id="cr4"/>
+	<img src={% static 'public_good_kids/img/twocoins.png' %} class="coins coinsRight hidaway hidden" id="cr5"/>
+
+	<!-- Münzen unten -->
+	<img src={% static 'public_good_kids/img/twocoins.png' %} class="coins hidden owncoins rotatedcoin" id="cb1"/>
+	<img src={% static 'public_good_kids/img/twocoins.png' %} class="coins hidden owncoins rotatedcoin" id="cb2"/>
+	<img src={% static 'public_good_kids/img/twocoins.png' %} class="coins hidden owncoins rotatedcoin" id="cb3"/>
+	<img src={% static 'public_good_kids/img/twocoins.png' %} class="coins hidden owncoins rotatedcoin" id="cb4"/>
+	<img src={% static 'public_good_kids/img/twocoins.png' %} class="coins hidden owncoins rotatedcoin" id="cb5"/>
+
+	<!-- Pfeile zum Münzen verteilen -->
+	<img src={% static 'public_good_kids/img/arrowcolor.png' %} class="arrow" id="arrow-up"  onclick="moveToMain()"/>
+	<img src={% static 'public_good_kids/img/arrowblue.png' %} class="arrow" id="arrow-down" onclick="moveToOwn()"/>
+
+	<!-- Bestätigungs-Button -->
+  <button class="otree-btn-next btn next-button otree-next-button" id="confirmbutton" onclick="confirm()"></button>
+</div>

@@ -2,71 +2,15 @@
 {% load staticfiles otree %}
 
 {% block styles %}
-<link href="{% static "public_good_kids/ActualGame.css" %}" rel="stylesheet" />
+<link href="{% static "public_good_kids/css/ActualGame.css" %}" rel="stylesheet" />
 {% endblock %}
 
 {% block content %}
-<div id ="container">
-	<!-- Geldtöpfe -->
-	<div class="partner" id="partnerLeft"></div>
-	<div class="partner" id ="partnerTop"></div>
-	<div class="partner" id ="partnerRight"></div>
-	<div class="partner" id ="partnerBottom"></div>
+{% include "StandardArea.html" %}
 
-	<!-- Gemeinschaftstopf -->
-	<div id="mainpot"></div>
-
-	<!-- Spielerfiguren -->
-	<img src={% static 'public_good_kids/figureyellow.png' %} class="figure figureLeft"/>
-	<img src={% static 'public_good_kids/figuregreen.png' %} class="figure figureTop"/>
-	<img src={% static 'public_good_kids/figurered.png' %} class="figure figureRight"/>
-	<img src="{% static 'public_good_kids/figureblue.png' %}" class="figure figureBottom" onclick="initialize()"/>
-
-  <!--Tierbilder -->
-  <img src={% static imagepathleft %} class="animal animalLeft"/>
-  <img src={% static imagepathtop %} class="animal animalTop"/>
-  <img src={% static imagepathright %} class="animal animalRight"/>
-  <img src={% static imagepathbottom %} class="animal animalBottom"/>
-
-	<!-- Münzen links -->
-	<img src={% static 'public_good_kids/twocoins.png' %} class="coins hidaway" id="cl1"/>
-	<img src={% static 'public_good_kids/twocoins.png' %} class="coins hidaway" id="cl2"/>
-	<img src={% static 'public_good_kids/twocoins.png' %} class="coins hidaway" id="cl3"/>
-	<img src={% static 'public_good_kids/twocoins.png' %} class="coins hidaway" id="cl4"/>
-	<img src={% static 'public_good_kids/twocoins.png' %} class="coins hidaway" id="cl5"/>
-
-	<!-- Münzen oben -->
-	<img src={% static 'public_good_kids/twocoins.png' %} class="coins hidaway rotatedcoin" id="ct1"/>
-	<img src={% static 'public_good_kids/twocoins.png' %} class="coins hidaway rotatedcoin" id="ct2"/>
-	<img src={% static 'public_good_kids/twocoins.png' %} class="coins hidaway rotatedcoin" id="ct3"/>
-	<img src={% static 'public_good_kids/twocoins.png' %} class="coins hidaway rotatedcoin" id="ct4"/>
-	<img src={% static 'public_good_kids/twocoins.png' %} class="coins hidaway rotatedcoin" id="ct5"/>
-
-	<!-- Münzen rechts -->
-	<img src={% static 'public_good_kids/twocoins.png' %} class="coins hidaway" id="cr1"/>
-	<img src={% static 'public_good_kids/twocoins.png' %} class="coins hidaway" id="cr2"/>
-	<img src={% static 'public_good_kids/twocoins.png' %} class="coins hidaway" id="cr3"/>
-	<img src={% static 'public_good_kids/twocoins.png' %} class="coins hidaway" id="cr4"/>
-	<img src={% static 'public_good_kids/twocoins.png' %} class="coins hidaway" id="cr5"/>
-
-	<!-- Münzen unten -->
-	<img src={% static 'public_good_kids/twocoins.png' %} class="coins rotatedcoin" id="cb1"/>
-	<img src={% static 'public_good_kids/twocoins.png' %} class="coins rotatedcoin" id="cb2"/>
-	<img src={% static 'public_good_kids/twocoins.png' %} class="coins rotatedcoin" id="cb3"/>
-	<img src={% static 'public_good_kids/twocoins.png' %} class="coins rotatedcoin" id="cb4"/>
-	<img src={% static 'public_good_kids/twocoins.png' %} class="coins rotatedcoin" id="cb5"/>
-
-	<!-- Pfeile zum Münzen verteilen -->
-	<img src={% static 'public_good_kids/arrowcolor.png' %} class="arrow" id="arrow-up"  onclick="moveToMain()"/>
-	<img src={% static 'public_good_kids/arrowblue.png' %} class="arrow" id="arrow-down" onclick="moveToOwn()"/>
-
-	<!-- Bestätigungs-Button -->
-  <button class="otree-btn-next btn next-button otree-next-button" id="confirmbutton" onclick="confirm()"></button>
-</div>
 <input type="hidden" value="0" name="contribution" id="contribution"/>
 <input type="hidden" name="p_label" value="{{p_label}}" id="p_label"/>
 <input type="hidden" name="gameTreatment" value="{{gameTreatment}}" id="gameTreatment"/>
-<input type="hidden" name="groupTreatment" value="{{groupTreatment}}" id="groupTreatment"/>
 
 <br />
 <br />
@@ -78,40 +22,9 @@
 {% endblock %}
 
 {% block scripts %}
+<script src="{% static "public_good_kids/js/Timer.js" %}"></script>
 <script type="text/javascript">
 window.onload = initialize();
-
-function decreaseTimer() {
-  var elem = document.getElementById("timeleft");
-  var width = 100;
-  var id = setInterval(frame, 300); // decrease by 1% every 0.3 sec
-  function frame() {
-    if (width <= 0) {
-        clearInterval(id);
-    } else {
-        width--;
-        elem.style.width = width + '%';
-    }
-  }
-
-	setTimeout(startReminder, 28000);
-
-  var warned = false;
-	function startReminder() {
-		var audio = new Audio('../../../../../static/public_good_kids/Erinnerung_v2.mp3');
-	  audio.play();
-
-    if (!warned) {
-			var img = document.createElement("img");
-	    img.src = '../../../../../static/public_good_kids/exclamation.png';
-			img.classList.add('fixtopright');
-			document.body.appendChild(img);
-			warned = true;
-		}
-
-    setTimeout(startReminder, 25000);
-	}
-}
 
 
 function initialize() {

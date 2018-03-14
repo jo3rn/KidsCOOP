@@ -1,0 +1,19 @@
+.otree-btn-next {
+    border: 0px;
+    width: 100px;
+    height: 100px;
+}
+
+.hidden {
+    visibility: hidden;
+}
+
+#confirmbutton {
+  /* Button, der Auswahl bestätigt */
+  width: 10%;
+  height: 10%;
+  position: absolute;
+  bottom: 5%;
+  right: 5%;
+  visibility: hidden;
+}

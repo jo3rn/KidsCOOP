@@ -1,16 +1,15 @@
-.otree-btn-next {
-    all: initial;
-    background-image: url('confirm.png');
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: 100%;
-    border: 0px;
-    width: 100px;
-    height: 100px;
+#timer {
+  width: 800px;
+  height: 25px;
+  background-color: white;
 }
 
-.hidden {
-    visiblity: hidden;
+#timeleft {
+  width: 100%;
+  height: 100%;
+  background-color: grey;
+  transition: all 0.3s linear;
+  visibility: hidden;
 }
 
 #container {
@@ -63,14 +62,14 @@
 }
 
 #mainpot {
-  /* Gemeinschaftseldtopf in der Mitte */
+  /* Gemeinschaftsgeldtopf in der Mitte */
   border-radius: 15%;
   width: 30%;
   height: 30%;
   left: 35%;
   top: 35%;
   position: absolute;
-  background-image: url('main.png');
+  background-image: url('../img/main.png');
   background-position: center;
   box-shadow: 10px 10px rgb(150,150,150);
 }
@@ -100,33 +99,6 @@
 .figureBottom {
   top: 68%;
   left: 35%;
-}
-
-.animal {
-  /* Tierfiguren neben den Spielfiguren */
-  width: 12%;
-  position: absolute;
-  z-index: 1;
-}
-
-.animalLeft {
-  top: 31%;
-  left: 12%;
-}
-
-.animalTop {
-  top: 14%;
-  left: 63%;
-}
-
-.animalRight {
-  top: 62%;
-  left: 78%;
-}
-
-.animalBottom {
-  top: 80%;
-  left: 27%;
 }
 
 .coins {
@@ -239,13 +211,30 @@
 	transform: rotate(90deg);
 }
 
-.hiddenCoin {
+.arrow {
+  /* Pfeile zum Verteilen der Münzen */
+  position: absolute;
+  left: 47%;
+  height: 6%;
   visibility: hidden;
+  /* img in den Vordergrund */
+  z-index: 1;
+  transition: all 1s;
+}
+
+#arrow-up {
+  /* Pfeil Richtung Geldtopf in der Mitte */
+  top: 62.5%;
+}
+
+#arrow-down {
+  /* Pfeil Richtung Geldtopf unten */
+  top: 74.5%;
 }
 
 .otree-btn-next {
     all: initial;
-    background-image: url('confirm.png');
+    background-image: url('../img/confirm.png');
     background-repeat: no-repeat;
     background-position: center;
     background-size: 100%;
@@ -259,4 +248,12 @@
   bottom: 5%;
   right: 5%;
   visibility: hidden;
+  transition: all 1s;
+  transition-timing-function: ease;
+}
+
+.fixtopright {
+  position: fixed;
+  top: 0;
+  right: 0;
 }

@@ -27,22 +27,11 @@ class Instructions(Page):
     def is_displayed(self):
         return self.round_number == 1
 
-    def vars_for_template(self):
-        return {
-            'instructions1a'    : self.participant.vars['instructions1a']
-        }
 
 class TestRun(Page):
     def is_displayed(self):
         return self.round_number == 1
 
-    def vars_for_template(self):
-        return {
-            'imagepathleft'     : self.participant.vars['imagepathleft'],
-            'imagepathbottom'   : self.participant.vars['imagepathbottom'],
-            'imagepathright'    : self.participant.vars['imagepathright'],
-            'imagepathtop'      : self.participant.vars['imagepathtop']
-        }
 
 class Understood(Page):
     form_model = 'player'
@@ -55,15 +44,8 @@ class NotUnderstood(Page):
     def is_displayed(self):
         return (self.round_number == 1 and self.player.understood == "no")
 
-    def vars_for_template(self):
-        return {
-            'imagepathleft'     : self.participant.vars['imagepathleft'],
-            'imagepathbottom'   : self.participant.vars['imagepathbottom'],
-            'imagepathright'    : self.participant.vars['imagepathright'],
-            'imagepathtop'      : self.participant.vars['imagepathtop']
-        }
 
-class Contribute(Page):
+class ClassicPublicGood(Page):
     form_model = 'player'
     form_fields = ['contribution', 'p_label', 'gameTreatment']
 
@@ -72,15 +54,11 @@ class Contribute(Page):
 
     def vars_for_template(self):
         return {
-            'groupTreatment'    : self.participant.vars['groupdesign'],
             'gameTreatment'     : 'PublicGoods',
             'roundnumber'       : self.round_number,
             'p_label'           : self.participant.label,
-            'imagepathleft'     : self.participant.vars['imagepathleft'],
-            'imagepathbottom'   : self.participant.vars['imagepathbottom'],
-            'imagepathright'    : self.participant.vars['imagepathright'],
-            'imagepathtop'      : self.participant.vars['imagepathtop']
         }
+
 
 class UKStrategy(Page):
     form_model = 'player'
@@ -88,17 +66,13 @@ class UKStrategy(Page):
 
     def vars_for_template(self):
         return {
-            'groupTreatment'    : self.participant.vars['groupdesign'],
             'gameTreatment'     : 'UKStrategy',
             'p_label'           : self.participant.label,
-            'imagepathleft'     : self.participant.vars['imagepathleft'],
-            'imagepathbottom'   : self.participant.vars['imagepathbottom'],
-            'imagepathright'    : self.participant.vars['imagepathright'],
-            'imagepathtop'      : self.participant.vars['imagepathtop']
         }
 
     def is_displayed(self):
         return self.round_number == 4
+
 
 class K0Strategy(Page):
     form_model = 'player'
@@ -106,13 +80,8 @@ class K0Strategy(Page):
 
     def vars_for_template(self):
         return {
-            'groupTreatment'    : self.participant.vars['groupdesign'],
             'gameTreatment'     : 'K0Strategy',
             'p_label'           : self.participant.label,
-            'imagepathleft'     : self.participant.vars['imagepathleft'],
-            'imagepathbottom'   : self.participant.vars['imagepathbottom'],
-            'imagepathright'    : self.participant.vars['imagepathright'],
-            'imagepathtop'      : self.participant.vars['imagepathtop']
         }
 
     def is_displayed(self):
@@ -121,19 +90,15 @@ class K0Strategy(Page):
     def before_next_page(self):
         self.player.set_payoffs_generic()
 
+
 class K1Strategy(Page):
     form_model = 'player'
     form_fields = ['contribution', 'p_label', 'gameTreatment']
 
     def vars_for_template(self):
         return {
-            'groupTreatment'    : self.participant.vars['groupdesign'],
             'gameTreatment'     : 'K1Strategy',
             'p_label'           : self.participant.label,
-            'imagepathleft'     : self.participant.vars['imagepathleft'],
-            'imagepathbottom'   : self.participant.vars['imagepathbottom'],
-            'imagepathright'    : self.participant.vars['imagepathright'],
-            'imagepathtop'      : self.participant.vars['imagepathtop']
         }
 
     def is_displayed(self):
@@ -142,19 +107,15 @@ class K1Strategy(Page):
     def before_next_page(self):
         self.player.set_payoffs_generic()
 
+
 class K2Strategy(Page):
     form_model = 'player'
     form_fields = ['contribution', 'p_label', 'gameTreatment']
 
     def vars_for_template(self):
         return {
-            'groupTreatment'    : self.participant.vars['groupdesign'],
             'gameTreatment'     : 'K2Strategy',
             'p_label'           : self.participant.label,
-            'imagepathleft'     : self.participant.vars['imagepathleft'],
-            'imagepathbottom'   : self.participant.vars['imagepathbottom'],
-            'imagepathright'    : self.participant.vars['imagepathright'],
-            'imagepathtop'      : self.participant.vars['imagepathtop']
         }
 
     def is_displayed(self):
@@ -163,19 +124,15 @@ class K2Strategy(Page):
     def before_next_page(self):
         self.player.set_payoffs_generic()
 
+
 class K3Strategy(Page):
     form_model = 'player'
     form_fields = ['contribution', 'p_label', 'gameTreatment']
 
     def vars_for_template(self):
         return {
-            'groupTreatment'    : self.participant.vars['groupdesign'],
             'gameTreatment'     : 'K3Strategy',
             'p_label'           : self.participant.label,
-            'imagepathleft'     : self.participant.vars['imagepathleft'],
-            'imagepathbottom'   : self.participant.vars['imagepathbottom'],
-            'imagepathright'    : self.participant.vars['imagepathright'],
-            'imagepathtop'      : self.participant.vars['imagepathtop']
         }
 
     def is_displayed(self):
@@ -184,9 +141,6 @@ class K3Strategy(Page):
     def before_next_page(self):
         self.player.set_payoffs_generic()
         self.player.set_final_payoff()
-
-
-
 
 
 class ResultsWaitPage(WaitPage):
@@ -199,7 +153,7 @@ class ResultsWaitPage(WaitPage):
         else:
             self.group.set_payoffs_generic()
 
-    template_name = 'PublicGoodKids/CustomWaitPage.html'
+    template_name = 'public_good_kids/CustomWaitPage.html'
     body_text = 'boom'
 
 
@@ -240,10 +194,6 @@ class Results(Page):
             'top5'          : styletop[4],
             'contribution'  : self.player.contribution,
             'otherchipin'   : sum([p.contribution for p in self.group.get_players()]) - self.player.contribution,
-            'imagepathleft'     : self.participant.vars['imagepathleft'],
-            'imagepathbottom'   : self.participant.vars['imagepathbottom'],
-            'imagepathright'    : self.participant.vars['imagepathright'],
-            'imagepathtop'      : self.participant.vars['imagepathtop']
         }
 
 
@@ -261,7 +211,6 @@ class Disbursement(Page):
     }
 
 
-
 page_sequence = [
     GenderAndID,
     ChooseWaitPage,
@@ -270,7 +219,7 @@ page_sequence = [
     Understood,
     NotUnderstood,
     ChooseWaitPage,
-    Contribute,
+    ClassicPublicGood,
     UKStrategy,
     K0Strategy,
     K1Strategy,

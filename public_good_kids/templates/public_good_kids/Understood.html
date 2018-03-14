@@ -14,12 +14,12 @@
     }
 
     #no {
-        background-image: url({% static 'public_good_kids/no.png' %});
+        background-image: url({% static 'public_good_kids/img/no.png' %});
         float: left;
     }
 
     #yes {
-        background-image: url({% static 'public_good_kids/yes.png' %});
+        background-image: url({% static 'public_good_kids/img/yes.png' %});
         float: right;
     }
 
@@ -53,7 +53,7 @@
 window.onload = playAudio();
 
 function playAudio() {
-  var audio = new Audio('../../../../../static/public_good_kids/Verstanden_v1.mp3');
+  var audio = new Audio('../../../../../static/public_good_kids/audio/Verstanden v1.mp3');
   audio.play();
 }
 
