@@ -46,8 +46,9 @@ Network Trash Folder
 Temporary Items
 .apdisk
 
-# Ignore complete pycache files
+# Ignore pycache
 __pycache__/
+*.pyc
 
 # Ignore local database
 *.sqlite3
