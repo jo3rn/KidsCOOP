@@ -17,17 +17,17 @@
 	<div id="mainpot"></div>
 
 	<!-- Spielerfiguren -->
-	<img src={% static 'public_good_kids/figureyellow.png' %} class="figure figureLeft"/>
-	<img src={% static 'public_good_kids/figuregreen.png' %} class="figure figureTop"/>
-	<img src={% static 'public_good_kids/figurered.png' %} class="figure figureRight"/>
-	<img src="{% static 'public_good_kids/figureblue.png' %}" class="figure figureBottom"/>
+	<img src={% static 'public_good_kids/img/figureyellow.png' %} class="figure figureLeft"/>
+	<img src={% static 'public_good_kids/img/figuregreen.png' %} class="figure figureTop"/>
+	<img src={% static 'public_good_kids/img/figurered.png' %} class="figure figureRight"/>
+	<img src={% static 'public_good_kids/img/figureblue.png' %} class="figure figureBottom"/>
 
 	<!-- Münzen unten -->
-	<img src={% static 'public_good_kids/twocoins.png' %} class="coins {{class1}}" id="cb1" style="top: {{top1}}"/>
-	<img src={% static 'public_good_kids/twocoins.png' %} class="coins {{class2}}" id="cb2" style="top: {{top2}}"/>
-	<img src={% static 'public_good_kids/twocoins.png' %} class="coins {{class3}}" id="cb3" style="top: {{top3}}"/>
-	<img src={% static 'public_good_kids/twocoins.png' %} class="coins {{class4}}" id="cb4" style="top: {{top4}}"/>
-	<img src={% static 'public_good_kids/twocoins.png' %} class="coins {{class5}}" id="cb5" style="top: {{top5}}"/>
+	<img src={% static 'public_good_kids/img/twocoins.png' %} class="coins {{class1}}" id="cb1" style="top: {{top1}}"/>
+	<img src={% static 'public_good_kids/img/twocoins.png' %} class="coins {{class2}}" id="cb2" style="top: {{top2}}"/>
+	<img src={% static 'public_good_kids/img/twocoins.png' %} class="coins {{class3}}" id="cb3" style="top: {{top3}}"/>
+	<img src={% static 'public_good_kids/img/twocoins.png' %} class="coins {{class4}}" id="cb4" style="top: {{top4}}"/>
+	<img src={% static 'public_good_kids/img/twocoins.png' %} class="coins {{class5}}" id="cb5" style="top: {{top5}}"/>
 
   <!-- Next(Bestätigungs)-Button -->
   <button class="otree-btn-next btn next-button otree-next-button" id="confirmbutton"></button>
@@ -62,7 +62,7 @@ function startDistribution() {
 		for (m=0; m < contributionOthers; m++) {
 			// create coin image and properties
 			var newcoin = document.createElement('img');
-			newcoin.src = '/static/public_good_kids/twocoins.png';
+			newcoin.src = '/static/public_good_kids/img/twocoins.png';
 			newcoin.classList.add('maincoin');
 			newcoin.style.position = 'absolute';
 			newcoin.style.width = '4%';

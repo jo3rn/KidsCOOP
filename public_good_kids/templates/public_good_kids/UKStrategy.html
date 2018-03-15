@@ -5,58 +5,22 @@
 <link href="{% static "public_good_kids/css/ActualGame.css" %}" rel="stylesheet" />
 {% endblock %}
 
+
 {% block content %}
 {% include "StandardArea.html" %}
-
-<input type="hidden" value="0" name="contribution" id="contribution"/>
-<input type="hidden" name="p_label" value="{{p_label}}" id="p_label"/>
-<input type="hidden" name="gameTreatment" value="{{gameTreatment}}" id="gameTreatment"/>
-
-<br />
-<br />
-
-<div id="timer">
-  <div id="timeleft"></div>
-</div>
-
+{% include "HiddenInput.html" %}
+{% include "Timer.html" %}
 {% endblock %}
 
+
 {% block scripts %}
+<script src="{% static "public_good_kids/js/Confirm.js" %}"></script>
+<script src="{% static "public_good_kids/js/MoveCoins.js" %}"></script>
+<script src="{% static "public_good_kids/js/Timer.js" %}"></script>
 <script type="text/javascript">
+document.getElementById('arrow-up').addEventListener("click", function() {moveToMain(moveAll=true, kStrategy=false);});
+document.getElementById('arrow-down').addEventListener("click", function() {moveToOwn(moveAll=true, kStrategy=false);});
 window.onload = initialize();
-
-function decreaseTimer() {
-  var elem = document.getElementById("timeleft");
-  var width = 100;
-  var id = setInterval(frame, 300); // decrease by 1% every 0.3 sec
-  function frame() {
-    if (width <= 0) {
-        clearInterval(id);
-    } else {
-        width--;
-        elem.style.width = width + '%';
-    }
-  }
-
-	setTimeout(startReminder, 28000);
-
-	var warned = false;
-	function startReminder() {
-		var audio = new Audio('../../../../../static/public_good_kids/Erinnerung_v2.mp3');
-	  audio.play();
-
-		if (!warned) {
-			var img = document.createElement("img");
-	    img.src = '../../../../../static/public_good_kids/exclamation.png';
-			img.classList.add('fixtopright');
-			document.body.appendChild(img);
-			warned = true;
-		}
-
-		setTimeout(startReminder, 25000);
-	}
-}
-
 
 function initialize() {
 	// starts audio, timer and sets arrows in place
@@ -142,6 +106,7 @@ function resetExample() {
 	cb5.classList.add("rotatedcoin");
 }
 
+/*
 function moveToMain() {
 	// moves coin in mainpot
 	try {
@@ -260,24 +225,7 @@ function moveToOwn() {
 	catch(err) {
 	}
 }
-
-
-function confirm() {
-	try {
-		// hide arrows
-		document.getElementById('arrow-up').style.visibility = 'hidden';
-		document.getElementById('arrow-down').style.visibility = 'hidden';
-
-		// hide confirm button
-		document.getElementById('confirmbutton').style.visibility = 'hidden';
-
-    // write contribution in input field for database
-    document.getElementById("contribution").value = contribution;
-
-	}
-	catch(err) {
-	}
-}
+*/
 
 </script>
 {% endblock %}

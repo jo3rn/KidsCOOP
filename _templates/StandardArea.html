@@ -2,19 +2,19 @@
 
 <div id ="container" class="hideThis">
 	<!-- Geldtöpfe -->
-	<div class="partner hidden players leftboi" id="partnerLeft"></div>
-	<div class="partner hidden players topboi" id="partnerTop"></div>
-	<div class="partner hidden players rightboi" id="partnerRight"></div>
-	<div class="partner players bottomboi" id="partnerBottom"></div>
+	<div class="partner hidden players" id="partnerLeft"></div>
+	<div class="partner hidden players" id="partnerTop"></div>
+	<div class="partner hidden players" id="partnerRight"></div>
+	<div class="partner players" id="partnerBottom"></div>
 
 	<!-- Gemeinschaftstopf -->
 	<div id="mainpot"></div>
 
 	<!-- Spielerfiguren -->
-	<img src={% static 'public_good_kids/img/figureyellow.png' %} class="figure figureLeft hidden players highthem leftboi"/>
-	<img src={% static 'public_good_kids/img/figuregreen.png' %} class="figure figureTop hidden players highthem topboi"/>
-	<img src={% static 'public_good_kids/img/figurered.png' %} class="figure figureRight hidden players highthem rightboi"/>
-	<img src={% static 'public_good_kids/img/figureblue.png' %} class="figure figureBottom players highyou bottomboi"/>
+	<img src={% static 'public_good_kids/img/figureyellow.png' %} class="figure figureLeft hidden players highthem"/>
+	<img src={% static 'public_good_kids/img/figuregreen.png' %} class="figure figureTop hidden players highthem"/>
+	<img src={% static 'public_good_kids/img/figurered.png' %} class="figure figureRight hidden players highthem"/>
+	<img src={% static 'public_good_kids/img/figureblue.png' %} class="figure figureBottom players highyou"/>
 
 	<!-- Münzen links -->
 	<img src={% static 'public_good_kids/img/twocoins.png' %} class="coins coinsLeft hidaway hidden" id="cl1"/>
@@ -45,9 +45,9 @@
 	<img src={% static 'public_good_kids/img/twocoins.png' %} class="coins hidden owncoins rotatedcoin" id="cb5"/>
 
 	<!-- Pfeile zum Münzen verteilen -->
-	<img src={% static 'public_good_kids/img/arrowcolor.png' %} class="arrow" id="arrow-up"  onclick="moveToMain()"/>
-	<img src={% static 'public_good_kids/img/arrowblue.png' %} class="arrow" id="arrow-down" onclick="moveToOwn()"/>
+	<img src={% static 'public_good_kids/img/arrowcolor.png' %} class="arrow" id="arrow-up"/>
+	<img src={% static 'public_good_kids/img/arrowblue.png' %} class="arrow" id="arrow-down"/>
 
 	<!-- Bestätigungs-Button -->
-  <button class="otree-btn-next btn next-button otree-next-button" id="confirmbutton" onclick="confirm()"></button>
+  <button class="otree-btn-next btn next-button otree-next-button" id="confirmbutton"></button>
 </div>

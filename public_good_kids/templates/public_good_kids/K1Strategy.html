@@ -7,24 +7,18 @@
 
 {% block content %}
 {% include "StandardArea.html" %}
-
-<input type="hidden" value="0" name="contribution" id="contribution"/>
-<input type="hidden" name="p_label" value="{{p_label}}" id="p_label"/>
-<input type="hidden" name="gameTreatment" value="{{gameTreatment}}" id="gameTreatment"/>
-
-<br />
-<br />
-
-<div id="timer">
-  <div id="timeleft"></div>
-</div>
-
+{% include "HiddenInput.html" %}
+{% include "Timer.html" %}
 {% endblock %}
 
 
 {% block scripts %}
+<script src="{% static "public_good_kids/js/Confirm.js" %}"></script>
+<script src="{% static "public_good_kids/js/MoveCoins.js" %}"></script>
 <script src="{% static "public_good_kids/js/Timer.js" %}"></script>
 <script type="text/javascript">
+document.getElementById('arrow-up').addEventListener("click", function() {moveToMain(moveAll=true, kStrategy=true);});
+document.getElementById('arrow-down').addEventListener("click", function() {moveToOwn(moveAll=true, kStrategy=true);});
 window.onload = initialize();
 
 
@@ -120,7 +114,7 @@ function distributeOtherCoins() {
 	cr5.style.top = '55%';
 }
 
-
+/*
 function moveToMain() {
 	// moves coin in mainpot
 	try {
@@ -152,13 +146,7 @@ function moveToMain() {
 			// show confirm button when all coins are distributed
 			confirm.style.visibility = 'visible';
 
-			/* not necessary
-			// hide coins of other participants
-			var othercoins = document.getElementsByClassName('hidaway');
-			for (k=0; k < othercoins.length; k++) {
-				othercoins[k].style.visibility = 'hidden';
-			}
-			*/
+
 		} else {
 			if (cb5.style.top != '61%') {
 				cb5.style.top = '61%';
@@ -214,13 +202,7 @@ function moveToOwn() {
 			// show confirm button when all coins are distributed
 			confirm.style.visibility = 'visible';
 
-			/* not necessary
-			// hide coins of other participants
-			var othercoins = document.getElementsByClassName('hidaway');
-			for (k=0; k < othercoins.length; k++) {
-				othercoins[k].style.visibility = 'hidden';
-			}
-			*/
+
 		} else {
 			if (cb5.style.top != '80%') {
 				cb5.style.top = '80%';
@@ -246,23 +228,7 @@ function moveToOwn() {
 	}
 }
 
-
-function confirm() {
-	try {
-		// hide arrows
-		document.getElementById('arrow-up').style.visibility = 'hidden';
-		document.getElementById('arrow-down').style.visibility = 'hidden';
-
-		// hide confirm button
-		document.getElementById('confirmbutton').style.visibility = 'hidden';
-
-    // write contribution in input field for database
-    document.getElementById("contribution").value = contribution;
-
-	}
-	catch(err) {
-	}
-}
+*/
 
 </script>
 {% endblock %}

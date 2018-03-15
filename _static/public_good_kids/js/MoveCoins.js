@@ -1,100 +1,44 @@
-{% extends "global/Page.html" %}
-{% load staticfiles otree %}
-
-{% block styles %}
-<link href="{% static "public_good_kids/css/ActualGame.css" %}" rel="stylesheet" />
-{% endblock %}
-
-
-{% block content %}
-{% include "StandardArea.html" %}
-{% include "HiddenInput.html" %}
-{% include "Timer.html" %}
-{% endblock %}
-
-
-{% block scripts %}
-<script src="{% static "public_good_kids/js/Confirm.js" %}"></script>
-<script src="{% static "public_good_kids/js/MoveCoins.js" %}"></script>
-<script src="{% static "public_good_kids/js/Timer.js" %}"></script>
-<script type="text/javascript">
-
-document.getElementById('arrow-up').addEventListener("click", function() {moveToMain(moveAll=false, kStrategy=false);});
-document.getElementById('arrow-down').addEventListener("click", function() {moveToOwn(moveAll=false, kStrategy=false);});
-window.onload = initialize();
-
-
-function initialize() {
-	// starts audio, timer and sets arrows in place
-	// also needed to initialize global variables
-	try {
-
-		document.getElementById("timeleft").style.visibility = 'visible';
-		if (typeof coinCountdown === 'undefined') {
-			if({{ roundnumber|json }} == 1) {
-				var audio = new Audio('../../../../../static/public_good_kids/Ueberleitung_v2.mp3');
-			  audio.play();
-
-				setTimeout(playStart, 16000);
-				setTimeout(showArrows, 16000);
-
-	      // start timer
-	      setTimeout(decreaseTimer, 16000);
-			} else {
-				playNext();
-				showArrows();
-				decreaseTimer();
-			}
-
-
-			// coin countdown to indicate if all coins are distributed
-			coinCountdown = 1;
-
-			// keep track of player's contribution
-			contribution = 0;
-		}
-
-	}
-	catch(err) {
-	}
-}
-
-function playStart() {
-	var audio = new Audio('../../../../../static/public_good_kids/Start_v1.mp3');
-	audio.play();
-}
-
-function playNext() {
-	var audio = new Audio('../../../../../static/public_good_kids/Next_v1.mp3');
-	audio.play();
-}
-
-function showArrows() {
-	// make arrows visible
-	var arrows = document.getElementsByClassName('arrow');
-	var i;
-	for (i=0; i < arrows.length; i++) {
-		arrows[i].style.visibility = 'visible';
-	}
-}
-
-/*
-function moveToMain() {
+function moveToMain(moveAll=false, kStrategy=false) {
 	// moves coin in mainpot
 	try {
+    // initialize variables
 		var cb1 = document.getElementById('cb1');
 		var cb2 = document.getElementById('cb2');
 		var cb3 = document.getElementById('cb3');
 		var cb4 = document.getElementById('cb4');
 		var cb5 = document.getElementById('cb5');
-		var confirm = document.getElementById('confirmbutton');
 
+    console.log("moveAll: " + moveAll);
+    console.log("after variables: " + coinCountdown);
+
+    // if there are coins left between the pots
 		if (coinCountdown == 1) {
-			cb1.style.top = '61%';
-			cb1.classList.add('maincoin');
-			cb1.classList.remove("rotatedcoin");
+      cb1.style.top = '61%';
+      cb1.classList.add('maincoin');
+      cb1.classList.remove("rotatedcoin");
+      if (moveAll) {
+  			cb2.style.top = '61%';
+  			cb2.classList.add('maincoin');
+  			cb2.classList.remove("rotatedcoin");
+  			cb3.style.top = '61%';
+  			cb3.classList.add('maincoin');
+  			cb3.classList.remove("rotatedcoin");
+  			cb4.style.top = '61%';
+  			cb4.classList.add('maincoin');
+  			cb4.classList.remove("rotatedcoin");
+  			cb5.style.top = '61%';
+  			cb5.classList.add('maincoin');
+  			cb5.classList.remove("rotatedcoin");
+  			coinCountdown = 6;
+  			contribution += 5;
+        showConfirmButton();
+        if (!kStrategy) {
+          hideOtherCoins();
+        }
+      } else {
 			coinCountdown += 1;
 			contribution += 1;
+    }
 		} else if (coinCountdown == 2) {
 			cb2.style.top = '61%';
 			cb2.classList.add('maincoin');
@@ -119,19 +63,34 @@ function moveToMain() {
 			cb5.classList.remove("rotatedcoin");
 			coinCountdown += 1;
 			contribution += 1;
-			// show confirm button when all coins are distributed
-			confirm.style.visibility = 'visible';
-			// hide coins of other participants
-			var othercoins = document.getElementsByClassName('hidaway');
-			for (k=0; k < othercoins.length; k++) {
-				othercoins[k].style.visibility = 'hidden';
-			}
+			showConfirmButton();
+      if (!kStrategy) {
+        hideOtherCoins();
+      }
+
+    // if all coins are in either one of the pots
 		} else {
 			if (cb5.style.top != '61%') {
 				cb5.style.top = '61%';
 				cb5.classList.remove('owncoin');
 				cb5.classList.add('maincoin');
-				contribution += 1;
+        if (moveAll) {
+          cb4.style.top = '61%';
+  				cb4.classList.remove('owncoin');
+  				cb4.classList.add('maincoin');
+  				cb3.style.top = '61%';
+  				cb3.classList.remove('owncoin');
+  				cb3.classList.add('maincoin');
+  				cb2.style.top = '61%';
+  				cb2.classList.remove('owncoin');
+  				cb2.classList.add('maincoin');
+  				cb1.style.top = '61%';
+  				cb1.classList.remove('owncoin');
+  				cb1.classList.add('maincoin');
+  				contribution += 5;
+        } else {
+          contribution += 1;
+        }
 			} else if (cb4.style.top != '61%') {
 				cb4.style.top = '61%';
 				cb4.classList.remove('owncoin');
@@ -154,27 +113,58 @@ function moveToMain() {
 				contribution += 1;
 			}
 		}
+
 	}
 	catch(err) {
 	}
 }
 
-function moveToOwn() {
+
+
+function moveToOwn(moveAll=false) {
 	// moves coin in own pot
 	try {
+    // initialize variables
 		var cb1 = document.getElementById('cb1');
 		var cb2 = document.getElementById('cb2');
 		var cb3 = document.getElementById('cb3');
 		var cb4 = document.getElementById('cb4');
 		var cb5 = document.getElementById('cb5');
-		var confirm = document.getElementById('confirmbutton');
 
+    console.log("moveAll: " + moveAll);
+    console.log("after variables: " + coinCountdown);
+    // if there are coins left between the pots
 		if (coinCountdown == 1) {
+      console.log("1: " + coinCountdown);
 			cb1.style.top = '80%';
 			cb1.classList.add('owncoin');
 			cb1.classList.remove("rotatedcoin");
-			coinCountdown += 1;
+      if (moveAll) {
+        console.log("moveAll");
+        cb2.style.top = '80%';
+  			cb2.classList.add('owncoin');
+  			cb2.classList.remove("rotatedcoin");
+  			cb3.style.top = '80%';
+  			cb3.classList.add('owncoin');
+  			cb3.classList.remove("rotatedcoin");
+  			cb4.style.top = '80%';
+  			cb4.classList.add('owncoin');
+  			cb4.classList.remove("rotatedcoin");
+  			cb5.style.top = '80%';
+  			cb5.classList.add('owncoin');
+  			cb5.classList.remove("rotatedcoin");
+  			coinCountdown = 6;
+        showConfirmButton();
+        if (!kStrategy) {
+          hideOtherCoins();
+        }
+      } else {
+
+        coinCountdown += 1;
+        console.log("increase by 1: " + coinCountdown);
+      }
 		} else if (coinCountdown == 2) {
+      console.log("2: " + coinCountdown);
 			cb2.style.top = '80%';
 			cb2.classList.add('owncoin');
 			cb2.classList.remove("rotatedcoin");
@@ -194,19 +184,35 @@ function moveToOwn() {
 			cb5.classList.add('owncoin');
 			cb5.classList.remove("rotatedcoin");
 			coinCountdown += 1;
-			// show confirm button when all coins are distributed
-			confirm.style.visibility = 'visible';
-			// hide coins of other participants
-			var othercoins = document.getElementsByClassName('hidaway');
-			for (k=0; k < othercoins.length; k++) {
-				othercoins[k].style.visibility = 'hidden';
-			}
+			showConfirmButton();
+      if (!kStrategy) {
+        hideOtherCoins();
+      }
+
+    // if all coins are in either one of the pots
 		} else {
+      console.log("in pots: " + coinCountdown);
 			if (cb5.style.top != '80%') {
 				cb5.style.top = '80%';
 				cb5.classList.remove('maincoin');
 				cb5.classList.add('owncoin');
-				contribution -= 1;
+        if (moveAll) {
+          cb4.style.top = '80%';
+  				cb4.classList.remove('maincoin');
+  				cb4.classList.add('owncoin');
+  				cb3.style.top = '80%';
+  				cb3.classList.remove('maincoin');
+  				cb3.classList.add('owncoin');
+  				cb2.style.top = '80%';
+  				cb2.classList.remove('maincoin');
+  				cb2.classList.add('owncoin');
+  				cb1.style.top = '80%';
+  				cb1.classList.remove('maincoin');
+  				cb1.classList.add('owncoin');
+  				contribution -= 5;
+        } else {
+          contribution -= 1;
+        }
 			} else if (cb4.style.top != '80%') {
 				cb4.style.top = '80%';
 				cb4.classList.remove('maincoin');
@@ -233,7 +239,18 @@ function moveToOwn() {
 	catch(err) {
 	}
 }
-*/
 
-</script>
-{% endblock %}
+
+
+function showConfirmButton() {
+  // show confirm button when all coins are distributed
+  document.getElementById('confirmbutton').style.visibility = 'visible';
+}
+
+function hideOtherCoins() {
+  // hide coins of other participants
+  var othercoins = document.getElementsByClassName('hidaway');
+  for (k=0; k < othercoins.length; k++) {
+    othercoins[k].style.visibility = 'hidden';
+  }
+}

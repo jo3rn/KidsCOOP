@@ -212,13 +212,13 @@ class Disbursement(Page):
 
 
 page_sequence = [
-    GenderAndID,
-    ChooseWaitPage,
-    Instructions,
-    TestRun,
-    Understood,
-    NotUnderstood,
-    ChooseWaitPage,
+    #GenderAndID,
+    #ChooseWaitPage,
+    #Instructions,
+    #TestRun,
+    #Understood,
+    #NotUnderstood,
+    #ChooseWaitPage,
     ClassicPublicGood,
     UKStrategy,
     K0Strategy,

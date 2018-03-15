@@ -50,7 +50,7 @@ function showPayOff() {
   for (i = 1; i <= amount; i++) {
     // add coin pairs according to pay off
     var img = document.createElement("img");
-    img.src = '../../../../../static/public_good_kids/twocoins.png';
+    img.src = '../../../../../static/public_good_kids/img/twocoins.png';
     img.classList.add('coins');
     document.getElementById("flexcontainer").appendChild(img);
   }
@@ -59,7 +59,7 @@ function showPayOff() {
   if ({{ finalpay|json }} % 2) {
     // odd amount of pay off -> add one extra coin (half of the image)
     var img = document.createElement("img");
-    img.src = '../../../../../static/public_good_kids/twocoins.png';
+    img.src = '../../../../../static/public_good_kids/img/twocoins.png';
     img.classList.add('coins');
     img.style.clipPath = "inset(0% 50% 0% 0%)";
     document.getElementById("flexcontainer").appendChild(img);
