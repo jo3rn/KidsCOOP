@@ -54,7 +54,7 @@ class ClassicPublicGood(Page):
 
     def vars_for_template(self):
         return {
-            'gameTreatment'     : 'PublicGoods',
+            'gameTreatment'     : 'PublicGoods_' + str(self.round_number),
             'roundnumber'       : self.round_number,
             'p_label'           : self.participant.label,
         }

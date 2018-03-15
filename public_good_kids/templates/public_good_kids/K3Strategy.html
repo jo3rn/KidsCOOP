@@ -13,6 +13,7 @@
 
 {% block scripts %}
 <script src="{% static "public_good_kids/js/Confirm.js" %}"></script>
+<script src="{% static "public_good_kids/js/KStrategy.js" %}"></script>
 <script src="{% static "public_good_kids/js/MoveCoins.js" %}"></script>
 <script src="{% static "public_good_kids/js/Timer.js" %}"></script>
 <script type="text/javascript">
@@ -30,7 +31,7 @@ function initialize() {
 			var audio = new Audio('../../../../../static/public_good_kids/KIII_strategy_v2.mp3');
 		  audio.play();
 
-			setTimeout(distributeOtherCoins, 3000);
+			setTimeout(distributeOtherCoins.bind(null, 3), 3000);
 			setTimeout(showArrows, 16000);
 			function showArrows() {
 				// make arrows visible
@@ -54,63 +55,6 @@ function initialize() {
 	}
 	catch(err) {
 	}
-}
-
-function distributeOtherCoins() {
-	var cl1 = document.getElementById('cl1');
-	var cl2 = document.getElementById('cl2');
-	var cl3 = document.getElementById('cl3');
-	var cl4 = document.getElementById('cl4');
-	var cl5 = document.getElementById('cl5');
-	var ct1 = document.getElementById('ct1');
-	var ct2 = document.getElementById('ct2');
-	var ct3 = document.getElementById('ct3');
-	var ct4 = document.getElementById('ct4');
-	var ct5 = document.getElementById('ct5');
-	var cr1 = document.getElementById('cr1');
-	var cr2 = document.getElementById('cr2');
-	var cr3 = document.getElementById('cr3');
-	var cr4 = document.getElementById('cr4');
-	var cr5 = document.getElementById('cr5');
-
-	ct1.classList.remove("rotatedcoin");
-	ct2.classList.remove("rotatedcoin");
-	ct3.classList.remove("rotatedcoin");
-	ct4.classList.remove("rotatedcoin");
-	ct5.classList.remove("rotatedcoin");
-
-	cl1.style.left = '40%';
-	cl2.style.left = '44%';
-	cl3.style.left = '48%';
-	cl4.style.left = '52%';
-	cl5.style.left = '56%';
-	cl1.style.top = '47%';
-	cl2.style.top = '47%';
-	cl3.style.top = '47%';
-	cl4.style.top = '47%';
-	cl5.style.top = '47%';
-
-	ct1.style.left = '40%';
-	ct2.style.left = '44%';
-	ct3.style.left = '48%';
-	ct4.style.left = '52%';
-	ct5.style.left = '56%';
-	ct1.style.top = '40%';
-	ct2.style.top = '40%';
-	ct3.style.top = '40%';
-	ct4.style.top = '40%';
-	ct5.style.top = '40%';
-
-	cr1.style.left = '40%';
-	cr2.style.left = '44%';
-	cr3.style.left = '48%';
-	cr4.style.left = '52%';
-	cr5.style.left = '56%';
-	cr1.style.top = '54%';
-	cr2.style.top = '54%';
-	cr3.style.top = '54%';
-	cr4.style.top = '54%';
-	cr5.style.top = '54%';
 }
 
 </script>
