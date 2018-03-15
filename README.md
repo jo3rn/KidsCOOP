@@ -17,7 +17,7 @@ If you have Python 3 already installed, you only need to run `pip3 install -U ot
 
 ## Start the application
 
-Clone or download this repository to your device. Jump inside the directory and open a terminal window (e.g. PowerShell on Windows). Enter `otree runserver`.
+Clone or download this repository to your device. Jump inside the directory and open a terminal window (e.g. PowerShell on Windows). Enter `otree devserver`.
 Open your browser and enter http://127.0.0.1:8000 in the address bar. You will have access to invitation links for participants in the same network.
 
 Remark: While this works for a small number of concurrent participants in a local network, you might want to consider hosting the application on a server. Read the [corresponding chapter in the oTree documentation](https://otree.readthedocs.io/en/latest/server/intro.html) for further details.
