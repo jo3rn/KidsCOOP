@@ -1,81 +1,102 @@
-console.log("instructions.js loaded");
-
-function runInstructions1a(){
-  console.log("run 1a");
-  let audio = new Audio('../../../../../static/public_good_kids/audio/Instruktion1a.mp3');
-  audio.play();
-	setTimeout(showPlayers, 3500);
-
-	//call Instruktion1b
-  setTimeout(runInstructions1b, 48000);
+function Instruktion1a(){
+  var audio = new Audio('../../../../../static/public_good_kids/audio/Instruktion1a.mp3');
+  audio.addEventListener('loadedmetadata', function() {
+    audio.play();
+    var delay = audio.duration*1000 + 500;
+    setTimeout(showPlayers, 4300);
+    setTimeout(Instruktion1b, delay);
+  });
 }
 
-function runInstructions1b(){
-  //Instruktion1b
-  let audio = new Audio('../../../../../static/public_good_kids/Instruktion1b_v2.mp3');
-  audio.play();
-
-  setTimeout(showCoins, 1500);
-  setTimeout(highlightCoin, 8000);
-  setTimeout(dehighlightCoin, 12000);
-
-  // call Instruktion2
-  setTimeout(runInstructions2, 41000);
-
-	/* for debugging purposes only
-  showPlayers();
-  showCoins();
-  showAnimal();
-  showOtherAnimals();
-
-  setTimeout(advanceToNextPage, 2500);
-	*/
-
+function Instruktion1b(){
+  var audio = new Audio('../../../../../static/public_good_kids/audio/Instruktion1b v2.mp3');
+  audio.addEventListener('loadedmetadata', function() {
+    audio.play();
+    var delay = audio.duration*1000 + 500;
+    setTimeout(showCoins, 2000);
+    setTimeout(highlightCoin, 8300);
+    setTimeout(dehighlightCoin, 12000);
+    setTimeout(Instruktion2a, delay);
+  });
 }
 
-function runInstructions2(){
-  //Instruktion2
-  var audio = new Audio('../../../../../static/public_good_kids/Instruktion2b_v2.mp3');
-  audio.play();
-
-  setTimeout(highlightCoins, 6000);
-  setTimeout(dehighlight, 10000);
-  setTimeout(highlightPots, 10000);
-  setTimeout(rotateOwn, 11000);
-  setTimeout(rotateMain, 13500);
-  setTimeout(dehighlight, 17000);
-  /*setTimeout(contributeOneCoin, 21000);
-  setTimeout(doubleCoin, 24000);
-  setTimeout(othersContribute, 21000);
-  setTimeout(doubleCoins, 24000);
-  setTimeout(repositionAndDelete, 58000);
-	*/
-  setTimeout(contributeOneCoin, 21000);
-  setTimeout(doubleCoin, 24000);
-  setTimeout(distributeFour, 29500);
-  setTimeout(repositionAndDelete, 33000);
-	/*
-  setTimeout(highlightPlayer, 78000);
-  setTimeout(dehighlight, 79500);
-  setTimeout(highlightOtherPlayers, 80000);
-  setTimeout(dehighlight, 81500);
-	*/
-
-  //setTimeout(showConfirm, 12000);
-
-  //call Instruktion3
-  setTimeout(runInstructions3, 41000);
+function Instruktion2a(){
+  var audio = new Audio('../../../../../static/public_good_kids/audio/Instruktion2a.mp3');
+  audio.addEventListener('loadedmetadata', function() {
+    audio.play();
+    var delay = audio.duration*1000 + 500;
+    setTimeout(highlightCoins, 2000);
+    setTimeout(dehighlight, 6000);
+    setTimeout(highlightPots, 6000);
+    setTimeout(rotate.bind(null, 'partnerBottom'), 11500);
+    setTimeout(rotate.bind(null, 'mainpot'), 15000);
+    setTimeout(dehighlight, 20000);
+    setTimeout(KontrollfrageKorb, delay);
+  });
 }
 
-function runInstructions3(){
-  var audio = new Audio('../../../../../static/public_good_kids/Instruktion3_v2.mp3');
-  audio.play();
+// INSTRUCTIONS UPDATED UNTIL HERE ###########################################################
 
-  setTimeout(runBeispiel3, 18000);
+function KontrollfrageKorb(){
+  var audio = new Audio('../../../../../static/public_good_kids/audio/KontrollfrageKorb.mp3');
+  audio.addEventListener('loadedmetadata', function() {
+    audio.play();
+    var delay = audio.duration*1000 + 500;
+    setTimeout(Instruktion2b, delay);
+  });
 }
 
-function runBeispiel3() {
-  var audio = new Audio('../../../../../static/public_good_kids/Beispiel3_v2.mp3');
+function Instruktion2b(){
+  var audio = new Audio('../../../../../static/public_good_kids/audio/Instruktion2b.mp3');
+  audio.addEventListener('loadedmetadata', function() {
+    audio.play();
+    var delay = audio.duration*1000 + 500;
+    setTimeout(contributeOneCoin, 21000);
+    setTimeout(doubleCoin, 24000);
+    setTimeout(distributeFour, 29500);
+    setTimeout(repositionAndDelete, 33000);
+    setTimeout(KontrollfrageGemeinschaftskorb, delay);
+  });
+}
+
+function KontrollfrageGemeinschaftskorb(){
+  var audio = new Audio('../../../../../static/public_good_kids/audio/KontrollfrageGemeinschaftskorb.mp3');
+  audio.addEventListener('loadedmetadata', function() {
+    audio.play();
+    var delay = audio.duration*1000 + 500;
+    setTimeout(Instruktion2c, delay);
+  });
+}
+
+function Instruktion2c(){
+  var audio = new Audio('../../../../../static/public_good_kids/audio/Instruktion2c.mp3');
+  audio.addEventListener('loadedmetadata', function() {
+    audio.play();
+    var delay = audio.duration*1000 + 500;
+    setTimeout(KontrollfrageAufteilung, delay);
+  });
+}
+
+function KontrollfrageAufteilung(){
+  var audio = new Audio('../../../../../static/public_good_kids/audio/KontrollfrageAufteilung.mp3');
+  audio.addEventListener('loadedmetadata', function() {
+    audio.play();
+    var delay = audio.duration*1000 + 500;
+    setTimeout(Instruktion3, delay);
+  });
+}
+
+function Instruktion3(){
+  var audio = new Audio('../../../../../static/public_good_kids/audio/Instruktion3 v2.mp3');
+  audio.addEventListener('loadedmetadata', function() {
+    audio.play();
+    var delay = audio.duration*1000 + 500;
+    setTimeout(Beispiel3, delay);
+  });
+}
+
+function Beispiel3() {
+  var audio = new Audio('../../../../../static/public_good_kids/Beispiel3 v2.mp3');
   audio.play();
   setTimeout(highlightPlayer, 5000);
   setTimeout(highlightClassAlso, 5000, ['owncoins']);
@@ -116,7 +137,6 @@ function runBeispiel3() {
 
 function showPlayers(){
   // shows pots, figures
-  console.log("showPlayers");
   var i;
   var players = document.getElementsByClassName('players');
   for (i=0; i < players.length; i++) {
@@ -126,7 +146,6 @@ function showPlayers(){
 
 function showCoins(){
   // shows coins
-  console.log("showCoins");
   var j;
   var coins = document.getElementsByClassName('coins');
   for (j=0; j < coins.length; j++) {
@@ -136,7 +155,6 @@ function showCoins(){
 
 function highlightCoin() {
   // highlights the middle coin pair
-  console.log("highlightCoin");
   var elem = document.getElementById("cb3");
   elem.style.top = '35%';
   elem.style.left = '30%';
@@ -154,7 +172,6 @@ function highlightCoin() {
 
 function dehighlightCoin() {
   // removes highlighting of middle coin pair
-  console.log("dehighlightCoin");
   var el = document.querySelectorAll('*');
   for(var i=0;i<el.length;i++){
     el[i].style.opacity = '1';
@@ -167,7 +184,6 @@ function dehighlightCoin() {
 
 function highlightCoins() {
   // highlights own 5 coin pairs
-  console.log("highlightCoins");
   var el = document.querySelectorAll('*');
   for(var i=0;i<el.length;i++){
     if (el[i].classList.contains('owncoins') || el[i].hasChildNodes()) {
@@ -180,7 +196,6 @@ function highlightCoins() {
 
 function dehighlight() {
   // changes opacity of all elements to normal (1)
-  console.log("dehighlight");
   var el = document.querySelectorAll('*');
   for(var i=0;i<el.length;i++){
     el[i].style.opacity = '1';
@@ -189,7 +204,6 @@ function dehighlight() {
 
 function highlightPots() {
   // highlights own pot and main pots
-  console.log("highlightPots");
   var el = document.querySelectorAll('*');
   for(var i=0;i<el.length;i++){
     if (el[i].id == 'mainpot' || el[i].id == 'partnerBottom' || el[i].hasChildNodes()) {
@@ -200,16 +214,8 @@ function highlightPots() {
   }
 }
 
-function rotateMain() {
-  console.log("rotateMain");
-  var div = document.getElementById('mainpot');
-  div.style.transition = 'all 2s';
-  div.style.transform = 'rotate(360deg)';
-}
-
-function rotateOwn() {
-  console.log("rotateOwn");
-  var div = document.getElementById('partnerBottom');
+function rotate(elem) {
+  var div = document.getElementById(elem);
   div.style.transition = 'all 2s';
   div.style.transform = 'rotate(360deg)';
 }
@@ -326,7 +332,6 @@ function distributeFour() {
 }
 
 function highlightPlayer() {
-  console.log("highlightPlayer");
   var el = document.querySelectorAll('*');
   for(var i=0;i<el.length;i++){
     if (el[i].classList.contains('highyou') || el[i].hasChildNodes()) {
@@ -338,7 +343,6 @@ function highlightPlayer() {
 }
 
 function highlightOtherPlayers() {
-  console.log("highlightOtherPlayers");
   var el = document.querySelectorAll('*');
   for(var i=0;i<el.length;i++){
     if (el[i].classList.contains('highthem') || el[i].hasChildNodes()) {
@@ -352,7 +356,6 @@ function highlightOtherPlayers() {
 function highlightClassAlso(theClass) {
   /* highlights elements of the specified class,
   while sth else is already higlighted */
-  console.log("highlightClassAlso " + theClass);
   var i;
   var el = document.querySelectorAll('*');
   for(var i=0;i<el.length;i++){
@@ -365,7 +368,6 @@ function highlightClassAlso(theClass) {
 function highlightIdAlso(id) {
   /* highlights the element with the specified id,
   while sth else is already higlighted */
-  console.log("highlightIdAlso " + id);
   document.getElementById(id).style.opacity = '1';
 }
 
@@ -710,7 +712,6 @@ function distributeCoins() {
 
 function highlightClass(theClass) {
   // highlights only the specified class
-  console.log("highlightClass");
   var el = document.querySelectorAll('*');
   for(var i=0;i<el.length;i++){
     if (el[i].classList.contains(theClass)) {
@@ -727,6 +728,5 @@ function advanceToNextPage() {
 
 function showConfirm() {
   // shows confirm button (green tick)
-  console.log("showConfirm");
   document.getElementById('confirmbutton').style.visibility = 'visible';
 }

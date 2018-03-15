@@ -1,3 +1,13 @@
+function showArrows() {
+	// make arrows visible
+	var arrows = document.getElementsByClassName('arrow');
+	var i;
+	for (i=0; i < arrows.length; i++) {
+		arrows[i].style.visibility = 'visible';
+	}
+}
+
+
 function moveToMain(moveAll=false, kStrategy=false) {
 	// moves coin in mainpot
 	try {

@@ -17,8 +17,8 @@
 <script src="{% static "public_good_kids/js/Confirm.js" %}"></script>
 <script src="{% static "public_good_kids/js/MoveCoins.js" %}"></script>
 <script src="{% static "public_good_kids/js/Timer.js" %}"></script>
-<script type="text/javascript">
 
+<script type="text/javascript">
 document.getElementById('arrow-up').addEventListener("click", function() {moveToMain(moveAll=false, kStrategy=false);});
 document.getElementById('arrow-down').addEventListener("click", function() {moveToOwn(moveAll=false, kStrategy=false);});
 window.onload = initialize();
@@ -32,20 +32,21 @@ function initialize() {
 		document.getElementById("timeleft").style.visibility = 'visible';
 		if (typeof coinCountdown === 'undefined') {
 			if({{ roundnumber|json }} == 1) {
-				var audio = new Audio('../../../../../static/public_good_kids/Ueberleitung_v2.mp3');
-			  audio.play();
+				var audio = new Audio('../../../../../static/public_good_kids/audio/Ueberleitung v2.mp3');
+				audio.addEventListener('loadedmetadata', function() {
+					audio.play();
+					var delay = audio.duration*1000 + 500;
+ 					setTimeout(playStart, delay);
+					setTimeout(showArrows, delay);
+					// start timer
+		      setTimeout(decreaseTimer, delay);
+				});
 
-				setTimeout(playStart, 16000);
-				setTimeout(showArrows, 16000);
-
-	      // start timer
-	      setTimeout(decreaseTimer, 16000);
 			} else {
 				playNext();
 				showArrows();
 				decreaseTimer();
 			}
-
 
 			// coin countdown to indicate if all coins are distributed
 			coinCountdown = 1;
@@ -60,22 +61,13 @@ function initialize() {
 }
 
 function playStart() {
-	var audio = new Audio('../../../../../static/public_good_kids/Start_v1.mp3');
+	var audio = new Audio('../../../../../static/public_good_kids/audio/Start v1.mp3');
 	audio.play();
 }
 
 function playNext() {
-	var audio = new Audio('../../../../../static/public_good_kids/Next_v1.mp3');
+	var audio = new Audio('../../../../../static/public_good_kids/audio/Next v2.mp3');
 	audio.play();
-}
-
-function showArrows() {
-	// make arrows visible
-	var arrows = document.getElementsByClassName('arrow');
-	var i;
-	for (i=0; i < arrows.length; i++) {
-		arrows[i].style.visibility = 'visible';
-	}
 }
 
 </script>

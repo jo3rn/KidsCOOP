@@ -41,7 +41,7 @@
 window.onload = changeCSSVisibility();
 
 function changeCSSVisibility() {
-	var audio = new Audio('../../../../../static/public_good_kids/Rundenauszahlung.mp3');
+	var audio = new Audio('../../../../../static/public_good_kids/audio/Rundenauszahlung.mp3');
 	audio.play();
 
 	setTimeout(startDistribution, 6000);
@@ -68,6 +68,7 @@ function startDistribution() {
 			newcoin.style.width = '4%';
 			newcoin.style.transition = 'all 1.5s';
 			container.appendChild(newcoin);
+			console.log(newcoin);
 
 			// determine vertical position of new coin
 			if (m < 5) {

@@ -16,6 +16,7 @@
 <script src="{% static "public_good_kids/js/KStrategy.js" %}"></script>
 <script src="{% static "public_good_kids/js/MoveCoins.js" %}"></script>
 <script src="{% static "public_good_kids/js/Timer.js" %}"></script>
+
 <script type="text/javascript">
 document.getElementById('arrow-up').addEventListener("click", function() {moveToMain(moveAll=true, kStrategy=true);});
 document.getElementById('arrow-down').addEventListener("click", function() {moveToOwn(moveAll=true, kStrategy=true);});
@@ -28,19 +29,11 @@ function initialize() {
 	try {
 		document.getElementById("timeleft").style.visibility = 'visible';
 		if (typeof coinCountdown === 'undefined') {
-			var audio = new Audio('../../../../../static/public_good_kids/KII_strategy_v2.mp3');
+			var audio = new Audio('../../../../../static/public_good_kids/audio/KII_strategy v2.mp3');
 		  audio.play();
 
 			setTimeout(distributeOtherCoins.bind(null, 2), 3000);
 			setTimeout(showArrows, 15000);
-			function showArrows() {
-				// make arrows visible
-				var arrows = document.getElementsByClassName('arrow');
-				var i;
-				for (i=0; i < arrows.length; i++) {
-					arrows[i].style.visibility = 'visible';
-				}
-			}
 
       // start timer
       setTimeout(decreaseTimer, 15000);
