@@ -17,7 +17,11 @@
   width: 800px;
   height: 800px;
   position: relative;
-  border: solid black;
+}
+
+#overlay {
+  /* nur für Kontrollfrage relevant */
+  display: none;
 }
 
 .partner {
@@ -61,7 +65,7 @@
   box-shadow: 10px 10px rgb(83,105,156);
 }
 
-#mainpot {
+.mainpot {
   /* Gemeinschaftsgeldtopf in der Mitte */
   border-radius: 15%;
   width: 30%;

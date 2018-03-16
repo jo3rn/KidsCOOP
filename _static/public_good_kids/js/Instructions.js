@@ -1,19 +1,32 @@
+/*
+#####
+##### EACH OF THE FOLLOWING FUNCTIONS:
+##### - RUNS ONE AUDIO FILE
+##### - RUNS HELPER FUNCTIONS FOR STUFF THAT IS EXPLAINED IN THE AUDIO FILE
+##### - TRIGGERS THE NEXT AUDIO FILE FUNCTION
+#####
+ */
+
+function Instruktion1a(){
+  KontrollfrageGemeinschaftskorb();
+}
+/**
 function Instruktion1a(){
   var audio = new Audio('../../../../../static/public_good_kids/audio/Instruktion1a.mp3');
   audio.addEventListener('loadedmetadata', function() {
     audio.play();
     var delay = audio.duration*1000 + 500;
-    setTimeout(showPlayers, 4300);
+    setTimeout(showClass.bind(null, 'players'), 4300);
     setTimeout(Instruktion1b, delay);
   });
 }
-
+*/
 function Instruktion1b(){
   var audio = new Audio('../../../../../static/public_good_kids/audio/Instruktion1b v2.mp3');
   audio.addEventListener('loadedmetadata', function() {
     audio.play();
     var delay = audio.duration*1000 + 500;
-    setTimeout(showCoins, 2000);
+    setTimeout(showClass.bind(null, 'coins'), 2000);
     setTimeout(highlightCoin, 8300);
     setTimeout(dehighlightCoin, 12000);
     setTimeout(Instruktion2a, delay);
@@ -25,7 +38,7 @@ function Instruktion2a(){
   audio.addEventListener('loadedmetadata', function() {
     audio.play();
     var delay = audio.duration*1000 + 500;
-    setTimeout(highlightCoins, 2000);
+    setTimeout(highlightClass.bind(null, 'owncoins'), 2000);
     setTimeout(dehighlight, 6000);
     setTimeout(highlightPots, 6000);
     setTimeout(rotate.bind(null, 'partnerBottom'), 11500);
@@ -63,8 +76,39 @@ function KontrollfrageGemeinschaftskorb(){
   var audio = new Audio('../../../../../static/public_good_kids/audio/KontrollfrageGemeinschaftskorb.mp3');
   audio.addEventListener('loadedmetadata', function() {
     audio.play();
+    document.getElementById("overlay").style.display = "block";
+    // correct answer
+    setTimeout(appearCoin.bind(null, "18%", "65%", "61%"), 5100);
+    setTimeout(appearCoin.bind(null, "18%", "61%", "54%"), 7000);
+    setTimeout(rotate.bind(null, 'mainpotCorrect'), 7000);
+    // wrong answer
+    setTimeout(appearCoin.bind(null, "78%", "65%", "61%"), 10000);
+    setTimeout(appearCoin.bind(null, "69%", "61%", "54%"), 12200);
+    setTimeout(appearCoin.bind(null, "75%", "61%", "54%"), 12200);
+    setTimeout(appearCoin.bind(null, "81%", "61%", "54%"), 12200);
+    setTimeout(appearCoin.bind(null, "87%", "61%", "54%"), 12200);
+    setTimeout(rotate.bind(null, 'mainpotWrong'), 12200);
+    // add click event to pots
+    var delay = audio.duration*1000 - 500;
+    setTimeout(addKG, delay);
+  });
+}
+
+function RichtigeAntwort(){
+  var audio = new Audio('../../../../../static/public_good_kids/audio/RichtigeAntwort.mp3');
+  audio.addEventListener('loadedmetadata', function() {
+    audio.play();
     var delay = audio.duration*1000 + 500;
-    setTimeout(Instruktion2c, delay);
+    //setTimeout(Instruktion2c, delay);
+  });
+}
+
+function FalscheAntwort2(){
+  var audio = new Audio('../../../../../static/public_good_kids/audio/FalscheAntwort2.mp3');
+  audio.addEventListener('loadedmetadata', function() {
+    audio.play();
+    var delay = audio.duration*1000 + 500;
+    //setTimeout(Instruktion2c, delay);
   });
 }
 
@@ -98,7 +142,7 @@ function Instruktion3(){
 function Beispiel3() {
   var audio = new Audio('../../../../../static/public_good_kids/Beispiel3 v2.mp3');
   audio.play();
-  setTimeout(highlightPlayer, 5000);
+  setTimeout(highlightClass.bind(null, 'highyou'), 5000);
   setTimeout(highlightClassAlso, 5000, ['owncoins']);
 	setTimeout(highlightIdAlso, 9000, ['partnerBottom']);
   setTimeout(move2ToOwn, 9000);
@@ -135,21 +179,20 @@ function Beispiel3() {
 }
 
 
-function showPlayers(){
-  // shows pots, figures
-  var i;
-  var players = document.getElementsByClassName('players');
-  for (i=0; i < players.length; i++) {
-    players[i].classList.remove('hidden');
-  }
-}
+/*
+#####
+#####
+##### ALL FOLLOWING FUNCTIONS ARE HELPER FUNCTIONS
+##### FOR THE PRECEDING AUDIO FILE FUNCTIONS
+#####
+#####
+ */
 
-function showCoins(){
-  // shows coins
-  var j;
-  var coins = document.getElementsByClassName('coins');
-  for (j=0; j < coins.length; j++) {
-    coins[j].classList.remove('hidden');
+function showClass(theClass){
+  var i;
+  var theClass = document.getElementsByClassName(theClass);
+  for (i=0; i < theClass.length; i++) {
+    theClass[i].classList.remove('hidden');
   }
 }
 
@@ -182,11 +225,12 @@ function dehighlightCoin() {
   elem.style.width = '4%';
 }
 
-function highlightCoins() {
-  // highlights own 5 coin pairs
+function highlightClass(theClass) {
+  /* highlights elements of the specified class,
+  by lessening the opacity of everything else */
   var el = document.querySelectorAll('*');
   for(var i=0;i<el.length;i++){
-    if (el[i].classList.contains('owncoins') || el[i].hasChildNodes()) {
+    if (el[i].classList.contains(theClass) || el[i].hasChildNodes()) {
 
     } else {
     el[i].style.opacity = '0.2';
@@ -195,7 +239,7 @@ function highlightCoins() {
 }
 
 function dehighlight() {
-  // changes opacity of all elements to normal (1)
+  // resets opacity of all elements to normal (1)
   var el = document.querySelectorAll('*');
   for(var i=0;i<el.length;i++){
     el[i].style.opacity = '1';
@@ -329,28 +373,6 @@ function distributeFour() {
   cb3.style.left = '47%';
   cb3.style.top = '85%';
   cb3.style.clipPath = "inset(0% 0% 0% 50%)";
-}
-
-function highlightPlayer() {
-  var el = document.querySelectorAll('*');
-  for(var i=0;i<el.length;i++){
-    if (el[i].classList.contains('highyou') || el[i].hasChildNodes()) {
-
-    } else {
-    el[i].style.opacity = '0.2';
-    }
-  }
-}
-
-function highlightOtherPlayers() {
-  var el = document.querySelectorAll('*');
-  for(var i=0;i<el.length;i++){
-    if (el[i].classList.contains('highthem') || el[i].hasChildNodes()) {
-
-    } else {
-    el[i].style.opacity = '0.2';
-    }
-  }
 }
 
 function highlightClassAlso(theClass) {
@@ -710,18 +732,6 @@ function distributeCoins() {
 	}
 }
 
-function highlightClass(theClass) {
-  // highlights only the specified class
-  var el = document.querySelectorAll('*');
-  for(var i=0;i<el.length;i++){
-    if (el[i].classList.contains(theClass)) {
-
-    } else {
-    el[i].style.opacity = '0.2';
-    }
-  }
-}
-
 function advanceToNextPage() {
   document.getElementById("form").submit();
 }
@@ -729,4 +739,33 @@ function advanceToNextPage() {
 function showConfirm() {
   // shows confirm button (green tick)
   document.getElementById('confirmbutton').style.visibility = 'visible';
+}
+
+function appearCoin(left, top, top2){
+  var newcoin = document.createElement('img');
+  newcoin.src = '../../../../../static/public_good_kids/img/twocoins.png';
+  newcoin.classList.add('control2');
+  newcoin.style.position = 'absolute';
+  newcoin.style.width = '4%';
+  newcoin.style.transition = 'all 1.5s';
+  newcoin.style.left = left;
+  newcoin.style.top = top;
+  document.getElementById("overlay").appendChild(newcoin);
+  setTimeout(function(){newcoin.style.top = top2;}, 10);
+}
+
+function addKG() {
+  document.getElementById("mainpotCorrect").addEventListener("click", evalKG);
+  document.getElementById("mainpotWrong").addEventListener("click", evalKG);
+}
+
+function evalKG(){
+  document.getElementById("mainpotCorrect").removeEventListener("click", evalKG);
+  document.getElementById("mainpotWrong").removeEventListener("click", evalKG);
+  document.getElementById("overlay").style.display = "none";
+  if (this.id == "mainpotCorrect") {
+    RichtigeAntwort();
+  } else if (this.id == "mainpotWrong") {
+    FalscheAntwort2();
+  }
 }
