@@ -8,19 +8,16 @@
  */
 
 function Instruktion1a(){
-  KontrollfrageGemeinschaftskorb();
-}
-/**
-function Instruktion1a(){
   var audio = new Audio('../../../../../static/public_good_kids/audio/Instruktion1a.mp3');
   audio.addEventListener('loadedmetadata', function() {
     audio.play();
     var delay = audio.duration*1000 + 500;
     setTimeout(showClass.bind(null, 'players'), 4300);
-    setTimeout(Instruktion1b, delay);
+    //setTimeout(Instruktion1b, delay);
+    setTimeout(KontrollfrageKorb, delay);
   });
 }
-*/
+
 function Instruktion1b(){
   var audio = new Audio('../../../../../static/public_good_kids/audio/Instruktion1b v2.mp3');
   audio.addEventListener('loadedmetadata', function() {
@@ -48,16 +45,45 @@ function Instruktion2a(){
   });
 }
 
-// INSTRUCTIONS UPDATED UNTIL HERE ###########################################################
-
 function KontrollfrageKorb(){
   var audio = new Audio('../../../../../static/public_good_kids/audio/KontrollfrageKorb.mp3');
   audio.addEventListener('loadedmetadata', function() {
     audio.play();
+    var delay = audio.duration*1000 - 500;
+    setTimeout(addKK, delay);
+  });
+}
+
+function FalscheAntwort1(){
+  var audio = new Audio('../../../../../static/public_good_kids/audio/FalscheAntwort1.mp3');
+  audio.addEventListener('loadedmetadata', function() {
+    audio.play();
+    setTimeout(rotate.bind(null, 'partnerBottom'), 4000);
     var delay = audio.duration*1000 + 500;
     setTimeout(Instruktion2b, delay);
   });
 }
+
+function RichtigeAntwort(question){
+  var audio = new Audio('../../../../../static/public_good_kids/audio/RichtigeAntwort.mp3');
+  audio.addEventListener('loadedmetadata', function() {
+    audio.play();
+    var delay = audio.duration*1000 + 500;
+    switch(question){
+      case 1:
+        setTimeout(Instruktion2b, delay);
+        break;
+      case 2:
+        setTimeout(Instruktion2c, delay);
+        break;
+      case 3:
+        setTimeout(Instruktion3, delay);
+        break;
+    }
+  });
+}
+
+// INSTRUCTIONS UPDATED UNTIL HERE ###########################################################
 
 function Instruktion2b(){
   var audio = new Audio('../../../../../static/public_good_kids/audio/Instruktion2b.mp3');
@@ -94,21 +120,12 @@ function KontrollfrageGemeinschaftskorb(){
   });
 }
 
-function RichtigeAntwort(){
-  var audio = new Audio('../../../../../static/public_good_kids/audio/RichtigeAntwort.mp3');
-  audio.addEventListener('loadedmetadata', function() {
-    audio.play();
-    var delay = audio.duration*1000 + 500;
-    //setTimeout(Instruktion2c, delay);
-  });
-}
-
 function FalscheAntwort2(){
   var audio = new Audio('../../../../../static/public_good_kids/audio/FalscheAntwort2.mp3');
   audio.addEventListener('loadedmetadata', function() {
     audio.play();
     var delay = audio.duration*1000 + 500;
-    //setTimeout(Instruktion2c, delay);
+    setTimeout(Instruktion2c, delay);
   });
 }
 
@@ -741,6 +758,36 @@ function showConfirm() {
   document.getElementById('confirmbutton').style.visibility = 'visible';
 }
 
+function addKK() {
+  document.getElementById("partnerBottom").addEventListener("click", evalKK);
+  document.getElementById("partnerRight").addEventListener("click", evalKK);
+  document.getElementById("partnerTop").addEventListener("click", evalKK);
+  document.getElementById("partnerLeft").addEventListener("click", evalKK);
+  document.getElementById("mainpot").addEventListener("click", evalKK);
+  document.getElementById("partnerBottom").style.zIndex = 1;
+  document.getElementById("partnerRight").style.zIndex = 1;
+  document.getElementById("partnerTop").style.zIndex = 1;
+  document.getElementById("partnerLeft").style.zIndex = 1;
+}
+
+function evalKK(){
+  document.getElementById("partnerBottom").removeEventListener("click", evalKK);
+  document.getElementById("partnerRight").removeEventListener("click", evalKK);
+  document.getElementById("partnerTop").removeEventListener("click", evalKK);
+  document.getElementById("partnerLeft").removeEventListener("click", evalKK);
+  document.getElementById("mainpot").removeEventListener("click", evalKK);
+  document.getElementById("partnerBottom").style.zIndex = -2;
+  document.getElementById("partnerRight").style.zIndex = -2;
+  document.getElementById("partnerTop").style.zIndex = -2;
+  document.getElementById("partnerLeft").style.zIndex = -2;
+
+  if (this.id == "partnerBottom") {
+    RichtigeAntwort(1);
+  } else {
+    FalscheAntwort1();
+  }
+}
+
 function appearCoin(left, top, top2){
   var newcoin = document.createElement('img');
   newcoin.src = '../../../../../static/public_good_kids/img/twocoins.png';
@@ -764,7 +811,7 @@ function evalKG(){
   document.getElementById("mainpotWrong").removeEventListener("click", evalKG);
   document.getElementById("overlay").style.display = "none";
   if (this.id == "mainpotCorrect") {
-    RichtigeAntwort();
+    RichtigeAntwort(2);
   } else if (this.id == "mainpotWrong") {
     FalscheAntwort2();
   }
