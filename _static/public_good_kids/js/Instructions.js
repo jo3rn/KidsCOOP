@@ -13,8 +13,7 @@ function Instruktion1a(){
     audio.play();
     var delay = audio.duration*1000 + 500;
     setTimeout(showClass.bind(null, 'players'), 4300);
-    //setTimeout(Instruktion1b, delay);
-    setTimeout(KontrollfrageKorb, delay);
+    setTimeout(Instruktion1b, delay);
   });
 }
 
@@ -26,7 +25,8 @@ function Instruktion1b(){
     setTimeout(showClass.bind(null, 'coins'), 2000);
     setTimeout(highlightCoin, 8300);
     setTimeout(dehighlightCoin, 12000);
-    setTimeout(Instruktion2a, delay);
+    //setTimeout(Instruktion2a, delay);
+    setTimeout(Instruktion2b, delay);
   });
 }
 
@@ -83,17 +83,15 @@ function RichtigeAntwort(question){
   });
 }
 
-// INSTRUCTIONS UPDATED UNTIL HERE ###########################################################
-
 function Instruktion2b(){
   var audio = new Audio('../../../../../static/public_good_kids/audio/Instruktion2b.mp3');
   audio.addEventListener('loadedmetadata', function() {
     audio.play();
     var delay = audio.duration*1000 + 500;
-    setTimeout(contributeOneCoin, 21000);
-    setTimeout(doubleCoin, 24000);
-    setTimeout(distributeFour, 29500);
-    setTimeout(repositionAndDelete, 33000);
+    setTimeout(contributeOneCoin, 33200);
+    setTimeout(doubleCoin, 35000);
+    setTimeout(distributeFour, 46500);
+    setTimeout(repositionAndDelete, delay);
     setTimeout(KontrollfrageGemeinschaftskorb, delay);
   });
 }
@@ -128,6 +126,8 @@ function FalscheAntwort2(){
     setTimeout(Instruktion2c, delay);
   });
 }
+
+// INSTRUCTIONS UPDATED UNTIL HERE ###########################################################
 
 function Instruktion2c(){
   var audio = new Audio('../../../../../static/public_good_kids/audio/Instruktion2c.mp3');
@@ -764,6 +764,7 @@ function addKK() {
   document.getElementById("partnerTop").addEventListener("click", evalKK);
   document.getElementById("partnerLeft").addEventListener("click", evalKK);
   document.getElementById("mainpot").addEventListener("click", evalKK);
+  // adjust z-index of pots, otherwise they are not clickable
   document.getElementById("partnerBottom").style.zIndex = 1;
   document.getElementById("partnerRight").style.zIndex = 1;
   document.getElementById("partnerTop").style.zIndex = 1;
@@ -776,6 +777,7 @@ function evalKK(){
   document.getElementById("partnerTop").removeEventListener("click", evalKK);
   document.getElementById("partnerLeft").removeEventListener("click", evalKK);
   document.getElementById("mainpot").removeEventListener("click", evalKK);
+  // readjust z-index of pots, so that they go in the background
   document.getElementById("partnerBottom").style.zIndex = -2;
   document.getElementById("partnerRight").style.zIndex = -2;
   document.getElementById("partnerTop").style.zIndex = -2;
