@@ -26,7 +26,7 @@ function Instruktion1b(){
     setTimeout(highlightCoin, 8300);
     setTimeout(dehighlightCoin, 12000);
     //setTimeout(Instruktion2a, delay);
-    setTimeout(Instruktion2b, delay);
+    setTimeout(Instruktion2c, delay);
   });
 }
 
@@ -127,16 +127,26 @@ function FalscheAntwort2(){
   });
 }
 
-// INSTRUCTIONS UPDATED UNTIL HERE ###########################################################
-
 function Instruktion2c(){
   var audio = new Audio('../../../../../static/public_good_kids/audio/Instruktion2c.mp3');
   audio.addEventListener('loadedmetadata', function() {
     audio.play();
+    setTimeout(highlightClass.bind(null, 'owncoins'), 7000);
+    setTimeout(dehighlight, 9700);
+    setTimeout(rotate.bind(null, 'partnerBottom'), 11000);
+    setTimeout(rotate.bind(null, 'mainpot'), 15000);
+    setTimeout(contributeOneCoin, 24000);
+    setTimeout(doubleCoin, 27000);
+    setTimeout(distributeFour, 33500);
+    setTimeout(rotate.bind(null, 'partnerBottom'), 39000);
+    setTimeout(rotate.bind(null, 'mainpot'), 44000);
     var delay = audio.duration*1000 + 500;
-    setTimeout(KontrollfrageAufteilung, delay);
+    setTimeout(repositionAndDelete, delay);
+    //setTimeout(KontrollfrageAufteilung, delay);
   });
 }
+
+// INSTRUCTIONS UPDATED UNTIL HERE ###########################################################
 
 function KontrollfrageAufteilung(){
   var audio = new Audio('../../../../../static/public_good_kids/audio/KontrollfrageAufteilung.mp3');
