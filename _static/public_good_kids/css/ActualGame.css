@@ -19,8 +19,8 @@
   position: relative;
 }
 
-#overlay {
-  /* nur für Kontrollfrage relevant */
+#overlay, #overlayOpaque, #overlayWrong, #overlayCorrect {
+  /* nur für Kontrollfragen relevant */
   display: none;
 }
 
@@ -34,7 +34,7 @@
   pointer-events: auto;
 }
 
-#partnerLeft {
+#partnerLeft, .overlayLeft {
   /* Geldtopf links */
   background-color: rgb(255,255,1);
   top: 40%;
@@ -42,7 +42,7 @@
   box-shadow: 10px 10px rgb(204,204,0);
 }
 
-#partnerTop {
+#partnerTop, .overlayTop {
   /* Geldtopf oben */
   background-color: rgb(98,190,1);
   top: 2.5%;
@@ -50,7 +50,7 @@
   box-shadow: 10px 10px rgb(78,152,1);
 }
 
-#partnerRight {
+#partnerRight, .overlayRight {
   /* Geldtopf rechts */
   background-color: rgb(192,0,0);
   top: 40%;
@@ -58,7 +58,7 @@
   box-shadow: 10px 10px rgb(153,0,0);
 }
 
-#partnerBottom {
+#partnerBottom, .overlayBottom {
   /* Geldtopf unten */
   left: 40%;
   bottom: 2.5%;

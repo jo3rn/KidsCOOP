@@ -18,8 +18,8 @@
   visibility: hidden;
 }
 
-#overlay {
-    position: relative;
+#overlay, #overlayOpaque, #overlayWrong, #overlayCorrect {
+    position: absolute;
     display: none;
     width: 800px;
     height: 800px;
@@ -29,6 +29,20 @@
     bottom: 0;
     background-color: rgba(255,255,255,0.9);
     z-index: 2;
+    transition: all 1.5s;
+}
+
+#overlayOpaque {
+  background-color: rgba(255,255,255,1);
+}
+
+
+#overlayCorrect {
+  z-index: 3;
+}
+
+#overlayWrong {
+  z-index: 4;
 }
 
 #mainpotCorrect {
@@ -41,4 +55,9 @@
   left: 65%;
   top: 35%;
   cursor: pointer;
+}
+
+.rotated {
+  transition: all 1s;
+  transform: rotate(360deg);
 }

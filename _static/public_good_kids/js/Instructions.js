@@ -25,8 +25,7 @@ function Instruktion1b(){
     setTimeout(showClass.bind(null, 'coins'), 2000);
     setTimeout(highlightCoin, 8300);
     setTimeout(dehighlightCoin, 12000);
-    //setTimeout(Instruktion2a, delay);
-    setTimeout(Instruktion2c, delay);
+    setTimeout(Instruktion2a, delay);
   });
 }
 
@@ -102,15 +101,15 @@ function KontrollfrageGemeinschaftskorb(){
     audio.play();
     document.getElementById("overlay").style.display = "block";
     // correct answer
-    setTimeout(appearCoin.bind(null, "18%", "65%", "61%"), 5100);
-    setTimeout(appearCoin.bind(null, "18%", "61%", "54%"), 7000);
+    setTimeout(appearCoin.bind(null, "18%", "18%", "65%", "61%", "overlay", 10), 5100);
+    setTimeout(appearCoin.bind(null, "18%", "18%", "61%", "54%", "overlay", 10), 7000);
     setTimeout(rotate.bind(null, 'mainpotCorrect'), 7000);
     // wrong answer
-    setTimeout(appearCoin.bind(null, "78%", "65%", "61%"), 10000);
-    setTimeout(appearCoin.bind(null, "69%", "61%", "54%"), 12200);
-    setTimeout(appearCoin.bind(null, "75%", "61%", "54%"), 12200);
-    setTimeout(appearCoin.bind(null, "81%", "61%", "54%"), 12200);
-    setTimeout(appearCoin.bind(null, "87%", "61%", "54%"), 12200);
+    setTimeout(appearCoin.bind(null, "78%", "78%", "65%", "61%", "overlay", 10), 10000);
+    setTimeout(appearCoin.bind(null, "69%", "69%", "61%", "54%", "overlay", 10), 12200);
+    setTimeout(appearCoin.bind(null, "75%", "75%", "61%", "54%", "overlay", 10), 12200);
+    setTimeout(appearCoin.bind(null, "81%", "81%", "61%", "54%", "overlay", 10), 12200);
+    setTimeout(appearCoin.bind(null, "87%", "87%", "61%", "54%", "overlay", 10), 12200);
     setTimeout(rotate.bind(null, 'mainpotWrong'), 12200);
     // add click event to pots
     var delay = audio.duration*1000 - 500;
@@ -142,20 +141,43 @@ function Instruktion2c(){
     setTimeout(rotate.bind(null, 'mainpot'), 44000);
     var delay = audio.duration*1000 + 500;
     setTimeout(repositionAndDelete, delay);
-    //setTimeout(KontrollfrageAufteilung, delay);
+    setTimeout(KontrollfrageAufteilung, delay);
   });
 }
 
-// INSTRUCTIONS UPDATED UNTIL HERE ###########################################################
-
 function KontrollfrageAufteilung(){
   var audio = new Audio('../../../../../static/public_good_kids/audio/KontrollfrageAufteilung.mp3');
+  audio.addEventListener('loadedmetadata', function() {
+    audio.play();
+    setTimeout(setOverlay, 2000);
+
+    appearCoin("45%", "7.5%", "44%", "44%", "overlayWrong", 10000);
+    appearCoin("45%", "7.5%", "55%", "55%", "overlayWrong", 10000);
+    appearCoin("51%", "13.5%", "44%", "44%", "overlayWrong", 10000);
+    appearCoin("51%", "13.5%", "55%", "55%", "overlayWrong", 10000);
+    setTimeout(function(){document.getElementById("overlayWrong").style.borderStyle = "solid"}, 8000);
+
+    appearCoin("45%", "85.5%", "44%", "49%", "overlayCorrect", 22000);
+    appearCoin("45%", "48%", "55%", "10.5%", "overlayCorrect", 22000);
+    appearCoin("51%", "10.5%", "44%", "49%", "overlayCorrect", 22000);
+    appearCoin("51%", "48%", "55%", "85.5%", "overlayCorrect", 22000);
+    setTimeout(function(){document.getElementById("overlayCorrect").style.borderStyle = "solid"}, 20000);
+
+    var delay = audio.duration*1000 - 1000;
+    setTimeout(addKA, delay);
+  });
+}
+
+function FalscheAntwort3(){
+  var audio = new Audio('../../../../../static/public_good_kids/audio/FalscheAntwort3.mp3');
   audio.addEventListener('loadedmetadata', function() {
     audio.play();
     var delay = audio.duration*1000 + 500;
     setTimeout(Instruktion3, delay);
   });
 }
+
+// INSTRUCTIONS UPDATED UNTIL HERE ###########################################################
 
 function Instruktion3(){
   var audio = new Audio('../../../../../static/public_good_kids/audio/Instruktion3 v2.mp3');
@@ -287,8 +309,8 @@ function highlightPots() {
 
 function rotate(elem) {
   var div = document.getElementById(elem);
-  div.style.transition = 'all 2s';
-  div.style.transform = 'rotate(360deg)';
+  div.classList.add('rotated');
+  setTimeout(function(){div.classList.remove('rotated');}, 2000);
 }
 
 function contributeOneCoin() {
@@ -800,7 +822,7 @@ function evalKK(){
   }
 }
 
-function appearCoin(left, top, top2){
+function appearCoin(left, left2, top, top2, div, millisecs){
   var newcoin = document.createElement('img');
   newcoin.src = '../../../../../static/public_good_kids/img/twocoins.png';
   newcoin.classList.add('control2');
@@ -809,8 +831,9 @@ function appearCoin(left, top, top2){
   newcoin.style.transition = 'all 1.5s';
   newcoin.style.left = left;
   newcoin.style.top = top;
-  document.getElementById("overlay").appendChild(newcoin);
-  setTimeout(function(){newcoin.style.top = top2;}, 10);
+  document.getElementById(div).appendChild(newcoin);
+  setTimeout(function(){newcoin.style.top = top2;}, millisecs);
+  setTimeout(function(){newcoin.style.left = left2;}, millisecs);
 }
 
 function addKG() {
@@ -827,4 +850,30 @@ function evalKG(){
   } else if (this.id == "mainpotWrong") {
     FalscheAntwort2();
   }
+}
+
+function addKA() {
+  document.getElementById("overlayWrong").addEventListener("click", evalKA);
+  document.getElementById("overlayCorrect").addEventListener("click", evalKA);
+}
+
+function evalKA(){
+  document.getElementById("overlayWrong").removeEventListener("click", evalKA);
+  document.getElementById("overlayCorrect").removeEventListener("click", evalKA);
+  document.getElementById("overlayOpaque").style.display = "none";
+  document.getElementById("overlayWrong").style.display = "none";
+  document.getElementById("overlayCorrect").style.display = "none";
+  if (this.id == "overlayCorrect") {
+    RichtigeAntwort(3);
+  } else if (this.id == "overlayWrong") {
+    FalscheAntwort3();
+  }
+}
+
+function setOverlay(){
+  document.getElementById("overlayOpaque").style.display = "block";
+  document.getElementById("overlayWrong").style.display = "block";
+  document.getElementById("overlayCorrect").style.display = "block";
+  setTimeout(function(){document.getElementById("overlayWrong").style.transform = "matrix(0.6, 0, 0, 0.6, -300, 0)";}, 10);
+  setTimeout(function(){document.getElementById("overlayCorrect").style.transform = "matrix(0.6, 0, 0, 0.6, 300, 0)";}, 20);
 }
