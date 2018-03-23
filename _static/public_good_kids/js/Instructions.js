@@ -8,7 +8,7 @@
  */
 
 function Instruktion1a(){
-  var audio = new Audio('../../../../../static/public_good_kids/audio/Instruktion1a.mp3');
+  var audio = getAudio('Instruktion1a.mp3');
   audio.addEventListener('loadedmetadata', function() {
     audio.play();
     var delay = audio.duration*1000 + 500;
@@ -18,7 +18,7 @@ function Instruktion1a(){
 }
 
 function Instruktion1b(){
-  var audio = new Audio('../../../../../static/public_good_kids/audio/Instruktion1b v2.mp3');
+  var audio = getAudio('Instruktion1b v2.mp3');
   audio.addEventListener('loadedmetadata', function() {
     audio.play();
     var delay = audio.duration*1000 + 500;
@@ -30,7 +30,7 @@ function Instruktion1b(){
 }
 
 function Instruktion2a(){
-  var audio = new Audio('../../../../../static/public_good_kids/audio/Instruktion2a.mp3');
+  var audio = getAudio('Instruktion2a.mp3');
   audio.addEventListener('loadedmetadata', function() {
     audio.play();
     var delay = audio.duration*1000 + 500;
@@ -45,7 +45,7 @@ function Instruktion2a(){
 }
 
 function KontrollfrageKorb(){
-  var audio = new Audio('../../../../../static/public_good_kids/audio/KontrollfrageKorb.mp3');
+  var audio = getAudio('KontrollfrageKorb.mp3');
   audio.addEventListener('loadedmetadata', function() {
     audio.play();
     var delay = audio.duration*1000 - 500;
@@ -54,7 +54,7 @@ function KontrollfrageKorb(){
 }
 
 function FalscheAntwort1(){
-  var audio = new Audio('../../../../../static/public_good_kids/audio/FalscheAntwort1.mp3');
+  var audio = getAudio('FalscheAntwort1.mp3');
   audio.addEventListener('loadedmetadata', function() {
     audio.play();
     setTimeout(rotate.bind(null, 'partnerBottom'), 4000);
@@ -64,7 +64,7 @@ function FalscheAntwort1(){
 }
 
 function RichtigeAntwort(question){
-  var audio = new Audio('../../../../../static/public_good_kids/audio/RichtigeAntwort.mp3');
+  var audio = getAudio('RichtigeAntwort.mp3');
   audio.addEventListener('loadedmetadata', function() {
     audio.play();
     var delay = audio.duration*1000 + 500;
@@ -83,7 +83,7 @@ function RichtigeAntwort(question){
 }
 
 function Instruktion2b(){
-  var audio = new Audio('../../../../../static/public_good_kids/audio/Instruktion2b.mp3');
+  var audio = getAudio('Instruktion2b.mp3');
   audio.addEventListener('loadedmetadata', function() {
     audio.play();
     var delay = audio.duration*1000 + 500;
@@ -96,7 +96,7 @@ function Instruktion2b(){
 }
 
 function KontrollfrageGemeinschaftskorb(){
-  var audio = new Audio('../../../../../static/public_good_kids/audio/KontrollfrageGemeinschaftskorb.mp3');
+  var audio = getAudio('KontrollfrageGemeinschaftskorb.mp3');
   audio.addEventListener('loadedmetadata', function() {
     audio.play();
     document.getElementById("overlay").style.display = "block";
@@ -118,7 +118,7 @@ function KontrollfrageGemeinschaftskorb(){
 }
 
 function FalscheAntwort2(){
-  var audio = new Audio('../../../../../static/public_good_kids/audio/FalscheAntwort2.mp3');
+  var audio = getAudio('FalscheAntwort2.mp3');
   audio.addEventListener('loadedmetadata', function() {
     audio.play();
     var delay = audio.duration*1000 + 500;
@@ -127,7 +127,7 @@ function FalscheAntwort2(){
 }
 
 function Instruktion2c(){
-  var audio = new Audio('../../../../../static/public_good_kids/audio/Instruktion2c.mp3');
+  var audio = getAudio('Instruktion2c.mp3');
   audio.addEventListener('loadedmetadata', function() {
     audio.play();
     setTimeout(highlightClass.bind(null, 'owncoins'), 7000);
@@ -146,7 +146,7 @@ function Instruktion2c(){
 }
 
 function KontrollfrageAufteilung(){
-  var audio = new Audio('../../../../../static/public_good_kids/audio/KontrollfrageAufteilung.mp3');
+  var audio = getAudio('KontrollfrageAufteilung.mp3');
   audio.addEventListener('loadedmetadata', function() {
     audio.play();
     setTimeout(setOverlay, 2000);
@@ -169,7 +169,7 @@ function KontrollfrageAufteilung(){
 }
 
 function FalscheAntwort3(){
-  var audio = new Audio('../../../../../static/public_good_kids/audio/FalscheAntwort3.mp3');
+  var audio = getAudio('FalscheAntwort3.mp3');
   audio.addEventListener('loadedmetadata', function() {
     audio.play();
     var delay = audio.duration*1000 + 500;
@@ -180,7 +180,7 @@ function FalscheAntwort3(){
 // INSTRUCTIONS UPDATED UNTIL HERE ###########################################################
 
 function Instruktion3(){
-  var audio = new Audio('../../../../../static/public_good_kids/audio/Instruktion3 v2.mp3');
+  var audio = getAudio('Instruktion3 v2.mp3');
   audio.addEventListener('loadedmetadata', function() {
     audio.play();
     var delay = audio.duration*1000 + 500;
@@ -189,7 +189,7 @@ function Instruktion3(){
 }
 
 function Beispiel3() {
-  var audio = new Audio('../../../../../static/public_good_kids/Beispiel3 v2.mp3');
+  var audio = getAudio('Beispiel3 v2.mp3');
   audio.play();
   setTimeout(highlightClass.bind(null, 'highyou'), 5000);
   setTimeout(highlightClassAlso, 5000, ['owncoins']);
@@ -236,6 +236,10 @@ function Beispiel3() {
 #####
 #####
  */
+
+ function getAudio(file){
+   return new Audio ('../../../../../static/public_good_kids/audio/' + file);
+ }
 
 function showClass(theClass){
   var i;
