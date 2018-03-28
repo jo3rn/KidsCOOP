@@ -16,7 +16,7 @@ this is a public good game for kids in elementary school
 class Constants(BaseConstants):
     name_in_url = 'pgk'
     players_per_group = 4
-    num_rounds = 8
+    num_rounds = 9
 
     endowment = 5
     multiplier = 2

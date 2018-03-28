@@ -56,7 +56,7 @@ class ClassicPublicGood(Page):
         return {
             'gameTreatment'     : 'PublicGoods_' + str(self.round_number),
             'roundnumber'       : self.round_number,
-            'partLabel'           : self.participant.label,
+            'partLabel'         : self.participant.label,
         }
 
 
@@ -67,7 +67,7 @@ class UKStrategy(Page):
     def vars_for_template(self):
         return {
             'gameTreatment'     : 'UKStrategy',
-            'partLabel'           : self.participant.label,
+            'partLabel'         : self.participant.label,
         }
 
     def is_displayed(self):
@@ -81,7 +81,7 @@ class K0Strategy(Page):
     def vars_for_template(self):
         return {
             'gameTreatment'     : 'K0Strategy',
-            'partLabel'           : self.participant.label,
+            'partLabel'         : self.participant.label,
         }
 
     def is_displayed(self):
@@ -98,7 +98,7 @@ class K1Strategy(Page):
     def vars_for_template(self):
         return {
             'gameTreatment'     : 'K1Strategy',
-            'partLabel'           : self.participant.label,
+            'partLabel'         : self.participant.label,
         }
 
     def is_displayed(self):
@@ -115,7 +115,7 @@ class K2Strategy(Page):
     def vars_for_template(self):
         return {
             'gameTreatment'     : 'K2Strategy',
-            'partLabel'           : self.participant.label,
+            'partLabel'         : self.participant.label,
         }
 
     def is_displayed(self):
@@ -132,7 +132,7 @@ class K3Strategy(Page):
     def vars_for_template(self):
         return {
             'gameTreatment'     : 'K3Strategy',
-            'partLabel'           : self.participant.label,
+            'partLabel'         : self.participant.label,
         }
 
     def is_displayed(self):
@@ -141,6 +141,20 @@ class K3Strategy(Page):
     def before_next_page(self):
         self.player.set_payoffs_generic()
         self.player.set_final_payoff()
+
+
+class ThirdPartyPunishment(Page):
+    form_model = 'player'
+    form_fields = ['gameTreatment', 'partLabel']
+
+    def vars_for_template(self):
+        return {
+            'gameTreatment'     : 'TPP',
+            'partLabel'         : self.participant.label,
+        }
+
+    def is_displayed(self):
+        return self.round_number == 9
 
 
 class ResultsWaitPage(WaitPage):
@@ -202,7 +216,7 @@ class Disbursement(Page):
     form_fields = ['finalPay', 'payround']
 
     def is_displayed(self):
-        return self.round_number == 8
+        return self.round_number == 9
 
     def vars_for_template(self):
         return {
@@ -215,17 +229,18 @@ page_sequence = [
     #GenderAndID,
     #ChooseWaitPage,
     #Instructions,
-    TestRun,
+    #TestRun,
     #Understood,
     #NotUnderstood,
-    ChooseWaitPage,
-    ClassicPublicGood,
-    UKStrategy,
-    K0Strategy,
-    K1Strategy,
-    K2Strategy,
-    K3Strategy,
-    ResultsWaitPage,
-    Results,
-    Disbursement
+    #ChooseWaitPage,
+    #ClassicPublicGood,
+    #UKStrategy,
+    #K0Strategy,
+    #K1Strategy,
+    #K2Strategy,
+    #K3Strategy,
+    ThirdPartyPunishment,
+    #ResultsWaitPage,
+    #Results,
+    #Disbursement
 ]

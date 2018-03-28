@@ -1,0 +1,32 @@
+.grid-container {
+  display: grid;
+  grid-template-columns: auto auto auto;
+  grid-template-rows: 100px 200px 500px;
+}
+
+.grid-container > div {
+  text-align: center;
+}
+
+.tppFigure {
+  height: 100%;
+  position: relative;
+}
+
+#overlayOpaque {
+  position: absolute;
+  /*display: block;*/
+  width: 800px;
+  height: 800px;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 3;
+  background-color: rgba(255,255,255,1);
+  transition: all 1.5s;
+}
+
+.grey {
+  background-color: rgb(192,192,192);
+  box-shadow: 10px 10px rgb(153,153,153);
+}

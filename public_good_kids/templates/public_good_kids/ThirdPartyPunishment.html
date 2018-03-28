@@ -1,0 +1,51 @@
+{% extends "global/Page.html" %}
+{% load staticfiles otree %}
+
+{% block styles %}
+<link href="{% static "public_good_kids/css/ActualGame.css" %}" rel="stylesheet" />
+<link href="{% static "public_good_kids/css/ThirdPartyPunishment.css" %}" rel="stylesheet" />
+{% endblock %}
+
+
+{% block content %}
+<div id="container">
+
+
+<div class="grid-container">
+  <div><img id="figureLeft" src={% static 'public_good_kids/img/figureyellow.png' %} class="tppFigure"/></div>
+  <div><img id="figureTop" src={% static 'public_good_kids/img/figuregreen.png' %} class="tppFigure"/></div>
+  <div><img id="figureRight" src={% static 'public_good_kids/img/figurered.png' %} class="tppFigure"/></div>
+  <div></div>
+  <div></div>
+  <div></div>
+  <div></div>
+  <div></div>
+  <div></div>
+</div>
+
+<div id="overlayOpaque">
+  <!-- Geldtöpfe -->
+  <div id="potLeft" class="partner hidden players overlayLeft"></div>
+  <div id="potTop" class="partner hidden players overlayTop"></div>
+  <div id="potRight" class="partner hidden players overlayRight"></div>
+  <div id="potBottom" class="partner players overlayBottom"></div>
+
+  <!-- Spielerfiguren -->
+	<img src={% static 'public_good_kids/img/figureyellow.png' %} class="figure figureLeft hidden players highthem"/>
+	<img src={% static 'public_good_kids/img/figuregreen.png' %} class="figure figureTop hidden players highthem"/>
+	<img src={% static 'public_good_kids/img/figurered.png' %} class="figure figureRight hidden players highthem"/>
+	<img src={% static 'public_good_kids/img/figureblue.png' %} class="figure figureBottom players highyou"/>
+
+  <!-- Gemeinschaftstopf -->
+  <div class="mainpot"></div>
+</div>
+</div>
+{% endblock %}
+
+
+{% block scripts %}
+<script src="{% static "public_good_kids/js/ThirdPartyPunishment.js" %}"></script>
+<script>
+	window.onload = initialize;
+</script>
+{% endblock %}
