@@ -141,11 +141,9 @@ function decreaseTimer() {
 
 function switchToTrue() {
   instructions4Done = true;
-  console.log("switch to true instructions4Done: " + instructions4Done);
 }
 
 function runInstructions5() {
-  console.log("allDistributed: " + allDistributed + "  instructions4Done: " + instructions4Done);
   if (instructions4Done && !instructions5Played && allDistributed) {
     instructions5Played = true;
     var audio = new Audio('../../../../../static/public_good_kids/Instruktion5_v2.mp3');
@@ -158,7 +156,6 @@ function runInstructions5() {
 }
 
 function highlightArrow(element) {
-  console.log(element);
   var elem = document.getElementById(element);
   elem.style.transform = 'scale(3,3)';
 

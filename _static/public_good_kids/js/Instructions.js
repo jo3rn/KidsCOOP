@@ -25,7 +25,8 @@ function Instruktion1b(){
     setTimeout(showClass.bind(null, 'coins'), 2000);
     setTimeout(highlightCoin, 8300);
     setTimeout(dehighlightCoin, 12000);
-    setTimeout(Instruktion2a, delay);
+    //setTimeout(Instruktion2a, delay);
+    setTimeout(Beispiel3, delay);
   });
 }
 
@@ -177,8 +178,6 @@ function FalscheAntwort3(){
   });
 }
 
-// INSTRUCTIONS UPDATED UNTIL HERE ###########################################################
-
 function Instruktion3(){
   var audio = getAudio('Instruktion3 v2.mp3');
   audio.addEventListener('loadedmetadata', function() {
@@ -190,41 +189,43 @@ function Instruktion3(){
 
 function Beispiel3() {
   var audio = getAudio('Beispiel3 v2.mp3');
-  audio.play();
-  setTimeout(highlightClass.bind(null, 'highyou'), 5000);
-  setTimeout(highlightClassAlso, 5000, ['owncoins']);
-	setTimeout(highlightIdAlso, 9000, ['partnerBottom']);
-  setTimeout(move2ToOwn, 9000);
+  audio.addEventListener('loadedmetadata', function() {
+    audio.play();
+    var delay = audio.duration*1000 + 1000;
+    setTimeout(highlightClass.bind(null, 'highyou'), 5000);
+    setTimeout(highlightClassAlso, 5000, ['owncoins']);
+  	setTimeout(highlightIdAlso, 9000, ['partnerBottom']);
+    setTimeout(move2ToOwn, 9000);
 
-  setTimeout(highlightIdAlso, 13000, ['mainpot']);
-  setTimeout(move3ToMain, 13000);
+    setTimeout(highlightIdAlso, 13000, ['mainpot']);
+    setTimeout(move3ToMain, 13000);
 
-  setTimeout(highlightIdAlso, 16000, ['partnerLeft']);
-  setTimeout(highlightClassAlso, 16000, ['figureLeft']);
-  setTimeout(highlightClassAlso, 16000, ['coinsLeft']);
-  setTimeout(move2ToOwn2, 17500);
-  setTimeout(move3ToMain2, 17500);
+    setTimeout(highlightIdAlso, 16000, ['partnerLeft']);
+    setTimeout(highlightClassAlso, 16000, ['figureLeft']);
+    setTimeout(highlightClassAlso, 16000, ['coinsLeft']);
+    setTimeout(move2ToOwn2, 17500);
+    setTimeout(move3ToMain2, 17500);
 
-  setTimeout(highlightIdAlso, 20500, ['partnerTop']);
-  setTimeout(highlightClassAlso, 20500, ['figureTop']);
-  setTimeout(highlightClassAlso, 20500, ['coinsTop']);
-  setTimeout(move5ToMain, 24000);
+    setTimeout(highlightIdAlso, 20500, ['partnerTop']);
+    setTimeout(highlightClassAlso, 20500, ['figureTop']);
+    setTimeout(highlightClassAlso, 20500, ['coinsTop']);
+    setTimeout(move5ToMain, 24000);
 
-  setTimeout(highlightIdAlso, 26000, ['partnerRight']);
-  setTimeout(highlightClassAlso, 26000, ['figureRight']);
-  setTimeout(highlightClassAlso, 26000, ['coinsRight']);
-  setTimeout(move5ToOwn, 31000);
+    setTimeout(highlightIdAlso, 26000, ['partnerRight']);
+    setTimeout(highlightClassAlso, 26000, ['figureRight']);
+    setTimeout(highlightClassAlso, 26000, ['coinsRight']);
+    setTimeout(move5ToOwn, 31000);
 
-  setTimeout(cloneMaincoins, 36000);
-  setTimeout(distributeCoins, 41500);
-  setTimeout(distributeCoins, 42000);
-  setTimeout(distributeCoins, 42500);
-  setTimeout(distributeCoins, 43000);
-  setTimeout(distributeCoins, 43500);
-  setTimeout(distributeCoins, 44000);
+    setTimeout(cloneMaincoins, 36000);
+    setTimeout(distributeCoins, 41500);
+    setTimeout(distributeCoins, 42000);
+    setTimeout(distributeCoins, 42500);
+    setTimeout(distributeCoins, 43000);
+    setTimeout(distributeCoins, 43500);
+    setTimeout(distributeCoins, 44000);
 
-	setTimeout(advanceToNextPage, 79000);
-
+    setTimeout(advanceToNextPage, delay);
+  });
 }
 
 
@@ -520,6 +521,7 @@ function cloneMaincoins() {
   var maincoins = document.getElementsByClassName('maincoin');
   var i;
   var amount = maincoins.length;
+  rotate('mainpot');
 
   for (i=0; i < amount; i++) {
     // prepare cloning of coins

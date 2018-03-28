@@ -18,9 +18,6 @@ function moveToMain(moveAll=false, kStrategy=false) {
 		var cb4 = document.getElementById('cb4');
 		var cb5 = document.getElementById('cb5');
 
-    console.log("moveAll: " + moveAll);
-    console.log("after variables: " + coinCountdown);
-
     // if there are coins left between the pots
 		if (coinCountdown == 1) {
       cb1.style.top = '61%';
@@ -141,16 +138,12 @@ function moveToOwn(moveAll=false) {
 		var cb4 = document.getElementById('cb4');
 		var cb5 = document.getElementById('cb5');
 
-    console.log("moveAll: " + moveAll);
-    console.log("after variables: " + coinCountdown);
     // if there are coins left between the pots
 		if (coinCountdown == 1) {
-      console.log("1: " + coinCountdown);
 			cb1.style.top = '80%';
 			cb1.classList.add('owncoin');
 			cb1.classList.remove("rotatedcoin");
       if (moveAll) {
-        console.log("moveAll");
         cb2.style.top = '80%';
   			cb2.classList.add('owncoin');
   			cb2.classList.remove("rotatedcoin");
@@ -171,10 +164,8 @@ function moveToOwn(moveAll=false) {
       } else {
 
         coinCountdown += 1;
-        console.log("increase by 1: " + coinCountdown);
       }
 		} else if (coinCountdown == 2) {
-      console.log("2: " + coinCountdown);
 			cb2.style.top = '80%';
 			cb2.classList.add('owncoin');
 			cb2.classList.remove("rotatedcoin");
@@ -201,7 +192,6 @@ function moveToOwn(moveAll=false) {
 
     // if all coins are in either one of the pots
 		} else {
-      console.log("in pots: " + coinCountdown);
 			if (cb5.style.top != '80%') {
 				cb5.style.top = '80%';
 				cb5.classList.remove('maincoin');
@@ -249,7 +239,6 @@ function moveToOwn(moveAll=false) {
 	catch(err) {
 	}
 }
-
 
 
 function showConfirmButton() {
