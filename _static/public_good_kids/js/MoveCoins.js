@@ -11,6 +11,7 @@ function showArrows() {
 function moveToMain(moveAll=false, kStrategy=false) {
 	// moves coin in mainpot
 	try {
+		logClick('u');
     // initialize variables
 		var cb1 = document.getElementById('cb1');
 		var cb2 = document.getElementById('cb2');
@@ -131,6 +132,7 @@ function moveToMain(moveAll=false, kStrategy=false) {
 function moveToOwn(moveAll=false) {
 	// moves coin in own pot
 	try {
+		logClick('d');
     // initialize variables
 		var cb1 = document.getElementById('cb1');
 		var cb2 = document.getElementById('cb2');
@@ -252,4 +254,9 @@ function hideOtherCoins() {
   for (k=0; k < othercoins.length; k++) {
     othercoins[k].style.visibility = 'hidden';
   }
+}
+
+function logClick(direction) {
+	log = document.getElementById('distPattern');
+	log.value += direction;
 }

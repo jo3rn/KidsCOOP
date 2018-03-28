@@ -47,7 +47,7 @@ class NotUnderstood(Page):
 
 class ClassicPublicGood(Page):
     form_model = 'player'
-    form_fields = ['contribution', 'p_label', 'gameTreatment']
+    form_fields = ['contribution', 'distPattern', 'gameTreatment', 'partLabel']
 
     def is_displayed(self):
         return self.round_number < 4
@@ -56,18 +56,18 @@ class ClassicPublicGood(Page):
         return {
             'gameTreatment'     : 'PublicGoods_' + str(self.round_number),
             'roundnumber'       : self.round_number,
-            'p_label'           : self.participant.label,
+            'partLabel'           : self.participant.label,
         }
 
 
 class UKStrategy(Page):
     form_model = 'player'
-    form_fields = ['contribution', 'p_label', 'gameTreatment']
+    form_fields = ['contribution', 'distPattern', 'gameTreatment', 'partLabel']
 
     def vars_for_template(self):
         return {
             'gameTreatment'     : 'UKStrategy',
-            'p_label'           : self.participant.label,
+            'partLabel'           : self.participant.label,
         }
 
     def is_displayed(self):
@@ -76,12 +76,12 @@ class UKStrategy(Page):
 
 class K0Strategy(Page):
     form_model = 'player'
-    form_fields = ['contribution', 'p_label', 'gameTreatment']
+    form_fields = ['contribution', 'distPattern', 'gameTreatment', 'partLabel']
 
     def vars_for_template(self):
         return {
             'gameTreatment'     : 'K0Strategy',
-            'p_label'           : self.participant.label,
+            'partLabel'           : self.participant.label,
         }
 
     def is_displayed(self):
@@ -93,12 +93,12 @@ class K0Strategy(Page):
 
 class K1Strategy(Page):
     form_model = 'player'
-    form_fields = ['contribution', 'p_label', 'gameTreatment']
+    form_fields = ['contribution', 'distPattern', 'gameTreatment', 'partLabel']
 
     def vars_for_template(self):
         return {
             'gameTreatment'     : 'K1Strategy',
-            'p_label'           : self.participant.label,
+            'partLabel'           : self.participant.label,
         }
 
     def is_displayed(self):
@@ -110,12 +110,12 @@ class K1Strategy(Page):
 
 class K2Strategy(Page):
     form_model = 'player'
-    form_fields = ['contribution', 'p_label', 'gameTreatment']
+    form_fields = ['contribution', 'distPattern', 'gameTreatment', 'partLabel']
 
     def vars_for_template(self):
         return {
             'gameTreatment'     : 'K2Strategy',
-            'p_label'           : self.participant.label,
+            'partLabel'           : self.participant.label,
         }
 
     def is_displayed(self):
@@ -127,12 +127,12 @@ class K2Strategy(Page):
 
 class K3Strategy(Page):
     form_model = 'player'
-    form_fields = ['contribution', 'p_label', 'gameTreatment']
+    form_fields = ['contribution', 'distPattern', 'gameTreatment', 'partLabel']
 
     def vars_for_template(self):
         return {
             'gameTreatment'     : 'K3Strategy',
-            'p_label'           : self.participant.label,
+            'partLabel'           : self.participant.label,
         }
 
     def is_displayed(self):
@@ -199,7 +199,7 @@ class Results(Page):
 
 class Disbursement(Page):
     form_model = 'player'
-    form_fields = ['final_pay', 'payround']
+    form_fields = ['finalPay', 'payround']
 
     def is_displayed(self):
         return self.round_number == 8
@@ -216,8 +216,8 @@ page_sequence = [
     #ChooseWaitPage,
     #Instructions,
     TestRun,
-    Understood,
-    NotUnderstood,
+    #Understood,
+    #NotUnderstood,
     ChooseWaitPage,
     ClassicPublicGood,
     UKStrategy,

@@ -53,12 +53,21 @@ class Player(BasePlayer):
         self.participant.vars['finalpay'] = [p.payoff for p in self.in_all_rounds()][pay_round]
         self.participant.vars['payround'] = pay_round + 1
 
-
+    # number of coins put into the mainpot
     contribution = models.FloatField()
-    final_pay = models.FloatField(widget=widgets.HiddenInput(), verbose_name='')
+    # record of clicking the up (u) and down (d) arrows
+    distPattern = models.StringField(widget=widgets.HiddenInput(), verbose_name='')
+    # number of coins payed out at the end
+    finalPay = models.FloatField(widget=widgets.HiddenInput(), verbose_name='')
+    # which treatement of the game is played
     gameTreatment = models.StringField(widget=widgets.HiddenInput(), verbose_name='')
+    # gender of the participant
     gender = models.StringField(widget=widgets.HiddenInput(), verbose_name='')
-    p_label = models.StringField(widget=widgets.HiddenInput(), verbose_name='')
+    # unique identifier
+    partLabel = models.StringField(widget=widgets.HiddenInput(), verbose_name='')
+    # number of round decided for the final payment
     payround = models.FloatField(widget=widgets.HiddenInput(), verbose_name='')
+    # ID (number) given to the player at start
     playerID = models.StringField(widget=widgets.HiddenInput(), verbose_name='')
+    # yes/no whether the player understood the instructions
     understood = models.StringField(widget=widgets.HiddenInput(), verbose_name='')
