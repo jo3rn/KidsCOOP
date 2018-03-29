@@ -25,8 +25,7 @@ function Instruktion1b(){
     setTimeout(showClass.bind(null, 'coins'), 2000);
     setTimeout(highlightCoin, 8300);
     setTimeout(dehighlightCoin, 12000);
-    //setTimeout(Instruktion2a, delay);
-    setTimeout(Beispiel3, delay);
+    setTimeout(Instruktion2a, delay);
   });
 }
 
