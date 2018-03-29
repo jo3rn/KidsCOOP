@@ -12,38 +12,98 @@
 
 
 <div class="grid-container">
+  <!-- row 1 figures -->
   <div><img id="figureLeft" src={% static 'public_good_kids/img/figureyellow.png' %} class="tppFigure"/></div>
   <div><img id="figureTop" src={% static 'public_good_kids/img/figuregreen.png' %} class="tppFigure"/></div>
   <div><img id="figureRight" src={% static 'public_good_kids/img/figurered.png' %} class="tppFigure"/></div>
+
+  <!-- row 2 donation baskets -->
+  <div id="donation-left"></div>
+  <div id="donation-middle"></div>
+  <div id="donation-right"></div>
+
+  <!-- row 3 arrows -->
+  <div>
+    <img src={% static 'public_good_kids/img/arrowyellow.png' %} class="arrow-up tpp-arrow" id="arrow-up-left"/>
+    <img src={% static 'public_good_kids/img/arrowcolor-down.png' %} class="arrow-down tpp-arrow" id="arrow-down-left"/>
+  </div>
+  <div>
+    <img src={% static 'public_good_kids/img/arrowgreen.png' %} class="arrow-up tpp-arrow" id="arrow-up-middle"/>
+    <img src={% static 'public_good_kids/img/arrowcolor-down.png' %} class="arrow-down tpp-arrow" id="arrow-down-middle"/>
+  </div>
+  <div>
+    <img src={% static 'public_good_kids/img/arrowred.png' %} class="arrow-up tpp-arrow" id="arrow-up-right"/>
+    <img src={% static 'public_good_kids/img/arrowcolor-down.png' %} class="arrow-down tpp-arrow" id="arrow-down-right"/>
+  </div>
+
+  <!-- row 4 coins to donate -->
   <div></div>
-  <div></div>
-  <div></div>
-  <div></div>
-  <div></div>
-  <div></div>
+  <div id="coinsToDonate">
+    <img src={% static 'public_good_kids/img/twocoins-rotated.png' %} class="tpp-coin" id="tpp1"/>
+  	<img src={% static 'public_good_kids/img/twocoins-rotated.png' %} class="tpp-coin" id="tpp2"/>
+  	<img src={% static 'public_good_kids/img/twocoins-rotated.png' %} class="tpp-coin" id="tpp3"/>
+  	<img src={% static 'public_good_kids/img/twocoins-rotated.png' %} class="tpp-coin" id="tpp4"/>
+  	<img src={% static 'public_good_kids/img/twocoins-rotated.png' %} class="tpp-coin" id="tpp5"/>
+    <img src={% static 'public_good_kids/img/twocoins-rotated.png' %} class="tpp-coin" id="tpp6"/>
+  </div>
+  <div id="confirm-container">
+    <button class="otree-btn-next btn next-button otree-next-button" id="confirmbutton"></button>
+  </div>
 </div>
 
 <div id="overlayOpaque">
   <!-- Geldtöpfe -->
-  <div id="potLeft" class="partner hidden players overlayLeft"></div>
-  <div id="potTop" class="partner hidden players overlayTop"></div>
-  <div id="potRight" class="partner hidden players overlayRight"></div>
-  <div id="potBottom" class="partner players overlayBottom"></div>
+  <div id="potLeft" class="partner overlayLeft grey"></div>
+  <div id="potTop" class="partner overlayTop grey"></div>
+  <div id="potRight" class="partner overlayRight grey"></div>
+  <div id="potBottom" class="partner overlayBottom grey"></div>
 
   <!-- Spielerfiguren -->
-	<img src={% static 'public_good_kids/img/figureyellow.png' %} class="figure figureLeft hidden players highthem"/>
-	<img src={% static 'public_good_kids/img/figuregreen.png' %} class="figure figureTop hidden players highthem"/>
-	<img src={% static 'public_good_kids/img/figurered.png' %} class="figure figureRight hidden players highthem"/>
-	<img src={% static 'public_good_kids/img/figureblue.png' %} class="figure figureBottom players highyou"/>
+	<img id="overlayFigureLeft" src={% static 'public_good_kids/img/figuregrey.png' %} class="figure figureLeft"/>
+	<img id="overlayFigureTop" src={% static 'public_good_kids/img/figuregrey.png' %} class="figure figureTop"/>
+	<img id="overlayFigureRight" src={% static 'public_good_kids/img/figuregrey.png' %} class="figure figureRight"/>
+	<img id="overlayFigureBottom" src={% static 'public_good_kids/img/figuregrey.png' %} class="figure figureBottom"/>
 
   <!-- Gemeinschaftstopf -->
   <div class="mainpot"></div>
+
+  <!-- Münzen links -->
+	<img src={% static 'public_good_kids/img/twocoins.png' %} class="coins" id="cl1"/>
+	<img src={% static 'public_good_kids/img/twocoins.png' %} class="coins" id="cl2"/>
+	<img src={% static 'public_good_kids/img/twocoins.png' %} class="coins" id="cl3"/>
+	<img src={% static 'public_good_kids/img/twocoins.png' %} class="coins" id="cl4"/>
+	<img src={% static 'public_good_kids/img/twocoins.png' %} class="coins" id="cl5"/>
+
+	<!-- Münzen oben -->
+	<img src={% static 'public_good_kids/img/twocoins.png' %} class="coins rotatedcoin" id="ct1"/>
+	<img src={% static 'public_good_kids/img/twocoins.png' %} class="coins rotatedcoin" id="ct2"/>
+	<img src={% static 'public_good_kids/img/twocoins.png' %} class="coins rotatedcoin" id="ct3"/>
+	<img src={% static 'public_good_kids/img/twocoins.png' %} class="coins rotatedcoin" id="ct4"/>
+	<img src={% static 'public_good_kids/img/twocoins.png' %} class="coins rotatedcoin" id="ct5"/>
+
+	<!-- Münzen rechts -->
+	<img src={% static 'public_good_kids/img/twocoins.png' %} class="coins" id="cr1"/>
+	<img src={% static 'public_good_kids/img/twocoins.png' %} class="coins" id="cr2"/>
+	<img src={% static 'public_good_kids/img/twocoins.png' %} class="coins" id="cr3"/>
+	<img src={% static 'public_good_kids/img/twocoins.png' %} class="coins" id="cr4"/>
+	<img src={% static 'public_good_kids/img/twocoins.png' %} class="coins" id="cr5"/>
+
+	<!-- Münzen unten -->
+	<img src={% static 'public_good_kids/img/twocoins.png' %} class="coins rotatedcoin" id="cb1"/>
+	<img src={% static 'public_good_kids/img/twocoins.png' %} class="coins rotatedcoin" id="cb2"/>
+	<img src={% static 'public_good_kids/img/twocoins.png' %} class="coins rotatedcoin" id="cb3"/>
+	<img src={% static 'public_good_kids/img/twocoins.png' %} class="coins rotatedcoin" id="cb4"/>
+	<img src={% static 'public_good_kids/img/twocoins.png' %} class="coins rotatedcoin" id="cb5"/>
 </div>
 </div>
+
+{% include "HiddenInput.html" %}
 {% endblock %}
 
 
 {% block scripts %}
+<script src="{% static "public_good_kids/js/KStrategy.js" %}"></script>
+<script src="{% static "public_good_kids/js/MoveCoins.js" %}"></script>
 <script src="{% static "public_good_kids/js/ThirdPartyPunishment.js" %}"></script>
 <script>
 	window.onload = initialize;

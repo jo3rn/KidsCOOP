@@ -145,7 +145,7 @@ class K3Strategy(Page):
 
 class ThirdPartyPunishment(Page):
     form_model = 'player'
-    form_fields = ['gameTreatment', 'partLabel']
+    form_fields = ['contribution', 'distPattern', 'gameTreatment', 'partLabel']
 
     def vars_for_template(self):
         return {
@@ -226,21 +226,21 @@ class Disbursement(Page):
 
 
 page_sequence = [
-    #GenderAndID,
-    #ChooseWaitPage,
-    #Instructions,
-    #TestRun,
-    #Understood,
-    #NotUnderstood,
-    #ChooseWaitPage,
-    #ClassicPublicGood,
-    #UKStrategy,
-    #K0Strategy,
-    #K1Strategy,
-    #K2Strategy,
-    #K3Strategy,
+    GenderAndID,
+    ChooseWaitPage,
+    Instructions,
+    TestRun,
+    Understood,
+    NotUnderstood,
+    ChooseWaitPage,
+    ClassicPublicGood,
+    UKStrategy,
+    K0Strategy,
+    K1Strategy,
+    K2Strategy,
+    K3Strategy,
     ThirdPartyPunishment,
-    #ResultsWaitPage,
-    #Results,
-    #Disbursement
+    ResultsWaitPage,
+    Results,
+    Disbursement
 ]

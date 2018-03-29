@@ -1,7 +1,7 @@
 .grid-container {
   display: grid;
-  grid-template-columns: auto auto auto;
-  grid-template-rows: 100px 200px 500px;
+  grid-template-columns: 33% 33% 33%;
+  grid-template-rows: 150px 100px 250px 100px;
 }
 
 .grid-container > div {
@@ -11,6 +11,19 @@
 .tppFigure {
   height: 100%;
   position: relative;
+  transition: all 1s;
+  visibility: hidden;
+  transform: scale(3,3);
+}
+
+.tpp-coin {
+  width: 10%;
+  position: relative;
+  transition: all 1.5s;
+  transform: scale(3,3);
+  margin-top: 10%;
+  visibility: hidden;
+  margin: 2%;
 }
 
 #overlayOpaque {
@@ -29,4 +42,20 @@
 .grey {
   background-color: rgb(192,192,192);
   box-shadow: 10px 10px rgb(153,153,153);
+}
+
+.tpp-arrow {
+  display: block;
+  height: 25%;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 15%;
+  margin-bottom: 10%;
+  transition: all 1.5s;
+  transform: scale(3,3);
+  visibility: hidden;
+}
+
+#confirmbutton {
+  transition: all 0s;
 }
