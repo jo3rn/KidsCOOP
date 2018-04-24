@@ -1,3 +1,5 @@
+var isAtControlQuestion = false;
+
 /*
 #####
 ##### EACH OF THE FOLLOWING FUNCTIONS:
@@ -49,6 +51,7 @@ function KontrollfrageKorb(){
   audio.addEventListener('loadedmetadata', function() {
     audio.play();
     var delay = audio.duration*1000 - 500;
+    setTimeout(highlightClass.bind(null, 'partner'), 1500);
     setTimeout(addKK, delay);
   });
 }
@@ -73,7 +76,7 @@ function RichtigeAntwort(question){
         setTimeout(Instruktion2b, delay);
         break;
       case 2:
-        setTimeout(Instruktion2c, delay);
+        setTimeout(Beispiel3, delay);
         break;
       case 3:
         setTimeout(Instruktion3, delay);
@@ -83,13 +86,16 @@ function RichtigeAntwort(question){
 }
 
 function Instruktion2b(){
-  var audio = getAudio('Instruktion2b.mp3');
+  var audio = getAudio('Instruktion2b v2.mp3');
   audio.addEventListener('loadedmetadata', function() {
     audio.play();
     var delay = audio.duration*1000 + 500;
-    setTimeout(contributeOneCoin, 33200);
-    setTimeout(doubleCoin, 35000);
-    setTimeout(distributeFour, 46500);
+    setTimeout(contributeOneCoin, 12000);
+    setTimeout(doubleCoin, 15500);
+    setTimeout(repositionAndDelete, 23000);
+    setTimeout(contributeOneCoin, 28500);
+    setTimeout(doubleCoin, 30000);
+    setTimeout(distributeFour, 42000);
     setTimeout(repositionAndDelete, delay);
     setTimeout(KontrollfrageGemeinschaftskorb, delay);
   });
@@ -112,73 +118,13 @@ function KontrollfrageGemeinschaftskorb(){
     setTimeout(appearCoin.bind(null, "87%", "87%", "61%", "54%", "overlay", 10), 12200);
     setTimeout(rotate.bind(null, 'mainpotWrong'), 12200);
     // add click event to pots
-    var delay = audio.duration*1000 - 500;
+    var delay = audio.duration*1000 - 700;
     setTimeout(addKG, delay);
   });
 }
 
 function FalscheAntwort2(){
   var audio = getAudio('FalscheAntwort2.mp3');
-  audio.addEventListener('loadedmetadata', function() {
-    audio.play();
-    var delay = audio.duration*1000 + 500;
-    setTimeout(Instruktion2c, delay);
-  });
-}
-
-function Instruktion2c(){
-  var audio = getAudio('Instruktion2c.mp3');
-  audio.addEventListener('loadedmetadata', function() {
-    audio.play();
-    setTimeout(highlightClass.bind(null, 'owncoins'), 7000);
-    setTimeout(dehighlight, 9700);
-    setTimeout(rotate.bind(null, 'partnerBottom'), 11000);
-    setTimeout(rotate.bind(null, 'mainpot'), 15000);
-    setTimeout(contributeOneCoin, 24000);
-    setTimeout(doubleCoin, 27000);
-    setTimeout(distributeFour, 33500);
-    setTimeout(rotate.bind(null, 'partnerBottom'), 39000);
-    setTimeout(rotate.bind(null, 'mainpot'), 44000);
-    var delay = audio.duration*1000 + 500;
-    setTimeout(repositionAndDelete, delay);
-    setTimeout(KontrollfrageAufteilung, delay);
-  });
-}
-
-function KontrollfrageAufteilung(){
-  var audio = getAudio('KontrollfrageAufteilung.mp3');
-  audio.addEventListener('loadedmetadata', function() {
-    audio.play();
-    setTimeout(setOverlay, 2000);
-
-    appearCoin("45%", "7.5%", "44%", "44%", "overlayWrong", 10000);
-    appearCoin("45%", "7.5%", "55%", "55%", "overlayWrong", 10000);
-    appearCoin("51%", "13.5%", "44%", "44%", "overlayWrong", 10000);
-    appearCoin("51%", "13.5%", "55%", "55%", "overlayWrong", 10000);
-    setTimeout(function(){document.getElementById("overlayWrong").style.borderStyle = "solid"}, 8000);
-
-    appearCoin("45%", "85.5%", "44%", "49%", "overlayCorrect", 22000);
-    appearCoin("45%", "48%", "55%", "10.5%", "overlayCorrect", 22000);
-    appearCoin("51%", "10.5%", "44%", "49%", "overlayCorrect", 22000);
-    appearCoin("51%", "48%", "55%", "85.5%", "overlayCorrect", 22000);
-    setTimeout(function(){document.getElementById("overlayCorrect").style.borderStyle = "solid"}, 20000);
-
-    var delay = audio.duration*1000 - 1000;
-    setTimeout(addKA, delay);
-  });
-}
-
-function FalscheAntwort3(){
-  var audio = getAudio('FalscheAntwort3.mp3');
-  audio.addEventListener('loadedmetadata', function() {
-    audio.play();
-    var delay = audio.duration*1000 + 500;
-    setTimeout(Instruktion3, delay);
-  });
-}
-
-function Instruktion3(){
-  var audio = getAudio('Instruktion3 v2.mp3');
   audio.addEventListener('loadedmetadata', function() {
     audio.play();
     var delay = audio.duration*1000 + 500;
@@ -223,6 +169,66 @@ function Beispiel3() {
     setTimeout(distributeCoins, 43500);
     setTimeout(distributeCoins, 44000);
 
+    setTimeout(dehighlight, delay);
+    setTimeout(repositionAndDelete, delay);
+    setTimeout(KontrollfrageAufteilung, delay);
+  });
+}
+
+function KontrollfrageAufteilung(){
+  var audio = getAudio('KontrollfrageAufteilung.mp3');
+  audio.addEventListener('loadedmetadata', function() {
+    audio.play();
+    setTimeout(setOverlay, 2000);
+
+    // coins left
+    appearCoin("42%", "7.5%", "44%", "44%", "overlayWrong", 10000);
+    appearCoin("42%", "7.5%", "55%", "55%", "overlayWrong", 10000);
+    appearCoin("46%", "13.5%", "44%", "44%", "overlayWrong", 10000);
+    appearCoin("46%", "13.5%", "55%", "55%", "overlayWrong", 10000);
+    appearCoin("50%", "10.5%", "44%", "49.5%", "overlayWrong", 10000);
+
+    // coin right
+    appearCoin("50%", "85.5%", "55%", "49%", "overlayWrong", 10000);
+    // coin top
+    appearCoin("54%", "48%", "44%", "10.5%", "overlayWrong", 10000);
+    // coin bottom
+    appearCoin("54%", "48%", "55%", "85.5%", "overlayWrong", 10000);
+    setTimeout(function(){document.getElementById("overlayWrong").style.borderStyle = "solid"}, 8000);
+
+    // coins right
+    appearCoin("54%", "85.5%", "44%", "44%", "overlayCorrect", 22000);
+    appearCoin("54%", "85.5%", "55%", "55%", "overlayCorrect", 22000);
+    // coins top
+    appearCoin("50%", "48%", "44%", "6%", "overlayCorrect", 22000);
+    appearCoin("50%", "48%", "55%", "17%", "overlayCorrect", 22000);
+    // coins left
+    appearCoin("46%", "10.5%", "44%", "44%", "overlayCorrect", 22000);
+    appearCoin("46%", "10.5%", "55%", "55%", "overlayCorrect", 22000)
+    // coins bottom
+    appearCoin("42%", "48%", "44%", "81%", "overlayCorrect", 22000);
+    appearCoin("42%", "48%", "55%", "92%", "overlayCorrect", 22000);
+    setTimeout(function(){document.getElementById("overlayCorrect").style.borderStyle = "solid"}, 20000);
+
+    var delay = audio.duration*1000 - 1000;
+    setTimeout(addKA, delay);
+  });
+}
+
+function FalscheAntwort3(){
+  var audio = getAudio('FalscheAntwort3.mp3');
+  audio.addEventListener('loadedmetadata', function() {
+    audio.play();
+    var delay = audio.duration*1000 + 500;
+    setTimeout(Instruktion3, delay);
+  });
+}
+
+function Instruktion3(){
+  var audio = getAudio('Instruktion3 v2.mp3');
+  audio.addEventListener('loadedmetadata', function() {
+    audio.play();
+    var delay = audio.duration*1000 + 500;
     setTimeout(advanceToNextPage, delay);
   });
 }
@@ -281,6 +287,7 @@ function dehighlightCoin() {
 function highlightClass(theClass) {
   /* highlights elements of the specified class,
   by lessening the opacity of everything else */
+  console.log("Highlight: " + theClass);
   var el = document.querySelectorAll('*');
   for(var i=0;i<el.length;i++){
     if (el[i].classList.contains(theClass) || el[i].hasChildNodes()) {
@@ -332,6 +339,7 @@ function doubleCoin() {
   coinClone.style.left = '48%';
   setTimeout(shift, 100);
   function shift() {
+    rotate('mainpot');
     coinClone.style.top = '54%';
   }
 }
@@ -463,7 +471,6 @@ function move3ToMain() {
 	document.getElementById('cb3').classList.remove("rotatedcoin");
 	document.getElementById('cb4').classList.remove("rotatedcoin");
 	document.getElementById('cb5').classList.remove("rotatedcoin");
-
 }
 
 function move2ToOwn2() {
@@ -556,7 +563,6 @@ function cloneMaincoins() {
       maincoins[j].style.top = '51%';
     }
   }
-
 }
 
 function distributeCoins() {
@@ -780,7 +786,6 @@ function distributeCoins() {
 			maincoins[1].classList.remove('maincoin');
 			maincoins[0].classList.remove('maincoin');
 		}
-
 	}
 	catch(err) {
 	}
@@ -796,6 +801,7 @@ function showConfirm() {
 }
 
 function addKK() {
+  isAtControlQuestion = true;
   document.getElementById("partnerBottom").addEventListener("click", evalKK);
   document.getElementById("partnerRight").addEventListener("click", evalKK);
   document.getElementById("partnerTop").addEventListener("click", evalKK);
@@ -806,9 +812,12 @@ function addKK() {
   document.getElementById("partnerRight").style.zIndex = 1;
   document.getElementById("partnerTop").style.zIndex = 1;
   document.getElementById("partnerLeft").style.zIndex = 1;
+  setTimeout(startReminder.bind(null, "KFKorbErinnerung.mp3"), 20000);
 }
 
 function evalKK(){
+  isAtControlQuestion = false;
+  dehighlight();
   document.getElementById("partnerBottom").removeEventListener("click", evalKK);
   document.getElementById("partnerRight").removeEventListener("click", evalKK);
   document.getElementById("partnerTop").removeEventListener("click", evalKK);
@@ -842,11 +851,14 @@ function appearCoin(left, left2, top, top2, div, millisecs){
 }
 
 function addKG() {
+  isAtControlQuestion = true;
   document.getElementById("mainpotCorrect").addEventListener("click", evalKG);
   document.getElementById("mainpotWrong").addEventListener("click", evalKG);
+  setTimeout(startReminder.bind(null, "KFGemeinschaftskorbErinnerung.mp3"), 20000);
 }
 
 function evalKG(){
+  isAtControlQuestion = false;
   document.getElementById("mainpotCorrect").removeEventListener("click", evalKG);
   document.getElementById("mainpotWrong").removeEventListener("click", evalKG);
   document.getElementById("overlay").style.display = "none";
@@ -858,11 +870,14 @@ function evalKG(){
 }
 
 function addKA() {
+  isAtControlQuestion = true;
   document.getElementById("overlayWrong").addEventListener("click", evalKA);
   document.getElementById("overlayCorrect").addEventListener("click", evalKA);
+  setTimeout(startReminder.bind(null, "KFAufteilungErinnerung.mp3"), 20000);
 }
 
 function evalKA(){
+  isAtControlQuestion = false;
   document.getElementById("overlayWrong").removeEventListener("click", evalKA);
   document.getElementById("overlayCorrect").removeEventListener("click", evalKA);
   document.getElementById("overlayOpaque").style.display = "none";
@@ -881,4 +896,15 @@ function setOverlay(){
   document.getElementById("overlayCorrect").style.display = "block";
   setTimeout(function(){document.getElementById("overlayWrong").style.transform = "matrix(0.6, 0, 0, 0.6, -300, 0)";}, 10);
   setTimeout(function(){document.getElementById("overlayCorrect").style.transform = "matrix(0.6, 0, 0, 0.6, 300, 0)";}, 20);
+}
+
+function startReminder(fileName){
+  if (isAtControlQuestion) {
+    var audio = getAudio(fileName);
+    audio.addEventListener('loadedmetadata', function() {
+      audio.play();
+      var delay = audio.duration*1000 + 20000;
+      setTimeout(startReminder.bind(null, fileName), delay);
+    });
+  }
 }

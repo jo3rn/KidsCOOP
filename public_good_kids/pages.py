@@ -226,8 +226,8 @@ class Disbursement(Page):
 
 
 page_sequence = [
-    GenderAndID,
-    ChooseWaitPage,
+    #GenderAndID,
+    #ChooseWaitPage,
     Instructions,
     TestRun,
     Understood,
