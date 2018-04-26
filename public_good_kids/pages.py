@@ -157,6 +157,20 @@ class ThirdPartyPunishment(Page):
         return self.round_number == 9
 
 
+class Dictator(Page):
+    form_model = 'player'
+    form_fields = ['contribution', 'distPattern', 'gameTreatment', 'partLabel']
+
+    def vars_for_template(self):
+        return {
+            'gameTreatment'     : 'Dictator',
+            'partLabel'         : self.participant.label,
+        }
+
+    def is_displayed(self):
+        return self.round_number == 10
+
+
 class ResultsWaitPage(WaitPage):
     def is_displayed(self):
         return self.round_number < 5
@@ -216,7 +230,7 @@ class Disbursement(Page):
     form_fields = ['finalPay', 'payround']
 
     def is_displayed(self):
-        return self.round_number == 9
+        return self.round_number == 10
 
     def vars_for_template(self):
         return {
@@ -226,21 +240,22 @@ class Disbursement(Page):
 
 
 page_sequence = [
-    #GenderAndID,
-    #ChooseWaitPage,
-    Instructions,
-    TestRun,
-    Understood,
-    NotUnderstood,
-    ChooseWaitPage,
-    ClassicPublicGood,
-    UKStrategy,
-    K0Strategy,
-    K1Strategy,
-    K2Strategy,
-    K3Strategy,
-    ThirdPartyPunishment,
-    ResultsWaitPage,
-    Results,
-    Disbursement
+    # GenderAndID,
+    # ChooseWaitPage,
+    # Instructions,
+    # TestRun,
+    # Understood,
+    # NotUnderstood,
+    # ChooseWaitPage,
+    # ClassicPublicGood,
+    # UKStrategy,
+    # K0Strategy,
+    # K1Strategy,
+    # K2Strategy,
+    # K3Strategy,
+    # ThirdPartyPunishment,
+    Dictator,
+    # ResultsWaitPage,
+    # Results,
+    # Disbursement
 ]

@@ -1,0 +1,63 @@
+{% extends "global/Page.html" %}
+{% load staticfiles otree %}
+
+{% block styles %}
+<link href="{% static "public_good_kids/css/ActualGame.css" %}" rel="stylesheet" />
+<link href="{% static "public_good_kids/css/ThirdPartyPunishment.css" %}" rel="stylesheet" />
+{% endblock %}
+
+
+{% block content %}
+<div id="container">
+
+
+<div class="grid-container">
+  <!-- row 1 figures -->
+  <div><img id="figureLeft" src={% static 'public_good_kids/img/figureblue.png' %} class="tppFigure"/></div>
+  <div></div>
+  <div><img id="figureRight" src={% static 'public_good_kids/img/figuregrey.png' %} class="tppFigure"/></div>
+
+  <!-- row 2 donation baskets -->
+  <div id="donation-blue"></div>
+  <div></div>
+  <div id="donation-grey"></div>
+
+  <!-- row 3 arrows -->
+  <div>
+    <img src={% static 'public_good_kids/img/arrowblue-up.png' %} class="arrow-up tpp-arrow" id="arrow-up-left"/>
+    <img src={% static 'public_good_kids/img/arrowcolor-down.png' %} class="arrow-down tpp-arrow" id="arrow-down-left"/>
+  </div>
+  <div></div>
+  <div>
+    <img src={% static 'public_good_kids/img/arrowgrey.png' %} class="arrow-up tpp-arrow" id="arrow-up-right"/>
+    <img src={% static 'public_good_kids/img/arrowcolor-down.png' %} class="arrow-down tpp-arrow" id="arrow-down-right"/>
+  </div>
+
+  <!-- row 4 coins to donate -->
+  <div></div>
+  <div id="coinsToDonate">
+    <img src={% static 'public_good_kids/img/twocoins-rotated.png' %} class="tpp-coin" id="tpp1"/>
+  	<img src={% static 'public_good_kids/img/twocoins-rotated.png' %} class="tpp-coin" id="tpp2"/>
+  	<img src={% static 'public_good_kids/img/twocoins-rotated.png' %} class="tpp-coin" id="tpp3"/>
+  	<img src={% static 'public_good_kids/img/twocoins-rotated.png' %} class="tpp-coin" id="tpp4"/>
+  	<img src={% static 'public_good_kids/img/twocoins-rotated.png' %} class="tpp-coin" id="tpp5"/>
+    <img src={% static 'public_good_kids/img/twocoins-rotated.png' %} class="tpp-coin" id="tpp6"/>
+  </div>
+  <div id="confirm-container">
+    <button class="otree-btn-next btn next-button otree-next-button" id="confirmbutton"></button>
+  </div>
+
+</div>
+</div>
+
+{% include "HiddenInput.html" %}
+{% endblock %}
+
+
+{% block scripts %}
+<script src="{% static "public_good_kids/js/MoveCoins.js" %}"></script>
+<script src="{% static "public_good_kids/js/Dictator.js" %}"></script>
+<script>
+	window.onload = initialize;
+</script>
+{% endblock %}
