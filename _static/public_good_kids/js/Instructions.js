@@ -255,6 +255,16 @@ function showClass(theClass){
   }
 }
 
+function showID(theID){
+  var elem = document.getElementById(theID);
+  elem.classList.remove('hidden');
+}
+
+function hideID(theID){
+  var elem = document.getElementById(theID);
+  elem.classList.add('hidden');
+}
+
 function highlightCoin() {
   // highlights the middle coin pair
   var elem = document.getElementById("cb3");
@@ -817,6 +827,7 @@ function addKK() {
 
 function evalKK(){
   isAtControlQuestion = false;
+  hideID('exclamation');
   dehighlight();
   document.getElementById("partnerBottom").removeEventListener("click", evalKK);
   document.getElementById("partnerRight").removeEventListener("click", evalKK);
@@ -859,6 +870,7 @@ function addKG() {
 
 function evalKG(){
   isAtControlQuestion = false;
+  hideID('exclamation');
   document.getElementById("mainpotCorrect").removeEventListener("click", evalKG);
   document.getElementById("mainpotWrong").removeEventListener("click", evalKG);
   document.getElementById("overlay").style.display = "none";
@@ -878,6 +890,7 @@ function addKA() {
 
 function evalKA(){
   isAtControlQuestion = false;
+  hideID('exclamation');
   document.getElementById("overlayWrong").removeEventListener("click", evalKA);
   document.getElementById("overlayCorrect").removeEventListener("click", evalKA);
   document.getElementById("overlayOpaque").style.display = "none";
@@ -903,6 +916,7 @@ function startReminder(fileName){
     var audio = getAudio(fileName);
     audio.addEventListener('loadedmetadata', function() {
       audio.play();
+      showID('exclamation');
       var delay = audio.duration*1000 + 20000;
       setTimeout(startReminder.bind(null, fileName), delay);
     });

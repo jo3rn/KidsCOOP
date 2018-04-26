@@ -259,6 +259,7 @@
 
 .fixtopright {
   position: fixed;
+  opacity: 1 !important;
   top: 0;
   right: 0;
 }
