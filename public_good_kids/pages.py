@@ -140,7 +140,6 @@ class K3Strategy(Page):
 
     def before_next_page(self):
         self.player.set_payoffs_generic()
-        self.player.set_final_payoff()
 
 
 class ThirdPartyPunishment(Page):
@@ -170,19 +169,25 @@ class Dictator(Page):
     def is_displayed(self):
         return self.round_number == 10
 
+    def before_next_page(self):
+        self.participant.vars['dictator_share'] = self.player.contribution // 10
+        self.participant.vars['dictator_gift'] = self.player.contribution % 10
+
 
 class ResultsWaitPage(WaitPage):
     def is_displayed(self):
-        return self.round_number < 5
+        return (self.round_number < 5 or self.round_number == 10)
 
     def after_all_players_arrive(self):
         if self.round_number < 5:
             self.group.set_payoffs()
-        else:
-            self.group.set_payoffs_generic()
+
+        if self.round_number == 10:
+            self.group.set_dictator_gift()
+            self.group.compute_payoff()
+
 
     template_name = 'public_good_kids/CustomWaitPage.html'
-    body_text = 'boom'
 
 
 class Results(Page):
@@ -226,16 +231,16 @@ class Results(Page):
 
 
 class Disbursement(Page):
-    form_model = 'player'
-    form_fields = ['finalPay', 'payround']
-
     def is_displayed(self):
         return self.round_number == 10
 
     def vars_for_template(self):
         return {
-            'finalpay'  : int(self.participant.vars['finalpay']),
-            'payround'  : self.participant.vars['payround']
+            'finalpay'          : int(self.participant.vars['finalpay']),
+            'payround'          : self.participant.vars['payround'],
+            'pay_round_payoff'   : int(self.participant.vars['pay_round_payoff']),
+            'dictator_share'    : int(self.participant.vars['dictator_share']),
+            'dictator_gift'     : int(self.participant.vars['dictator_gift'])
     }
 
 

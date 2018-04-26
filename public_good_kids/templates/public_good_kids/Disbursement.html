@@ -24,9 +24,6 @@
 <div id="flexcontainer"></div>
 <div id="text"></div>
 
-<input type="hidden" value="{{finalpay}}" name="finalPay" id="finalPay"/>
-<input type="hidden" value="{{payround}}" name="payround" id="payround"/>
-
 
 {% endblock %}
 
@@ -66,7 +63,7 @@ function showPayOff() {
   }
 
   var paragraph = document.createElement('p');
-  var node = document.createTextNode("{{finalpay}} Taler aus Runde {{payround}}");
+  var node = document.createTextNode("{{finalpay}} Taler ({{pay_round_payoff}} aus Runde {{payround}} + {{dictator_share}} behalten, {{dictator_gift}} empfangen)");
 
   paragraph.appendChild(node);
   document.getElementById("text").appendChild(paragraph);
