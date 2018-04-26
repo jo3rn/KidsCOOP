@@ -116,6 +116,7 @@ SESSION_CONFIGS = [
          'display_name': 'Public Good Kids',
          'num_demo_participants': 4,
          'app_sequence': ['public_good_kids'],
+         'use_browser_bots': False,
      }
 ]
 
