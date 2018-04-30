@@ -139,6 +139,7 @@ function instructionsReplay(){
     setTimeout(flash.bind(null, 'figureRight'), 10500);
 
     setTimeout(addListenersToFigures, delay);
+    setTimeout(instructionsReplay, delay+7000);
   });
 }
 
