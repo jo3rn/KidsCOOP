@@ -822,7 +822,7 @@ function addKK() {
   document.getElementById("partnerRight").style.zIndex = 1;
   document.getElementById("partnerTop").style.zIndex = 1;
   document.getElementById("partnerLeft").style.zIndex = 1;
-  setTimeout(startReminder.bind(null, "KFKorbErinnerung.mp3"), 20000);
+  setTimeout(startReminder.bind(null, "KFKorbErinnerung.mp3"), 6000);
 }
 
 function evalKK(){
@@ -865,7 +865,7 @@ function addKG() {
   isAtControlQuestion = true;
   document.getElementById("mainpotCorrect").addEventListener("click", evalKG);
   document.getElementById("mainpotWrong").addEventListener("click", evalKG);
-  setTimeout(startReminder.bind(null, "KFGemeinschaftskorbErinnerung.mp3"), 20000);
+  setTimeout(startReminder.bind(null, "KFGemeinschaftskorbErinnerung.mp3"), 6000);
 }
 
 function evalKG(){
@@ -885,7 +885,7 @@ function addKA() {
   isAtControlQuestion = true;
   document.getElementById("overlayWrong").addEventListener("click", evalKA);
   document.getElementById("overlayCorrect").addEventListener("click", evalKA);
-  setTimeout(startReminder.bind(null, "KFAufteilungErinnerung.mp3"), 20000);
+  setTimeout(startReminder.bind(null, "KFAufteilungErinnerung.mp3"), 6000);
 }
 
 function evalKA(){
@@ -917,7 +917,7 @@ function startReminder(fileName){
     audio.addEventListener('loadedmetadata', function() {
       audio.play();
       showID('exclamation');
-      var delay = audio.duration*1000 + 20000;
+      var delay = audio.duration*1000 + 7000;
       setTimeout(startReminder.bind(null, fileName), delay);
     });
   }
