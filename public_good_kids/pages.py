@@ -176,7 +176,7 @@ class Dictator(Page):
 
 class ResultsWaitPage(WaitPage):
     def is_displayed(self):
-        return (self.round_number < 5 or self.round_number == 10)
+        return (self.round_number < 5 or self.round_number > 7)
 
     def after_all_players_arrive(self):
         if self.round_number < 5:
