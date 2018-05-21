@@ -1,3 +1,5 @@
+var figureNotClicked = true;
+
 function initialize() {
   var audio = getAudio('TPP_1.mp3');
   audio.addEventListener('loadedmetadata', function() {
@@ -6,6 +8,7 @@ function initialize() {
     setTimeout(showAndHighlightClass.bind(null, 'tppFigure'), 38000);
     setTimeout(flash.bind(null, 'figureLeft'), delay);
     setTimeout(addClickEvent.bind(null, 'figureLeft', instructionsYellow), delay);
+    setTimeout(startReminderColor.bind(null, 'TPP_Gelb_Erinnerung.mp3'), delay+8000);
   });
 
   document.getElementById('arrow-up-left').addEventListener('click', function(){donate('left');});
@@ -25,6 +28,7 @@ function removeClickEvent(element, listener) {
 }
 
 function instructionsYellow() {
+  hideID('exclamation');
   makeColorful('potLeft');
   changeImage('overlayFigureLeft', 'figureyellow.png');
   showOverlay();
@@ -52,10 +56,13 @@ function instructionsYellow() {
     setTimeout(flash.bind(null, 'figureTop'), delay);
     setTimeout(addClickEvent.bind(null, 'figureTop', instructionsGreen), delay);
     setTimeout(removeClickEvent.bind(null, 'figureLeft', instructionsYellow), delay);
+    setTimeout(setFigureUnclicked, delay);
+    setTimeout(startReminderColor.bind(null, 'TPP_Grün_Erinnerung.mp3'), delay+8000);
   });
 }
 
 function instructionsGreen() {
+  hideID('exclamation');
   makeColorful('potTop');
   changeImage('overlayFigureTop', 'figuregreen.png');
   showOverlay();
@@ -83,11 +90,14 @@ function instructionsGreen() {
     setTimeout(flash.bind(null, 'figureRight'), delay);
     setTimeout(addClickEvent.bind(null, 'figureRight', instructionsRed), delay);
     setTimeout(removeClickEvent.bind(null, 'figureTop', instructionsGreen), delay);
+    setTimeout(setFigureUnclicked, delay);
+    setTimeout(startReminderColor.bind(null, 'TPP_Rot_Erinnerung.mp3'), delay+8000);
   });
 
 }
 
 function instructionsRed() {
+  hideID('exclamation');
   makeColorful('potRight');
   changeImage('overlayFigureRight', 'figurered.png');
   showOverlay();
@@ -322,4 +332,32 @@ function revoke(direction){
     hideConfirmButton();
   } catch(err){
   }
+}
+
+function startReminderColor(fileName){
+  console.log("startReminderColor");
+  if (figureNotClicked) {
+    var audio = getAudio(fileName);
+    audio.addEventListener('loadedmetadata', function() {
+      audio.play();
+      showID('exclamation');
+      var delay = audio.duration*1000 + 7000;
+      setTimeout(startReminderColor.bind(null, fileName), delay);
+    });
+  }
+}
+
+function showID(theID){
+  var elem = document.getElementById(theID);
+  elem.classList.remove('hidden');
+}
+
+function hideID(theID){
+  figureNotClicked = false;
+  var elem = document.getElementById(theID);
+  elem.classList.add('hidden');
+}
+
+function setFigureUnclicked(){
+  figureNotClicked = true;
 }
