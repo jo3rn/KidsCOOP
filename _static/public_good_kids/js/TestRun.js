@@ -11,7 +11,7 @@ function releaseCoins() {
 			}
 
 			// make coins visible
-			var coins = document.getElementsByClassName('hiddenCoin');
+			var coins = document.getElementsByClassName('coins');
 			var j;
 			for (j=0; j < coins.length; j++) {
 				coins[j].style.visibility = 'visible';
