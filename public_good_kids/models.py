@@ -86,7 +86,7 @@ class Player(BasePlayer):
     # record of clicking the up (u) and down (d) arrows
     distPattern = models.StringField(widget=widgets.HiddenInput(), verbose_name='')
     # number of coins payed out at the end
-    finalPay = models.FloatField(widget=widgets.HiddenInput(), verbose_name='')
+    finalPay = models.CurrencyField(widget=widgets.HiddenInput(), verbose_name='')
     # which treatement of the game is played
     gameTreatment = models.StringField(widget=widgets.HiddenInput(), verbose_name='')
     # gender of the participant
