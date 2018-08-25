@@ -31,10 +31,10 @@
 }
 
 .calcButton {
-    line-height: 80px;
+    line-height: 40px;
     border: 1px solid black;
     background-color: lightgrey;
-    padding: 10%;
+    padding: 1em;
     text-align: center;
     width: 33.3%;
 
