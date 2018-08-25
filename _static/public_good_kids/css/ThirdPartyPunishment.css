@@ -1,7 +1,7 @@
 .grid-container {
   display: grid;
   grid-template-columns: 33% 33% 33%;
-  grid-template-rows: 150px 100px 250px 100px;
+  grid-template-rows: 22.5vh 15vh 37.5vh 15vh;
 }
 
 .grid-container > div {
@@ -29,8 +29,8 @@
 #overlayOpaque {
   position: absolute;
   /*display: block;*/
-  width: 800px;
-  height: 800px;
+  width: 90vh;
+  height: 90vh;
   left: 0;
   right: 0;
   bottom: 0;
