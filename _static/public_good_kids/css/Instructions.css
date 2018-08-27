@@ -21,8 +21,8 @@
 #overlay, #overlayOpaque, #overlayWrong, #overlayCorrect {
     position: absolute;
     display: none;
-    width: 90vh;
-    height: 90vh;
+    width: 90vmin;
+    height: 90vmin;
     top: 0;
     left: 0;
     right: 0;
