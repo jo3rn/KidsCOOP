@@ -224,8 +224,8 @@
 .arrow {
   /* Pfeile zum Verteilen der Münzen */
   position: absolute;
-  left: 47%;
-  height: 6%;
+  left: 46.25%;
+  height: 7.5%;
   visibility: hidden;
   /* img in den Vordergrund */
   z-index: 1;
@@ -234,12 +234,12 @@
 
 #arrow-up {
   /* Pfeil Richtung Geldtopf in der Mitte */
-  top: 62.5%;
+  top: 62%;
 }
 
 #arrow-down {
   /* Pfeil Richtung Geldtopf unten */
-  top: 74.5%;
+  top: 73.5%;
 }
 
 .otree-btn-next {

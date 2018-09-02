@@ -65,9 +65,9 @@ function highlightArrowUp() {
 function dehighlightArrowUp() {
   var elem = document.getElementById("arrow-up");
   elem.style.transform = 'rotate(-360deg)';
-  elem.style.left = '47%';
-  elem.style.height = '6%';
-  elem.style.top = '62.5%';
+  elem.style.left = '46.25%';
+  elem.style.height = '7.5%';
+  elem.style.top = '62%';
 }
 
 function highlightArrowDown() {
@@ -83,9 +83,9 @@ function highlightArrowDown() {
 function dehighlightArrowDown() {
   var elem = document.getElementById("arrow-down");
   elem.style.transform = 'rotate(-360deg)';
-  elem.style.left = '47%';
-  elem.style.height = '6%';
-  elem.style.top = '74.5%';
+  elem.style.left = '46.25%';
+  elem.style.height = '7.5%';
+  elem.style.top = '73.5%';
 }
 
 function showTimer() {
