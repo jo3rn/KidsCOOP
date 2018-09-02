@@ -2,6 +2,7 @@
   display: grid;
   grid-template-columns: 33% 33% 33%;
   grid-template-rows: 22.5vmin 15vmin 37.5vmin 15vmin;
+  margin-top: 1vmin;
 }
 
 .grid-container > div {
@@ -26,9 +27,9 @@
   margin: 2%;
 }
 
-#overlayOpaque {
+#overlayOpaqueTPP {
   position: absolute;
-  /*display: block;*/
+  display: block;
   width: 90vmin;
   height: 90vmin;
   left: 0;

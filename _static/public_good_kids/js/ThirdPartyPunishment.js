@@ -5,6 +5,7 @@ function initialize() {
   audio.addEventListener('loadedmetadata', function() {
     audio.play();
     var delay = audio.duration*1000 - 2000;
+    setTimeout(hideOverlay, 38000);
     setTimeout(showAndHighlightClass.bind(null, 'tppFigure'), 38000);
     setTimeout(flash.bind(null, 'figureLeft'), delay);
     setTimeout(addClickEvent.bind(null, 'figureLeft', instructionsYellow), delay);
@@ -250,11 +251,11 @@ function getAudio(file){
 }
 
 function showOverlay() {
-  document.getElementById('overlayOpaque').style.display = 'block';
+  document.getElementById('overlayOpaqueTPP').style.display = 'block';
 }
 
 function hideOverlay() {
-  document.getElementById('overlayOpaque').style.display = 'none';
+  document.getElementById('overlayOpaqueTPP').style.display = 'none';
 }
 
 function makeGrey(element) {
