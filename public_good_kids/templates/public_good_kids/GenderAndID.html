@@ -10,18 +10,17 @@
 
 <input type="hidden" name="gender" value="" id="gender"/>
 
-<p>
-    Bitte Geschlecht auswählen:
-</p>
-
+<div class="grid-container">
 <form>
-<div id="content">
+<div class="male">
 
 <label for="male">
   <input name="gender" type="radio" id="male" value="male"/>
   <img class="pictures" src="{% static 'public_good_kids/img/male.png' %}">
 </label>
+</div>
 
+<div class="female">
 <label for="female">
   <input name="gender" type="radio" id="female" value="female"/>
   <img class="pictures" src="{% static 'public_good_kids/img/female.png' %}">
@@ -31,11 +30,7 @@
 </form>
 
 
-<br />
-<p>
-    Bitte ID eingeben:
-</p>
-
+<div class="calculator">
 
 <div id="input">
   <div class="result" id="result"></div>
@@ -56,6 +51,8 @@
   <button id="okay" class="otree-btn-next btn next-button otree-next-button" onclick="writePlayerID()">OK</button>
 </div>
 
+</div>
+</div>
 
 <input type="hidden" name="playerID" value="" id="playerID"/>
 
@@ -69,14 +66,14 @@ function writePlayerID() {
 }
 
 function setResult(x) {
-  document.getElementById("okay").style.display = 'block';
+  document.getElementById("okay").style.visibility = 'visible';
 
   var oldContent = document.getElementById('result').innerHTML;
   document.getElementById('result').innerHTML = oldContent + x;
 }
 
 function deleteResult(x) {
-  document.getElementById("okay").style.display = 'none';
+  document.getElementById("okay").style.visibility = 'hidden';
   document.getElementById('result').innerHTML = '';
 }
 

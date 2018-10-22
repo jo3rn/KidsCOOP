@@ -1,7 +1,18 @@
-#wrapper {
-  width: 60vw;
+.grid-container {
+  display: grid;
+  max-height: 80vh;
+  max-width: 90vh;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  grid-gap: 1px;
+  grid-template-areas: "male calculator calculator calculator" "female calculator calculator calculator";
 }
 
+.male { grid-area: male; }
+
+.female { grid-area: female; }
+
+.calculator { grid-area: calculator; }
 
 #input {
     height: 100%;
@@ -50,19 +61,14 @@
     margin-top: 30px;
     width: 100%;
     min-height: 75px;
-    display: none;
+    visibility: hidden;
     font-size: 1.5em;
     background-color: lightgreen;
 }
 
-#content{
-    heigth:100px;
-    margin 0 10% 0 10%;
-}
-
 .pictures{
-    height:150px;
-    float: left;
+    max-height:50%;
+    max-width: 50%;
 }
 
 label > input{ /* HIDE RADIO */
