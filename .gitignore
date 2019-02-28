@@ -54,3 +54,6 @@ __pycache__/
 *.sqlite3
 
 __temp*
+
+# IDE
+.idea
