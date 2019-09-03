@@ -128,7 +128,7 @@ ROOMS = [
     }
 ]
 
-STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 # anything you put after the below line will override
 # oTree's default settings. Use with caution.
