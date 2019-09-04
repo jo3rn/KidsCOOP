@@ -16,10 +16,16 @@ if environ.get('OTREE_PRODUCTION') not in {None, '', '0'}:
 else:
     DEBUG = True
 
-ADMIN_USERNAME = environ.get('OTREE_ADMIN_USERNAME')
-
 # for security, best to set admin password in an environment variable
-ADMIN_PASSWORD = environ.get('OTREE_ADMIN_PASSWORD')
+if environ.get('OTREE_ADMIN_USERNAME') not in {None}:
+	ADMIN_USERNAME = environ.get('OTREE_ADMIN_USERNAME')
+else:
+	ADMIN_USERNAME = "admin"
+	
+if environ.get('OTREE_ADMIN_PASSWORD') not in {None}:
+	ADMIN_PASSWORD = environ.get('OTREE_ADMIN_PASSWORD')
+else:
+	ADMIN_PASSWORD = "admin"
 
 # don't share this with anybody.
 SECRET_KEY = '@vr=do=t*11pa!xwkhn!5$xv(o-t)w7y3bk=1^nr246wuxuqr0'
