@@ -2,7 +2,6 @@ import os
 from os import environ
 
 import dj_database_url
-from boto.mturk import qualification
 
 import otree.settings
 
@@ -76,33 +75,6 @@ INSTALLED_APPS = ['otree']
 
 # SENTRY_DSN = ''
 
-DEMO_PAGE_INTRO_TEXT = """
-oTree games
-"""
-
-# from here on are qualifications requirements for workers
-# see description for requirements on Amazon Mechanical Turk website:
-# http://docs.aws.amazon.com/AWSMechTurk/latest/AWSMturkAPI/ApiReference_QualificationRequirementDataStructureArticle.html
-# and also in docs for boto:
-# https://boto.readthedocs.org/en/latest/ref/mturk.html?highlight=mturk#module-boto.mturk.qualification
-
-mturk_hit_settings = {
-    'keywords': ['easy', 'bonus', 'choice', 'study'],
-    'title': 'Title for your experiment',
-    'description': 'Description for your experiment',
-    'frame_height': 500,
-    'preview_template': 'global/MTurkPreview.html',
-    'minutes_allotted_per_assignment': 60,
-    'expiration_hours': 7*24,  # 7 days
-    # 'grant_qualification_id': 'YOUR_QUALIFICATION_ID_HERE',# to prevent retakes
-    'qualification_requirements': [
-        # qualification.LocaleRequirement("EqualTo", "US"),
-        # qualification.PercentAssignmentsApprovedRequirement("GreaterThanOrEqualTo", 50),
-        # qualification.NumberHitsApprovedRequirement("GreaterThanOrEqualTo", 5),
-        # qualification.Requirement('YOUR_QUALIFICATION_ID_HERE', 'DoesNotExist')
-    ]
-}
-
 # if you set a property in SESSION_CONFIG_DEFAULTS, it will be inherited by all configs
 # in SESSION_CONFIGS, except those that explicitly override it.
 # the session config can be accessed from methods in your apps as self.session.config,
@@ -112,7 +84,6 @@ SESSION_CONFIG_DEFAULTS = {
     'real_world_currency_per_point': 0.000,
     'participation_fee': 0.00,
     'doc': "",
-    'mturk_hit_settings': mturk_hit_settings,
 }
 
 
